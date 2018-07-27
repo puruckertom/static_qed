@@ -595,11 +595,11 @@
 }
 
 .resilience-bar {
-    background-color: #FFFF00;
+    background-color: rgb(253, 253, 101);
 }
 
 .culture-bar {
-    background-color: #FF0000;
+    background-color: rgb(247, 88, 88);
 }
 
 .safety-bar {
@@ -836,27 +836,30 @@
 }
 
 .domain-icon {
-    background-color: #747DA9;
     display: table-cell;
     vertical-align: middle;
-    padding: 10px;
-    font-size: smaller;
-    opacity: 0.6;
+    font-size: .7em;
+    opacity: 0.9;
     text-align: center;
-    border-radius: 50%;
-    height: 112px;
-    width: 112px;
+    height: 81px;
+    width: 81px;
     font-weight: bold;
 }
 
 .domain-icon:hover {
     cursor: pointer;
     opacity: 1.0;
+    background-color: #ccc;
 }
 
 .domain-selected {
     opacity: 1.0 !important;
-    border: 1px black solid;
+    background-color: #235a8e;
+    color: white;
+}
+
+.domain-selected:hover{
+    background-color: #235a8e;
 }
 
 #customize_domain_score {
