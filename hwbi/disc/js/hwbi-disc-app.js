@@ -460,19 +460,23 @@ function calculateScore() {
     var hazardWeight = $('#hazard-slider-bar').slider("value");
     var adjustedHazardScore = hazardScore * hazardWeight;
     
-    var economyScore = hwbi_disc_data["outputs"]["domains"][7]["score"];
+    var economyScore = hwbi_disc_data["outputs"]["domains"][6]["score"];
     var economyWeight = $('#economy-slider-bar').slider("value");
     var adjustedEconomyScore = economyScore * economyWeight;
 
-    var cultureScore = hwbi_disc_data["outputs"]["domains"][7]["score"];
+    var resilienceScore = hwbi_disc_data["outputs"]["domains"][7]["score"];
+    var resilienceWeight = $('#resilience-slider-bar').slider("value");
+    var adjustedResilienceScore = resilienceScore * resilienceWeight;
+
+    var cultureScore = hwbi_disc_data["outputs"]["domains"][8]["score"];
     var cultureWeight = $('#culture-slider-bar').slider("value");
     var adjustedCultureScore = cultureScore * cultureWeight;
 
-    var safetyScore = hwbi_disc_data["outputs"]["domains"][6]["score"];
+    var safetyScore = hwbi_disc_data["outputs"]["domains"][9]["score"];
     var safetyWeight = $('#safety-slider-bar').slider("value");
     var adjustedSafetyScore = safetyScore * safetyWeight;
     
-    var totalScore = adjustedEnvironmentScore + adjustedEducationScore + adjustedHealthScore +
+    var totalScore = adjustedEnvironmentScore + adjustedEducationScore + adjustedHealthScore + adjustedResilienceScore + 
     adjustedCommunityScore + adjustedResourceMgmtScore + adjustedSafetyScore + adjustedHazardScore + adjustedEconomyScore + adjustedCultureScore;
 
     var newScore = totalScore / totalWeight;
