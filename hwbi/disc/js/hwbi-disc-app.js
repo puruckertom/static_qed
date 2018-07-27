@@ -721,7 +721,7 @@ function getIndicatorData() {
 }
 
 function setIndicatorSliders() {
-    var environment_communication = hwbi_indicator_data.outputs[0].score.toFixed(2);
+    var environment_communication = hwbi_indicator_data.outputs["communication infrastructure"].score.toFixed(2);
     $('#environment_communication_slider').slider({
         min: 0,
         max: 100,
@@ -735,7 +735,7 @@ function setIndicatorSliders() {
 
         }
     });
-    var environment_housing = hwbi_indicator_data.outputs[1].score.toFixed(2);
+    var environment_housing = hwbi_indicator_data.outputs["housing characteristics"].score.toFixed(2);
     $('#environment_housing_slider').slider({
         min: 0,
         max: 100,
@@ -749,7 +749,7 @@ function setIndicatorSliders() {
 
         }
     });
-    var environment_transportation = hwbi_indicator_data.outputs[2].score.toFixed(2);
+    var environment_transportation = hwbi_indicator_data.outputs["transportation infrastructure"].score.toFixed(2);
     $('#environment_transportation_slider').slider({
         min: 0,
         max: 100,
@@ -763,7 +763,7 @@ function setIndicatorSliders() {
 
         }
     });
-    var environment_utility = hwbi_indicator_data.outputs[3].score.toFixed(2);
+    var environment_utility = hwbi_indicator_data.outputs["utility infrastructure"].score.toFixed(2);
     $('#environment_utility_slider').slider({
         min: 0,
         max: 100,
@@ -777,7 +777,7 @@ function setIndicatorSliders() {
 
         }
     });
-    var environment_vacant = hwbi_indicator_data.outputs[4].score.toFixed(2);
+    var environment_vacant = hwbi_indicator_data.outputs["vacant structures"].score.toFixed(2);
     $('#environment_vacant_slider').slider({
         min: 0,
         max: 100,
@@ -791,7 +791,7 @@ function setIndicatorSliders() {
 
         }
     });
-    var community_attitude = (hwbi_indicator_data.outputs[5].score).toFixed(2);
+    var community_attitude = (hwbi_indicator_data.outputs["attitude toward others and the community"].score).toFixed(2);
     $('#community_attitude_slider').slider({
         min: 0,
         max: 100,
@@ -804,7 +804,7 @@ function setIndicatorSliders() {
             calculateNewScore("community", "#community_indicators");
         }
     });
-    var community_democratic = (hwbi_indicator_data.outputs[6].score).toFixed(2);
+    var community_democratic = (hwbi_indicator_data.outputs["democratic engagement"].score).toFixed(2);
     $('#community_democratic_slider').slider({
         min: 0,
         max: 100,
@@ -817,7 +817,7 @@ function setIndicatorSliders() {
             calculateNewScore("community", "#community_indicators");
         }
     });
-    var community_family = (hwbi_indicator_data.outputs[7].score).toFixed(2);
+    var community_family = (hwbi_indicator_data.outputs["family bonding"].score).toFixed(2);
     $('#community_family_slider').slider({
         min: 0,
         max: 100,
@@ -830,7 +830,7 @@ function setIndicatorSliders() {
             calculateNewScore("community", "#community_indicators");
         }
     });
-    var community_social_eng = (hwbi_indicator_data.outputs[8].score).toFixed(2);
+    var community_social_eng = (hwbi_indicator_data.outputs["social engagement"].score).toFixed(2);
     $('#community_social_eng_slider').slider({
         min: 0,
         max: 100,
@@ -843,7 +843,7 @@ function setIndicatorSliders() {
             calculateNewScore("community", "#community_indicators");
         }
     });
-    var community_support = (hwbi_indicator_data.outputs[9].score).toFixed(2);
+    var community_support = (hwbi_indicator_data.outputs["social support"].score).toFixed(2);
     $('#community_support_slider').slider({
         min: 0,
         max: 100,
@@ -856,7 +856,7 @@ function setIndicatorSliders() {
             calculateNewScore("community", "#community_indicators");
         }
     });
-    var education_knowledge = (hwbi_indicator_data.outputs[10].score).toFixed(2);
+    var education_knowledge = (hwbi_indicator_data.outputs["basic educational knowledge and skills of youth"].score).toFixed(2);
     $('#education_knowledge_slider').slider({
         min: 0,
         max: 100,
@@ -869,7 +869,7 @@ function setIndicatorSliders() {
             calculateNewScore("Education", "#education_indicators");
         }
     });
-    var education_participation = (hwbi_indicator_data.outputs[11].score).toFixed(2);
+    var education_participation = (hwbi_indicator_data.outputs["social, emotional and developmental aspects"].score).toFixed(2);
     $('#education_participation_slider').slider({
         min: 0,
         max: 100,
@@ -882,7 +882,7 @@ function setIndicatorSliders() {
             calculateNewScore("Education", "#education_indicators");
         }
     });
-    var education_social = (hwbi_indicator_data.outputs[12].score).toFixed(2);
+    var education_social = (hwbi_indicator_data.outputs["participation and attainment"].score).toFixed(2);
     $('#education_social_slider').slider({
         min: 0,
         max: 100,
@@ -895,7 +895,7 @@ function setIndicatorSliders() {
             calculateNewScore("Education", "#education_indicators");
         }
     });
-    var health_healthcare = (hwbi_indicator_data.outputs[13].score).toFixed(2);
+    var health_healthcare = (hwbi_indicator_data.outputs["healthcare"].score).toFixed(2);
     $('#health_healthcare_slider').slider({
         min: 0,
         max: 100,
@@ -908,7 +908,7 @@ function setIndicatorSliders() {
             calculateNewScore("Health", "#health_indicators");
         }
     });
-    var health_life_exp = (hwbi_indicator_data.outputs[14].score).toFixed(2);
+    var health_life_exp = (hwbi_indicator_data.outputs["life expectancy and mortality"].score).toFixed(2);
     $('#health_life_expectancy_slider').slider({
         min: 0,
         max: 100,
@@ -921,7 +921,7 @@ function setIndicatorSliders() {
             calculateNewScore("Health", "#health_indicators");
         }
     });
-    var health_lifestyle = (hwbi_indicator_data.outputs[15].score).toFixed(2);
+    var health_lifestyle = (hwbi_indicator_data.outputs["lifestyle and behavior"].score).toFixed(2);
     $('#health_lifestyle_slider').slider({
         min: 0,
         max: 100,
@@ -934,7 +934,7 @@ function setIndicatorSliders() {
             calculateNewScore("Health", "#health_indicators");
         }
     });
-    var health_personal = (hwbi_indicator_data.outputs[16].score).toFixed(2);
+    var health_personal = (hwbi_indicator_data.outputs["personal well-being"].score).toFixed(2);
     $('#health_personal_slider').slider({
         min: 0,
         max: 100,
@@ -947,7 +947,7 @@ function setIndicatorSliders() {
             calculateNewScore("Health", "#health_indicators");
         }
     });
-    var health_conditions = (hwbi_indicator_data.outputs[17].score).toFixed(2);
+    var health_conditions = (hwbi_indicator_data.outputs["physical and mental health conditions"].score).toFixed(2);
     $('#health_conditions_slider').slider({
         min: 0,
         max: 100,
@@ -960,7 +960,7 @@ function setIndicatorSliders() {
             calculateNewScore("Health", "#health_indicators");
         }
     });
-    var resource_mgmt_condition = (hwbi_indicator_data.outputs[18].score).toFixed(2);
+    var resource_mgmt_condition = (hwbi_indicator_data.outputs["condition"].score).toFixed(2);
     $('#resource-mgmt_condition_slider').slider({
         min: 0,
         max: 100,
@@ -973,7 +973,7 @@ function setIndicatorSliders() {
             calculateNewScore("resource-mgmt", "#resource-mgmt_indicators");
         }
     });
-    var resource_mgmt_ecosystem = (hwbi_indicator_data.outputs[19].score).toFixed(2);
+    var resource_mgmt_ecosystem = (hwbi_indicator_data.outputs["extent of ecosystem types"].score).toFixed(2);
     $('#resource-mgmt_ecosystem_slider').slider({
         min: 0,
         max: 100,
@@ -986,7 +986,7 @@ function setIndicatorSliders() {
             calculateNewScore("resource-mgmt", "#resource-mgmt_indicators");
         }
     });
-    var hazard_exposure = (hwbi_indicator_data.outputs[20].score).toFixed(2);
+    var hazard_exposure = (hwbi_indicator_data.outputs["exposure"].score).toFixed(2);
     $('#hazard_exposure_slider').slider({
         min: 0,
         max: 100,
@@ -999,7 +999,7 @@ function setIndicatorSliders() {
             calculateNewScore("hazard", "#hazard_indicators");
         }
     });
-    var hazard_loss = (hwbi_indicator_data.outputs[21].score).toFixed(2);
+    var hazard_loss = (hwbi_indicator_data.outputs["loss"].score).toFixed(2);
     $('#hazard_loss_slider').slider({
         min: 0,
         max: 100,
@@ -1012,7 +1012,7 @@ function setIndicatorSliders() {
             calculateNewScore("hazard", "#hazard_indicators");
         }
     });
-    var economy_necessities = (hwbi_indicator_data.outputs[22].score).toFixed(2);
+    var economy_necessities = (hwbi_indicator_data.outputs["basic necessities"].score).toFixed(2);
     $('#economy_necessities_slider').slider({
         min: 0,
         max: 100,
@@ -1025,7 +1025,7 @@ function setIndicatorSliders() {
             calculateNewScore("economy", "#economy_indicators");
         }
     });
-    var economy_diversity = (hwbi_indicator_data.outputs[23].score).toFixed(2);
+    var economy_diversity = (hwbi_indicator_data.outputs["economic diversity"].score).toFixed(2);
     $('#economy_diversity_slider').slider({
         min: 0,
         max: 100,
@@ -1038,7 +1038,7 @@ function setIndicatorSliders() {
             calculateNewScore("economy", "#economy_indicators");
         }
     });
-    var economy_socio = (hwbi_indicator_data.outputs[24].score).toFixed(2);
+    var economy_socio = (hwbi_indicator_data.outputs["socio-economics"].score).toFixed(2);
     $('#economy_socio_slider').slider({
         min: 0,
         max: 100,
@@ -1051,7 +1051,7 @@ function setIndicatorSliders() {
             calculateNewScore("economy", "#economy_indicators");
         }
     });
-    var economy_wealth = (hwbi_indicator_data.outputs[25].score).toFixed(2);
+    var economy_wealth = (hwbi_indicator_data.outputs["wealth"].score).toFixed(2);
     $('#economy_wealth_slider').slider({
         min: 0,
         max: 100,
@@ -1064,7 +1064,7 @@ function setIndicatorSliders() {
             calculateNewScore("economy", "#economy_indicators");
         }
     });
-    var economy_work = (hwbi_indicator_data.outputs[26].score).toFixed(2);
+    var economy_work = (hwbi_indicator_data.outputs["work"].score).toFixed(2);
     $('#economy_work_slider').slider({
         min: 0,
         max: 100,
@@ -1077,7 +1077,7 @@ function setIndicatorSliders() {
             calculateNewScore("economy", "#economy_indicators");
         }
     });
-    var resilience_community = (hwbi_indicator_data.outputs[27].score).toFixed(2);
+    var resilience_community = (hwbi_indicator_data.outputs["community preparedness"].score).toFixed(2);
     $('#resilience_community_slider').slider({
         min: 0,
         max: 100,
@@ -1090,7 +1090,7 @@ function setIndicatorSliders() {
             calculateNewScore("resilience", "#resilience_indicators");
         }
     });
-    var resilience_conservation = (hwbi_indicator_data.outputs[28].score).toFixed(2);
+    var resilience_conservation = (hwbi_indicator_data.outputs["natural resource conservation"].score).toFixed(2);
     $('#resilience_conservation_slider').slider({
         min: 0,
         max: 100,
@@ -1102,7 +1102,7 @@ function setIndicatorSliders() {
             $('#resilience_conservation_value').html(ui.value);
             calculateNewScore("resilience", "#resilience_indicators");
         }
-    });var resilience_personal = (hwbi_indicator_data.outputs[29].score).toFixed(2);
+    });var resilience_personal = (hwbi_indicator_data.outputs["personal preparedness"].score).toFixed(2);
     $('#resilience_personal_slider').slider({
         min: 0,
         max: 100,
@@ -1115,7 +1115,7 @@ function setIndicatorSliders() {
             calculateNewScore("resilience", "#resilience_indicators");
         }
     });
-    var culture_activity = (hwbi_indicator_data.outputs[30].score).toFixed(2);
+    var culture_activity = (hwbi_indicator_data.outputs["activity participation"].score).toFixed(2);
     $('#culture_activity_slider').slider({
         min: 0,
         max: 100,
@@ -1128,7 +1128,7 @@ function setIndicatorSliders() {
             calculateNewScore("culture", "#culture_indicators");
         }
     });
-    var culture_biophilia = (hwbi_indicator_data.outputs[31].score).toFixed(2);
+    var culture_biophilia = (hwbi_indicator_data.outputs["biophilia"].score).toFixed(2);
     $('#culture_biophilia_slider').slider({
         min: 0,
         max: 100,
@@ -1141,7 +1141,7 @@ function setIndicatorSliders() {
             calculateNewScore("culture", "#culture_indicators");
         }
     });
-    var culture_time = (hwbi_indicator_data.outputs[32].score).toFixed(2);
+    var culture_time = (hwbi_indicator_data.outputs["time spent"].score).toFixed(2);
     $('#culture_time_slider').slider({
         min: 0,
         max: 100,
@@ -1154,7 +1154,7 @@ function setIndicatorSliders() {
             calculateNewScore("culture", "#culture_indicators");
         }
     });
-    var culture_adults = (hwbi_indicator_data.outputs[33].score).toFixed(2);
+    var culture_adults = (hwbi_indicator_data.outputs["working age adults"].score).toFixed(2);
     $('#culture_adults_slider').slider({
         min: 0,
         max: 100,
@@ -1167,7 +1167,7 @@ function setIndicatorSliders() {
             calculateNewScore("culture", "#culture_indicators");
         }
     });
-    var safety_actual = (hwbi_indicator_data.outputs[34].score).toFixed(2);
+    var safety_actual = (hwbi_indicator_data.outputs["actual safety"].score).toFixed(2);
     $('#safety_actual_slider').slider({
         min: 0,
         max: 100,
@@ -1181,7 +1181,7 @@ function setIndicatorSliders() {
 
         }
     });
-    var safety_perceived = (hwbi_indicator_data.outputs[35].score).toFixed(2);
+    var safety_perceived = (hwbi_indicator_data.outputs["perceived safety"].score).toFixed(2);
     $('#safety_perceived_slider').slider({
         min: 0,
         max: 100,
@@ -1194,7 +1194,7 @@ function setIndicatorSliders() {
             calculateNewScore("Safety", "#safety_indicators");
         }
     });
-    var safety_risk = (hwbi_indicator_data.outputs[36].score).toFixed(2);
+    var safety_risk = (hwbi_indicator_data.outputs["risk"].score).toFixed(2);
     $('#safety_risk_slider').slider({
         min: 0,
         max: 100,
