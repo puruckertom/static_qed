@@ -566,11 +566,11 @@
     -webkit-border-radius: 9px;
 }
 
-.nature-bar {
+.environment-bar {
     background-color: #82AC45;
 }
 
-.cultural-bar {
+.community-bar {
     background-color: #998FE4;
 }
 
@@ -582,20 +582,28 @@
     background-color: #5598C3;
 }
 
-.leisure-bar {
+.resource-mgmt-bar {
     background-color: #DC4B60;
 }
 
-.living-std-bar {
+.hazard-bar {
     background-color: #269683;
+}
+
+.economy-bar {
+    background-color: #E5632E;
+}
+
+.resilience-bar {
+    background-color: #FFFF00;
+}
+
+.culture-bar {
+    background-color: #FF0000;
 }
 
 .safety-bar {
     background-color: #606060;
-}
-
-.cohesion-bar {
-    background-color: #E5632E;
 }
 
 .domain-description {
@@ -654,30 +662,30 @@
     box-shadow: 1px 1px grey;
 }
 
-#nature-slider-bar {
+#environment-slider-bar {
     background-color: #82AC45;
 }
 
-#nature-slider-bar span {
+#environment-slider-bar span {
     background-color: #82AC45;
     width: 15px;
 }
 
-#nature-slider-bar span:active {
+#environment-slider-bar span:active {
     background-color: #779E3F;
     box-shadow: 1px 1px grey;
 }
 
-#cultural-slider-bar {
+#community-slider-bar {
     background-color: #998FE4;
 }
 
-#cultural-slider-bar span {
+#community-slider-bar span {
     background-color: #998FE4;
     width: 15px;
 }
 
-#cultural-slider-bar span:active {
+#community-slider-bar span:active {
     background-color: #877EC9;
     box-shadow: 1px 1px grey;
 }
@@ -710,31 +718,73 @@
     box-shadow: 1px 1px grey;
 }
 
-#leisure-slider-bar {
+#resource-mgmt-slider-bar {
     background-color: #DC4B60;
 }
 
-#leisure-slider-bar span {
+#resource-mgmt-slider-bar span {
     background-color: #DC4B60;
     width: 15px;
 }
 
-#leisure-slider-bar span:active {
+#resource-mgmt-slider-bar span:active {
     background-color: #C74457;
     box-shadow: 1px 1px grey;
 }
 
-#living-std-slider-bar {
+#hazard-slider-bar {
     background-color: #269683;
 }
 
-#living-std-slider-bar span {
+#hazard-slider-bar span {
     background-color: #269683;
     width: 15px;
 }
 
-#living-std-slider-bar span:active {
+#hazard-slider-bar span:active {
     background-color: #228574;
+    box-shadow: 1px 1px grey;
+}
+
+#economy-slider-bar {
+    background-color: #E5632E;
+}
+
+#economy-slider-bar span {
+    background-color: #E5632E;
+    width: 15px;
+}
+
+#economy-slider-bar span:active {
+    background-color: #E5632E;
+    box-shadow: 1px 1px grey;
+}
+
+#resilience-slider-bar {
+    background-color: #FFFF00;
+}
+
+#resilience-slider-bar span {
+    background-color: #FFFF00;
+    width: 15px;
+}
+
+#resilience-slider-bar span:active {
+    background-color: #FFFF00;
+    box-shadow: 1px 1px grey;
+}
+
+#culture-slider-bar {
+    background-color: #FF0000;
+}
+
+#culture-slider-bar span {
+    background-color: #FF0000;
+    width: 15px;
+}
+
+#culture-slider-bar span:active {
+    background-color: #FF0000;
     box-shadow: 1px 1px grey;
 }
 
@@ -749,20 +799,6 @@
 
 #safety-slider-bar span:active {
     background-color: #545454;
-    box-shadow: 1px 1px grey;
-}
-
-#cohesion-slider-bar {
-    background-color: #E5632E;
-}
-
-#cohesion-slider-bar span {
-    background-color: #E5632E;
-    width: 15px;
-}
-
-#cohesion-slider-bar span:active {
-    background-color: #C75628;
     box-shadow: 1px 1px grey;
 }
 
