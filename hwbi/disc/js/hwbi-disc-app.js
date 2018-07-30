@@ -947,16 +947,29 @@ function setIndicatorSliders() {
             calculateNewScore("Health", "#health_indicators");
         }
     });
-    var health_conditions = (hwbi_indicator_data.outputs["physical and mental health conditions"].score).toFixed(2);
-    $('#health_conditions_slider').slider({
+    var health_services = (hwbi_indicator_data.outputs["social services"].score).toFixed(2);
+    $('#health_services_slider').slider({
         min: 0,
         max: 100,
-        value: health_conditions,
+        value: health_services,
         create: function (event, ui) {
-            $('#health_conditions_value').html(health_conditions);
+            $('#health_services_value').html(health_services);
         },
         slide: function (event, ui) {
-            $('#health_conditions_value').html(ui.value);
+            $('#health_services_value').html(ui.value);
+            calculateNewScore("Health", "#health_indicators");
+        }
+    });
+    var health_characteristics = (hwbi_indicator_data.outputs["health characteristics"].score).toFixed(2);
+    $('#health_characteristics_slider').slider({
+        min: 0,
+        max: 100,
+        value: health_characteristics,
+        create: function (event, ui) {
+            $('#health_characteristics_value').html(health_characteristics);
+        },
+        slide: function (event, ui) {
+            $('#health_characteristics_value').html(ui.value);
             calculateNewScore("Health", "#health_indicators");
         }
     });
