@@ -247,7 +247,7 @@ function cycleQuote() {
 function initializeAutocomplete() {
     var input = document.getElementById('search_field');
     searchBox = new google.maps.places.Autocomplete(input, {
-        types: ['(cities)'],
+        types: ['(regions)'],
         componentRestrictions: {country: 'us'}
     });
     // searchBox.setComponentRestrictions({'country': ['us']});
@@ -274,7 +274,8 @@ function setLocationValue() {
 
     if (state === '' || county === '' || stateAbbr === '') {
         console.log("invalid entry")
-        return;
+
+        return toast();
     }
     var json_value = {};
     json_value["county"] = county;
@@ -1467,4 +1468,13 @@ function countyStateSelectors() {
         });
         getScoreData();
     });
+}
+
+function toast() {
+    var x = document.getElementById("toast");
+
+    x.className = "show";
+
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    return false;
 }
