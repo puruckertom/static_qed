@@ -275,7 +275,7 @@ function setLocationValue() {
     if (state === '' || county === '' || stateAbbr === '') {
         console.log("invalid entry")
 
-        return toast();
+        return toast("Unable to find location. Please try another!");
     }
     var json_value = {};
     json_value["county"] = county;
@@ -1470,10 +1470,11 @@ function countyStateSelectors() {
     });
 }
 
-function toast() {
+function toast(msg) {
     var x = document.getElementById("toast");
 
     x.className = "show";
+    x.innerHTML = msg;
 
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     return false;
