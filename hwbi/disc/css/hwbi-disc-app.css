@@ -546,7 +546,7 @@
 
 .domain-score-bar {
     position: relative;
-    display: flex;
+    display: inline-flex;
     margin-bottom: 5px;
     margin-right: 15%;
     margin-left: 15%;
@@ -1163,4 +1163,11 @@ However, delay the fade out process for 2.5 seconds */
 @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
+}
+
+
+#priorityexplanation {
+    background-color: #ddd;
+    padding: 10px;
+    font-family: sans-serif;
 }
