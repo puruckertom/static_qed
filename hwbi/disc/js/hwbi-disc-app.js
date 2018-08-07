@@ -256,6 +256,7 @@ function initializeAutocomplete() {
 
 function setLocationValue() {
     console.log("setLocationValue called");
+    console.log(document.getElementById('search_field').value);
     var place = searchBox.getPlace();
     var county = '';
     var state = '';
@@ -1260,7 +1261,7 @@ function calculateNewScore(domainID, domainBlock) {
     $('#arrow_adjusted').css("left", adjustedScoreRounded + "%");
     $('#score_adjusted').html(hwbi_indicator_value_adjusted[domainID].toFixed(1));
     $('#score_adjusted').css("left", adjustedScoreRounded + "%");
-
+    
 }
 
 function setCompareData(data, columnNumber) {
@@ -1284,14 +1285,16 @@ function setCompareData(data, columnNumber) {
         }
     }
     community.score = data["outputs"]["hwbi"].toFixed(1);
-    community.nature_score = data["outputs"]["domains"][0]["score"].toFixed(1);
-    community.cultural_score = data["outputs"]["domains"][1]["score"].toFixed(1);
+    community.environment_score = data["outputs"]["domains"][0]["score"].toFixed(1);
+    community.community_score = data["outputs"]["domains"][1]["score"].toFixed(1);
     community.education_score = data["outputs"]["domains"][2]["score"].toFixed(1);
     community.health_score = data["outputs"]["domains"][3]["score"].toFixed(1);
-    community.leisure_score = data["outputs"]["domains"][4]["score"].toFixed(1);
-    community.living_score = data["outputs"]["domains"][5]["score"].toFixed(1);
-    community.safety_score = data["outputs"]["domains"][6]["score"].toFixed(1);
-    community.cohesion_score = data["outputs"]["domains"][7]["score"].toFixed(1);
+    community.resource_mgmt_score = data["outputs"]["domains"][4]["score"].toFixed(1);
+    community.hazard_score = data["outputs"]["domains"][5]["score"].toFixed(1);
+    community.economy_score = data["outputs"]["domains"][6]["score"].toFixed(1);
+    community.resilience_score = data["outputs"]["domains"][7]["score"].toFixed(1);
+    community.culture_score = data["outputs"]["domains"][8]["score"].toFixed(1);
+    community.safety_score = data["outputs"]["domains"][9]["score"].toFixed(1);
 
     compareCommunities.push(community);
     sessionStorage.setItem('compareCommunities', JSON.stringify(compareCommunities));
@@ -1311,14 +1314,16 @@ function displayCompareData() {
 
         $('#community-location-' + i).html(community.location);
         $('#compare-score-' + i).html(community.score);
-        $('#compare-nature-' + i).html(community.nature_score);
-        $('#compare-cultural-' + i).html(community.cultural_score);
+        $('#compare-environment-' + i).html(community.environment_score);
+        $('#compare-community-' + i).html(community.community_score);
         $('#compare-education-' + i).html(community.education_score);
         $('#compare-health-' + i).html(community.health_score);
-        $('#compare-leisure-' + i).html(community.leisure_score);
-        $('#compare-living-' + i).html(community.living_score);
+        $('#compare-resource-mgmt-' + i).html(community.resource_mgmt_score);
+        $('#compare-hazard-' + i).html(community.hazard_score);
+        $('#compare-economy-' + i).html(community.economy_score);
+        $('#compare-resilience-' + i).html(community.resilience_score);
+        $('#compare-culture-' + i).html(community.culture_score);
         $('#compare-safety-' + i).html(community.safety_score);
-        $('#compare-cohesion-' + i).html(community.cohesion_score);
     }
 }
 
@@ -1339,14 +1344,16 @@ function clearComparisonDisplay() {
 
         $('#community-location-' + i).empty();
         $('#compare-score-' + i).empty();
-        $('#compare-nature-' + i).empty();
-        $('#compare-cultural-' + i).empty();
+        $('#compare-environment-' + i).empty();
+        $('#compare-community-' + i).empty();
         $('#compare-education-' + i).empty();
         $('#compare-health-' + i).empty();
-        $('#compare-leisure-' + i).empty();
-        $('#compare-living-' + i).empty();
+        $('#compare-resource-mgmt-' + i).empty();
+        $('#compare-hazard-' + i).empty();
+        $('#compare-economy-' + i).empty();
+        $('#compare-resilience-' + i).empty();
+        $('#compare-culture-' + i).empty();
         $('#compare-safety-' + i).empty();
-        $('#compare-cohesion-' + i).empty();
     }
 }
 
@@ -1408,7 +1415,7 @@ function initializeComparisonAutocomplete() {
     for (var i = 0; i < compareInputs.length; i++) {
         input = compareInputs[i];
         compareSearchBox[i] = new google.maps.places.Autocomplete(input, {
-            types: ['(cities)'],
+            types: ['(regions)'],
             componentRestriction: {country: 'us'}
         });
     }
@@ -1478,4 +1485,14 @@ function toast(msg) {
 
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     return false;
+}
+
+function priorityText() {
+    var x = document.getElementById("priorityexplanation");
+    
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
 }
