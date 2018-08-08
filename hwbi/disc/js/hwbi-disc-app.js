@@ -747,6 +747,7 @@ function getIndicatorData() {
 }
 
 function setIndicatorSliders() {
+    var cap = 25;
     $('.domain_indicator').hide(); // Hide domains
     $('.domain-icon').removeClass("domain-selected"); // De-select domain of indicator sliders
     $('#customize_domain_details').html(''); // Clear details
@@ -991,6 +992,9 @@ function setIndicatorSliders() {
         max: 100,
         value: hazard_exposure,
         slide: function (event, ui) {
+            if (ui.value > +hazard_exposure + cap || ui.value < +hazard_exposure - cap) {
+                return false;
+            }
             $('#hazard_exposure_value').html(ui.value);
             calculateNewScore("hazard", "#hazard_indicators");
         }
@@ -1002,6 +1006,9 @@ function setIndicatorSliders() {
         max: 100,
         value: hazard_loss,
         slide: function (event, ui) {
+            if (ui.value > +hazard_loss + cap || ui.value < +hazard_loss - cap) {
+                return false;
+            }
             $('#hazard_loss_value').html(ui.value);
             calculateNewScore("hazard", "#hazard_indicators");
         }
@@ -1282,6 +1289,19 @@ function clearComparisonDisplay() {
         $('#compare-safety-' + i).empty();
     }
 }
+
+$(document).click(function (e)
+{
+    var searchcontainer = $(".add-community-search");
+    var autocomplete = $(".compare-search-input");
+    var button = $(".add-community");
+
+    if (!searchcontainer.is(e.target) && !button.is(e.target) // if the target of the click isn't the container or button
+        && searchcontainer.has(e.target).length === 0) // nor a descendant of the container
+    {
+        searchcontainer.hide();
+    }
+});
 
 function addComparison() {
     $me = $(this);
