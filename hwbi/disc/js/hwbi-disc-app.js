@@ -245,13 +245,13 @@ function cycleQuote() {
 
 // initializeAutocomplete: Initializes google maps search places function with a restriction to only us locations.
 function initializeAutocomplete() {
-    var input = document.getElementById('search_field');
+    /* var input = document.getElementById('search_field');
     searchBox = new google.maps.places.Autocomplete(input, {
         types: ['(regions)'],
         componentRestrictions: {country: 'us'}
     });
     // searchBox.setComponentRestrictions({'country': ['us']});
-    searchBox.addListener('place_changed', setLocationValue);
+    searchBox.addListener('place_changed', setLocationValue); */
 
     var pac_input = document.getElementById('search_field');
 
@@ -284,10 +284,14 @@ function initializeAutocomplete() {
         input.addEventListener = addEventListenerWrapper;
         input.attachEvent = addEventListenerWrapper;
 
-        var autocomplete = new google.maps.places.Autocomplete(input);
+        searchBox = new google.maps.places.Autocomplete(input, {
+            types: ['(regions)'],
+            componentRestrictions: {country: 'us'}
+        });
+        searchBox.addListener('place_changed', setLocationValue);
 
     })(pac_input);
-
+    
 }
 
 function setLocationValue() {
