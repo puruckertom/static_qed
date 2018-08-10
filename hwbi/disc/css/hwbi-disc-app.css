@@ -1171,3 +1171,26 @@ However, delay the fade out process for 2.5 seconds */
     padding: 10px;
     font-family: sans-serif;
 }
+
+.searchicon {
+    background-image: url('../../../../static_qed/hwbi/disc/img/searchdark.png');
+    background-position: left 9px center;
+    background-repeat: no-repeat;
+    background-size: 22px;
+    
+}
+
+.compare-searchicon{
+    background-image: url('../../../../static_qed/hwbi/disc/img/searchdark.png');
+    background-position: left 5px center;
+    background-repeat: no-repeat;
+    background-size: 19px;
+}
+
+.compare-inputcontainer input {
+    text-indent: 28px;
+}
+
+.inputcontainer input {
+    text-indent: 30px;
+}
