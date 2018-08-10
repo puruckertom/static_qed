@@ -197,7 +197,7 @@ function getScoreData() {
     }
     $('#community-snapshot-tab-link').trigger("click");
     var location = JSON.parse(location_data);
-    var data_url = "/hwbi/disc/rest/scores?state=" + location.state + "&county=" + location.county + "&state_abbr=" + location.state_abbr;
+    var data_url = "/hwbi/disc/rest/indicators/scores/?county=" + location.county + "&state_abbr=" + location.state_abbr;
     $.ajax({
         url: data_url,
         type: "GET",
@@ -206,15 +206,17 @@ function getScoreData() {
             $('#search_error_notification').hide();
         },
         success: function (data, status, xhr) {
-            console.log("getScoreData success: " + status);
             locationValue = location;
             // zeroScoreData();
+            var indicatorData = data;
+            data = JSON.stringify(formatDomainData(JSON.parse(data)));
             setScoreData(data);
             setCompareData(data, 0);
             displayCompareData(JSON.parse(sessionStorage.getItem("compareCommunities")).length);
             $('#customize_location').html(location.county + " County, " + location.state);
             hwbi_disc_data = JSON.parse(data);
-            setTimeout(getIndicatorData, 1200);
+            hwbi_indicator_data = formatIndicatorData(setIndicatorData(indicatorData));
+            setIndicatorSliders(); // set sliders 
             hwbi_indicator_value_adjusted = {};
             setCookie('EPAHWBIDISC', location_data, 0.5);
             $('html, body').animate({
@@ -222,11 +224,9 @@ function getScoreData() {
             }, 'slow');
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("getScoreData error: " + errorThrown);
             $('#search_error_notification').show();
         },
         complete: function (jqXHR, textStatus) {
-            console.log("getScoreData complete: " + textStatus);
             $('#search_button').removeClass('searching');
             return false;
         }
@@ -296,33 +296,9 @@ function initializeAutocomplete() {
 
 function setLocationValue() {
     console.log("setLocationValue called");
-    console.log(document.getElementById('search_field').value);
     var place = searchBox.getPlace();
-    var county = '';
-    var state = '';
-    var stateAbbr = '';
-    for (var i = 0; i < place.address_components.length; i++) {
-        switch (place.address_components[i].types[0]) {
-            case "administrative_area_level_1":
-                state = place.address_components[i].long_name;
-                stateAbbr = place.address_components[i].short_name;
-                break;
-            case "administrative_area_level_2":
-                county = place.address_components[i].long_name.replace(" County", "");
-                break;
-        }
-    }
-
-    if (state === '' || county === '' || stateAbbr === '') {
-        console.log("invalid entry")
-
-        return toast("Unable to find location. Please try another!");
-    }
-    var json_value = {};
-    json_value["county"] = county;
-    json_value["state"] = state;
-    json_value["state_abbr"] = stateAbbr;
-    locationValue = JSON.stringify(json_value);
+    var location = parsePlaceResponse(place);
+    locationValue = JSON.stringify(location);
 
     getScoreData();
 }
@@ -1362,13 +1338,8 @@ function removeComparison() {
 function getComparisonData() {
     var communityNumber = +$(this).attr('data-community'); // get the community number
     var place = compareSearchBox[communityNumber].getPlace();
-    var county = place.address_components[1]['long_name'].replace(" County", "");
-    var state = place.address_components[2]['long_name'];
-    var state_abbr = place.address_components[2]['short_name'];
-    var location = {};
-    location["county"] = county;
-    location["state"] = state;
-    var data_url = "/hwbi/disc/rest/scores?state=" + state + "&county=" + county + "&state_abbr=" + state_abbr;
+    var location = parsePlaceResponse(place);
+    var data_url = "/hwbi/disc/rest/indicators/scores/?county=" + location.county + "&state_abbr=" + location.state_abbr;
     $.ajax({ // get score data
         url: data_url,
         type: "GET",
@@ -1377,7 +1348,7 @@ function getComparisonData() {
             $('.compare-search-error').hide();
         },
         success: function (data, status, xhr) {
-            console.log("getComparisonData success: " + status);
+            data = JSON.stringify(formatDomainData(JSON.parse(data)));
             if (setCompareData(data, communityNumber) !== "dupe") {
                 $('.add-community-search').eq(communityNumber).hide();
             } else {
@@ -1386,11 +1357,9 @@ function getComparisonData() {
             displayCompareData();
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("getComparisonData error: " + errorThrown);
             $('.compare-search-error').eq(communityNumber).html('Your search could not be completed. Please try another location.').show();
         },
         complete: function (jqXHR, textStatus) {
-            console.log("getComparisonData complete: " + textStatus);
             $('.compare-search-button').eq(communityNumber).removeClass('searching');
             return false;
         }
@@ -1449,7 +1418,6 @@ function countyStateSelectors() {
     });
     var stateAbbr;
     $.getJSON('/static_qed/hwbi/disc/js/statestateabbr.json', function (data) {
-        console.log(data);
         stateAbbr = data;
     });
     //on county selection, send ajax POST call sending state and county name to server
@@ -1483,4 +1451,104 @@ function priorityText() {
     } else {
         x.style.display = 'none';
     }
+}
+
+function formatDomainData(data) {
+    var indicators = setIndicatorData(JSON.stringify(data));
+    for (var domain in discDomains) {
+        var sum = 0;
+        var count = 0;
+        for (var index in discDomains[domain]) {
+            for (var i = 0; i < discDomains[domain][index].length; i++) {        
+                if (indicators.hasOwnProperty(discDomains[domain][index][i].toLowerCase())) {
+                    if (indicators[discDomains[domain][index][i]].hasOwnProperty("score")) {
+                        var score = indicators[discDomains[domain][index][i]].score;
+                        sum += score;
+                        count++;
+                    }
+                }
+            }
+        }
+        discDomains[domain].score = (count === 0 ? 0 : sum / count);
+        if (discDomains[domain].score == 0) {
+            toast("No data found for " + location.county + " County, " + location.state)
+            return;
+        }
+    }
+    data.outputs = {"domains" : [] };
+    data.outputs.domains.push({ "score" : discDomains["built environment"].score, weight: 1, description: "Built Environment", domainID : 'environment' });
+    data.outputs.domains.push({ "score" : discDomains["community involvement"].score, weight: 1, description: "Community Involvement", domainID : 'community' });
+    data.outputs.domains.push({ "score" : discDomains["education"].score, weight: 1, description: "Education", domainID : 'Education' });
+    data.outputs.domains.push({ "score" : discDomains["health"].score, weight: 1, description: "Health", domainID : 'Health' });
+    data.outputs.domains.push({ "score" : discDomains["environmental resource management"].score, weight: 1, description: "Environmental Resource Management", domainID : 'resource-mgmt' });
+    data.outputs.domains.push({ "score" : discDomains["hazard vulnerability"].score, weight: 1, description: "Hazard Vulnerability", domainID : 'hazard' });
+    data.outputs.domains.push({ "score" : discDomains["local economy"].score, weight: 1, description: "Local Economy", domainID : 'economy' });
+    data.outputs.domains.push({ "score" : discDomains["resilience planning"].score, weight: 1, description: "Resilience Planning", domainID : 'resilience' });
+    data.outputs.domains.push({ "score" : discDomains["local culture"].score, weight: 1, description: "Local Culture", domainID : 'culture' });
+    data.outputs.domains.push({ "score" : discDomains["safety and security"].score, weight: 1, description: "Safety and Security", domainID : 'safety' });
+    data.outputs.hwbi = 0;
+    for (var i = 0; i < data.outputs.domains.length; i++) {
+        data.outputs.hwbi += data.outputs.domains[i].score;
+    }
+    data.outputs.hwbi /= data.outputs.domains.length;
+    data.outputs.nationhwbi = 52.7943325;
+    return data;
+}
+
+function formatIndicatorData(indicators) {
+    var data = {};
+    var inputs = []; // build inputs
+    var meta_state = {
+        'name': 'state',
+        'value': indicators["activity participation"].stateID,
+        'description': 'US State'
+    };
+    var meta_county = {
+        'name': 'county',
+        'value': indicators["activity participation"].county,
+        'description': 'County'
+    };
+    inputs.push(meta_state);
+    inputs.push(meta_county);
+    data.inputs = inputs;
+    data.outputs = indicators;
+    return data;
+}
+
+function parsePlaceResponse(place) {
+    var county = '';
+    var state = '';
+    var state_abbr = '';
+    for (var i = 0; i < place.address_components.length; i++) {
+        switch (place.address_components[i].types[0]) {
+            case "administrative_area_level_1":
+                state = place.address_components[i].long_name;
+                state_abbr = place.address_components[i].short_name;
+                break;
+            case "administrative_area_level_2":
+                county = place.address_components[i].long_name.replace(" County", "");
+                break;
+        }
+    }
+    if (state === '' || county === '' || state_abbr === '') {
+        return toast("Unable to find location. Please try another!");
+    }
+    var location = {};
+    location["county"] = county;
+    location["state"] = state;
+    location["state_abbr"] = state_abbr;
+    return location;
+}
+
+function setIndicatorData(indicatorData) {
+    var outputs = JSON.parse(indicatorData).outputs;
+    var indicators = {};
+    for (var i = 0; i < outputs.length; i++) {
+        var row = outputs[i];
+        if (row.score <= 1 && row.score >= 0) {
+            row.score *= 100;
+        }
+        indicators[row.indicator.toLowerCase()] = row;
+    }
+    return indicators;
 }
