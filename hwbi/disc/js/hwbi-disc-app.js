@@ -291,7 +291,10 @@ function initializeAutocomplete() {
         searchBox.addListener('place_changed', setLocationValue);
 
     })(pac_input);
-    
+    $('#search_field').keypress(function(event){
+        if (event.keyCode === 13) 
+            event.preventDefault();
+    });
 }
 
 function setLocationValue() {
