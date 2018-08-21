@@ -485,42 +485,53 @@ function calculateScore() {
 
     var environmentScore = hwbi_disc_data["outputs"]["domains"][0]["score"];
     var environmentWeight = $('#environment-slider-bar').slider("value");
+    hwbi_disc_data["outputs"]["domains"][0]["weight"] = environmentWeight;
     var adjustedEnvironmentScore = environmentScore * environmentWeight;
     
     var communityScore = hwbi_disc_data["outputs"]["domains"][1]["score"];
     var communityWeight = $('#community-slider-bar').slider("value");
+    hwbi_disc_data["outputs"]["domains"][1]["weight"] = communityWeight;
     var adjustedCommunityScore = communityScore * communityWeight;
     
     var educationScore = hwbi_disc_data["outputs"]["domains"][2]["score"];
     var educationWeight = $('#education-slider-bar').slider("value");
     var adjustedEducationScore = educationScore * educationWeight;
+    hwbi_disc_data["outputs"]["domains"][2]["weight"] = educationWeight;
+    var adjustedEducationScore = educationScore * educationWeight;
     
     var healthScore = hwbi_disc_data["outputs"]["domains"][3]["score"];
     var healthWeight = $('#health-slider-bar').slider("value");
+    hwbi_disc_data["outputs"]["domains"][3]["weight"] = healthWeight;
     var adjustedHealthScore = healthScore * healthWeight;
 
     var resourceMgmtScore = hwbi_disc_data["outputs"]["domains"][4]["score"];
     var resourceMgmtWeight = $('#resource-mgmt-slider-bar').slider("value");
+    hwbi_disc_data["outputs"]["domains"][4]["weight"] = resourceMgmtWeight;
     var adjustedResourceMgmtScore = resourceMgmtScore * resourceMgmtWeight;
     
     var hazardScore = hwbi_disc_data["outputs"]["domains"][5]["score"];
     var hazardWeight = $('#hazard-slider-bar').slider("value");
+    hwbi_disc_data["outputs"]["domains"][5]["weight"] = hazardWeight;
     var adjustedHazardScore = hazardScore * hazardWeight;
     
     var economyScore = hwbi_disc_data["outputs"]["domains"][6]["score"];
     var economyWeight = $('#economy-slider-bar').slider("value");
+    hwbi_disc_data["outputs"]["domains"][6]["weight"] = economyWeight;
     var adjustedEconomyScore = economyScore * economyWeight;
 
     var resilienceScore = hwbi_disc_data["outputs"]["domains"][7]["score"];
     var resilienceWeight = $('#resilience-slider-bar').slider("value");
+    hwbi_disc_data["outputs"]["domains"][7]["weight"] = resilienceWeight;
     var adjustedResilienceScore = resilienceScore * resilienceWeight;
 
     var cultureScore = hwbi_disc_data["outputs"]["domains"][8]["score"];
     var cultureWeight = $('#culture-slider-bar').slider("value");
+    hwbi_disc_data["outputs"]["domains"][8]["weight"] = cultureWeight;
     var adjustedCultureScore = cultureScore * cultureWeight;
 
     var safetyScore = hwbi_disc_data["outputs"]["domains"][9]["score"];
     var safetyWeight = $('#safety-slider-bar').slider("value");
+    hwbi_disc_data["outputs"]["domains"][9]["weight"] = safetyWeight;
     var adjustedSafetyScore = safetyScore * safetyWeight;
     
     var totalScore = adjustedEnvironmentScore + adjustedEducationScore + adjustedHealthScore + adjustedResilienceScore + 
@@ -1475,7 +1486,7 @@ function formatDomainData(data) {
         discDomains[domain].score = (count === 0 ? 0 : sum / count);
         if (discDomains[domain].score == 0) {
             toast("No data found for " + location.county + " County, " + location.state)
-            return;
+            return {};
         }
     }
     data.outputs = {"domains" : [] };
