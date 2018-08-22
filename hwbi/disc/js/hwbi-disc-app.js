@@ -1627,3 +1627,17 @@ function setIndicatorData(indicatorData) {
     }
     return indicators;
 }
+
+function relevantIndicatorsDomains() {
+    for (var indicator in disc_indicator_changes) { 
+        var difference = disc_indicator_changes[indicator] - hwbi_indicator_data.outputs[indicator].score;
+        if (difference > 0) {
+            console.log("User specified indicator " + indicator + " is important!");
+        }
+    }
+    for (var i = 0; i < hwbi_disc_data.outputs.domains.length; i++) {
+        if (hwbi_disc_data.outputs.domains[i].weight > 1) {
+            console.log("User specified domain " + hwbi_disc_data.outputs.domains[i].description + " is important!");
+        }
+    }
+}
