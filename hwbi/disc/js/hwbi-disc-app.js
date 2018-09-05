@@ -334,6 +334,8 @@ function setScoreData(data) {
     document.getElementById('score_indicator_span').style.transform = "rotate(0deg) skew(45deg, -45deg)";
     // Set location info
     $('#location').html("Snapshot results for:<br>" + data.inputs[1].value + " County, " + data.inputs[0].value);
+    $('#reportlocation').html("Report for " + data.inputs[1].value + " County, " + data.inputs[0].value);
+
     // $('#wellbeing-score-location').html("Nation: " + data.outputs.nationhwbi.toFixed(1) + ", State: " +
     //     data.outputs.statehwbi.toFixed(1));
 
@@ -341,6 +343,7 @@ function setScoreData(data) {
     var score = round(data.outputs.hwbi, 1);
     $('#wellbeing-score').html(score);
     document.getElementById('score_indicator_span').style.transform = "rotate(" + Math.round(score * 90 / 50) + "deg) skew(45deg, -45deg)";
+    $('#report-wellbeing-score').html(score);
 
     // Set Domain scores
     var environment_score = round(data.outputs.domains[0].score, 1);
@@ -348,60 +351,70 @@ function setScoreData(data) {
     $('#environment_score_bar').attr('data-percent', environment_score + "%");
     //$('#environment_location').html("[Nation: " + round(data.outputs.domains[0].nationScore, 1) +
     //    ", State: " + data.outputs.domains[0].stateScore.toFixed(1) + "]");
+    $('#environment_score_summary').html(environment_score);
 
     var community_score = round(data.outputs.domains[1].score, 1);
     $('#community_score').html(community_score);
     $('#community_score_bar').attr('data-percent', community_score + "%");
     // $('#community_location').html("[Nation: " + round(data.outputs.domains[1].nationScore, 1) +
     //     ", State: " + data.outputs.domains[1].stateScore.toFixed(1) + "]");
-    
+    $('#community_score_summary').html(community_score);
+
     var education_score = round(data.outputs.domains[2].score, 1);
     $('#education_score').html(education_score);
     $('#education_score_bar').attr('data-percent', education_score + "%");
     // $('#education_location').html("[Nation: " + round(data.outputs.domains[2].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[2].stateScore, 1) + "]");
-    
+    $('#education_score_summary').html(education_score);
+
     var health_score = round(data.outputs.domains[3].score, 1);
     $('#health_score').html(health_score);
     $('#health_score_bar').attr('data-percent', health_score + "%");
     // $('#health_location').html("[Nation: " + round(data.outputs.domains[3].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[3].stateScore, 1) + "]");
-    
+    $('#health_score_summary').html(health_score);
+
     var resourceMgmt_score = round(data.outputs.domains[4].score, 1);
     $('#resource-mgmt_score').html(resourceMgmt_score);
     $('#resource-mgmt_score_bar').attr('data-percent', resourceMgmt_score + "%");
     // $('#resource-mgmt_location').html("[Nation: " + round(data.outputs.domains[4].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[4].stateScore, 1) + "]");
-    
+    $('#resource-mgmt_score_summary').html(resourceMgmt_score);
+
     var hazard_score = round(data.outputs.domains[5].score, 1);
     $('#hazard_score').html(hazard_score);
     $('#hazard_score_bar').attr('data-percent', hazard_score + "%");
     // $('#hazard_location').html("[Nation: " + round(data.outputs.domains[5].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[5].stateScore, 1) + "]");
-    
+    $('#hazard_score_summary').html(hazard_score);
+
     var economy_score = round(data.outputs.domains[6].score, 1);
     $('#economy_score').html(economy_score);
     $('#economy_score_bar').attr('data-percent', economy_score + "%");
     // $('#economy_location').html("[Nation: " + round(data.outputs.domains[6].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[6].stateScore, 1) + "]");
-    
+    $('#economy_score_summary').html(economy_score);
+
     var resilience_score = round(data.outputs.domains[7].score, 1);
     $('#resilience_score').html(resilience_score);
     $('#resilience_score_bar').attr('data-percent', resilience_score + "%");
     // $('#resilience_location').html("[Nation: " + round(data.outputs.domains[7].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[7].stateScore, 1) + "]");
-    
+    $('#resilience_score_summary').html(resilience_score);
+
     var culture_score = round(data.outputs.domains[8].score, 1);
     $('#culture_score').html(culture_score);
     $('#culture_score_bar').attr('data-percent', culture_score + "%");
     // $('#culture_location').html("[Nation: " + round(data.outputs.domains[8].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[8].stateScore, 1) + "]");
-    
+    $('#culture_score_summary').html(culture_score);
+
     var safety_score = round(data.outputs.domains[9].score, 1);
     $('#safety_score').html(safety_score);
     $('#safety_score_bar').attr('data-percent', safety_score + "%");
     // $('#safety_location').html("[Nation: " + round(data.outputs.domains[9].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[9].stateScore, 1) + "]");   
+    $('#safety_score_summary').html(safety_score);
 
     setTimeout(loadSkillbar, 600);
 }
@@ -815,8 +828,10 @@ function setIndicatorSliders() {
             $('#environment_communication_value').html(ui.value);
             disc_indicator_changes["communication infrastructure"] = ui.value;
             calculateNewScore("environment", "#environment_indicators");
+            $('#communication_infrastructure_adj').html(disc_indicator_changes["communication infrastructure"]);
         }
     });
+    $('#communication_infrastructure').html(environment_communication);
 
     var environment_housing = round(hwbi_indicator_data.outputs["housing characteristics"].score, 0);
     $('#environment_housing_value').html(environment_housing);
@@ -828,8 +843,12 @@ function setIndicatorSliders() {
             $('#environment_housing_value').html(ui.value);
             disc_indicator_changes["housing characteristics"] = ui.value;
             calculateNewScore("environment", "#environment_indicators");
+            $('#housing_characteristics_adj').html(disc_indicator_changes["housing characteristics"]);
+
         }
     });
+    $('#housing_characteristics').html(environment_housing);
+
     var environment_transportation = round(hwbi_indicator_data.outputs["transportation infrastructure"].score, 0);
     $('#environment_transportation_value').html(environment_transportation);
     $('#environment_transportation_slider').slider({
@@ -840,8 +859,12 @@ function setIndicatorSliders() {
             $('#environment_transportation_value').html(ui.value);
             disc_indicator_changes["transportation infrastructure"] = ui.value;
             calculateNewScore("environment", "#environment_indicators");
+            $('#transportation_infrastructure_adj').html(disc_indicator_changes["transportation infrastructure"]);
+
         }
     });
+    $('#transportation_infrastructure').html(environment_transportation);
+
     var environment_utility = round(hwbi_indicator_data.outputs["utility infrastructure"].score, 0);
     $('#environment_utility_value').html(environment_utility);
     $('#environment_utility_slider').slider({
@@ -852,9 +875,12 @@ function setIndicatorSliders() {
             $('#environment_utility_value').html(ui.value);
             disc_indicator_changes["utility infrastructure"] = ui.value;
             calculateNewScore("environment", "#environment_indicators");
+            $('#utility_infrastructure_adj').html(disc_indicator_changes["utility infrastructure"]);
 
         }
     });
+    $('#utility_infrastructure').html(environment_utility);
+
     var environment_vacant = round(hwbi_indicator_data.outputs["vacant structures"].score, 0);
     $('#environment_vacant_value').html(environment_vacant);
     $('#environment_vacant_slider').slider({
@@ -865,9 +891,12 @@ function setIndicatorSliders() {
             $('#environment_vacant_value').html(ui.value);
             disc_indicator_changes["vacant structures"] = ui.value;
             calculateNewScore("environment", "#environment_indicators");
+            $('#vacant_structures_adj').html(disc_indicator_changes["vacant structures"]);
 
         }
     });
+    $('#vacant_structures').html(environment_vacant);
+
     var community_attitude = round(hwbi_indicator_data.outputs["attitude toward others and the community"].score, 0);
     $('#community_attitude_value').html(community_attitude);
     $('#community_attitude_slider').slider({
@@ -878,8 +907,11 @@ function setIndicatorSliders() {
             $('#community_attitude_value').html(ui.value);
             disc_indicator_changes["attitude toward others and the community"] = ui.value;
             calculateNewScore("community", "#community_indicators");
+            $('#attitude_adj').html(disc_indicator_changes["attitude toward others and the community"]);
         }
     });
+    $('#attitudes').html(community_attitude);
+
     var community_democratic = round(hwbi_indicator_data.outputs["democratic engagement"].score, 0);
     $('#community_democratic_value').html(community_democratic);
     $('#community_democratic_slider').slider({
@@ -890,8 +922,11 @@ function setIndicatorSliders() {
             $('#community_democratic_value').html(ui.value);
             disc_indicator_changes["democratic engagement"] = ui.value;
             calculateNewScore("community", "#community_indicators");
+            $('#democratic_engagement_adj').html(disc_indicator_changes["democratic engagement"]);
         }
     });
+    $('#democratic_engagement').html(community_democratic);
+
     var community_family = round(hwbi_indicator_data.outputs["family bonding"].score, 0);
     $('#community_family_value').html(community_family);
     $('#community_family_slider').slider({
@@ -902,8 +937,11 @@ function setIndicatorSliders() {
             $('#community_family_value').html(ui.value);
             disc_indicator_changes["family bonding"] = ui.value;
             calculateNewScore("community", "#community_indicators");
+            $('#family_bonding_adj').html(disc_indicator_changes["family bonding"]);
         }
     });
+    $('#family_bonding').html(community_family);
+
     var community_social_eng = round(hwbi_indicator_data.outputs["social engagement"].score, 0);
     $('#community_social_eng_value').html(community_social_eng);
     $('#community_social_eng_slider').slider({
@@ -914,8 +952,11 @@ function setIndicatorSliders() {
             $('#community_social_eng_value').html(ui.value);
             disc_indicator_changes["social engagement"] = ui.value;
             calculateNewScore("community", "#community_indicators");
+            $('#social_engagement_adj').html(disc_indicator_changes["social engagement"]);
         }
     });
+    $('#social_engagement').html(community_social_eng);
+
     var community_support = round(hwbi_indicator_data.outputs["social support"].score, 0);
     $('#community_support_value').html(community_support);
     $('#community_support_slider').slider({
@@ -926,8 +967,11 @@ function setIndicatorSliders() {
             $('#community_support_value').html(ui.value);
             disc_indicator_changes["social support"] = ui.value;
             calculateNewScore("community", "#community_indicators");
+            $('#social_support_adj').html(disc_indicator_changes["social support"]);
         }
     });
+    $('#social_support').html(community_support);
+
     var education_knowledge = round(hwbi_indicator_data.outputs["basic educational knowledge and skills of youth"].score, 0);
     $('#education_knowledge_value').html(education_knowledge);
     $('#education_knowledge_slider').slider({
@@ -938,9 +982,12 @@ function setIndicatorSliders() {
             $('#education_knowledge_value').html(ui.value);
             disc_indicator_changes["basic educational knowledge and skills of youth"] = ui.value;
             calculateNewScore("Education", "#education_indicators");
+            $('#educational_knowledge_adj').html(disc_indicator_changes["basic educational knowledge and skills of youth"]);
         }
     });
-    var education_participation = round(hwbi_indicator_data.outputs["social, emotional and developmental aspects"].score, 0);
+    $('#educational_knowledge').html(education_knowledge);
+
+    var education_participation = round(hwbi_indicator_data.outputs["participation and attainment"].score, 0);
     $('#education_participation_value').html(education_participation);
     $('#education_participation_slider').slider({
         min: 0,
@@ -948,11 +995,14 @@ function setIndicatorSliders() {
         value: education_participation,
         slide: function (event, ui) {
             $('#education_participation_value').html(ui.value);
-            disc_indicator_changes["social, emotional and developmental aspects"] = ui.value;
+            disc_indicator_changes["participation and attainment"] = ui.value;
             calculateNewScore("Education", "#education_indicators");
+            $('#participation_attainment_adj').html(disc_indicator_changes["participation and attainment"]);
         }
     });
-    var education_social = round(hwbi_indicator_data.outputs["participation and attainment"].score, 0);
+    $('#participation_attainment').html(education_participation);
+
+    var education_social = round(hwbi_indicator_data.outputs["social, emotional and developmental aspects"].score, 0);
     $('#education_social_value').html(education_social);
     $('#education_social_slider').slider({
         min: 0,
@@ -960,10 +1010,13 @@ function setIndicatorSliders() {
         value: education_social,
         slide: function (event, ui) {
             $('#education_social_value').html(ui.value);
-            disc_indicator_changes["participation and attainment"] = ui.value;
+            disc_indicator_changes["social, emotional and developmental aspects"] = ui.value;
             calculateNewScore("Education", "#education_indicators");
+            $('#social_emotional_developmental_adj').html(disc_indicator_changes["social, emotional and developmental aspects"]);
         }
     });
+    $('#social_emotional_developmental').html(education_social);
+
     var health_healthcare = round(hwbi_indicator_data.outputs["healthcare"].score, 0);
     $('#health_healthcare_value').html(health_healthcare);
     $('#health_healthcare_slider').slider({
@@ -974,8 +1027,11 @@ function setIndicatorSliders() {
             $('#health_healthcare_value').html(ui.value);
             disc_indicator_changes["healthcare"] = ui.value;
             calculateNewScore("Health", "#health_indicators");
+            $('#healthcare_adj').html(disc_indicator_changes["healthcare"]);
         }
     });
+    $('#healthcare').html(health_healthcare);
+
     var health_life_exp = round(hwbi_indicator_data.outputs["life expectancy and mortality"].score, 0);
     $('#health_life_expectancy_value').html(health_life_exp);
     $('#health_life_expectancy_slider').slider({
@@ -986,8 +1042,11 @@ function setIndicatorSliders() {
             $('#health_life_expectancy_value').html(ui.value);
             disc_indicator_changes["life expectancy and mortality"] = ui.value;
             calculateNewScore("Health", "#health_indicators");
+            $('#life_exp_adj').html(disc_indicator_changes["life expectancy and mortality"]);
         }
     });
+    $('#life_exp').html(health_life_exp);
+
     var health_lifestyle = round(hwbi_indicator_data.outputs["lifestyle and behavior"].score, 0);
     $('#health_lifestyle_value').html(health_lifestyle);
     $('#health_lifestyle_slider').slider({
@@ -998,8 +1057,11 @@ function setIndicatorSliders() {
             $('#health_lifestyle_value').html(ui.value);
             disc_indicator_changes["lifestyle and behavior"] = ui.value;
             calculateNewScore("Health", "#health_indicators");
+            $('#lifestyle_behavior_adj').html(disc_indicator_changes["lifestyle and behavior"]);
         }
     });
+    $('#lifestyle_behavior').html(health_lifestyle);
+
     var health_personal = round(hwbi_indicator_data.outputs["personal well-being"].score, 0);
     $('#health_personal_value').html(health_personal);
     $('#health_personal_slider').slider({
@@ -1010,8 +1072,11 @@ function setIndicatorSliders() {
             $('#health_personal_value').html(ui.value);
             disc_indicator_changes["personal well-being"] = ui.value;
             calculateNewScore("Health", "#health_indicators");
+            $('#personal_wellbeing_adj').html(disc_indicator_changes["personal well-being"]);
         }
     });
+    $('#personal_wellbeing').html(health_personal);
+
     var health_services = round(hwbi_indicator_data.outputs["social services"].score, 0);
     $('#health_services_value').html(health_services);
     $('#health_services_slider').slider({
@@ -1022,8 +1087,11 @@ function setIndicatorSliders() {
             $('#health_services_value').html(ui.value);
             disc_indicator_changes["social services"] = ui.value;
             calculateNewScore("Health", "#health_indicators");
+            $('#social_services_adj').html(disc_indicator_changes["social services"]);
         }
     });
+    $('#social_services').html(health_services);
+
     var health_characteristics = round(hwbi_indicator_data.outputs["health characteristics"].score, 0);
     $('#health_characteristics_value').html(health_characteristics);
     $('#health_characteristics_slider').slider({
@@ -1034,8 +1102,11 @@ function setIndicatorSliders() {
             $('#health_characteristics_value').html(ui.value);
             disc_indicator_changes["health characteristics"] = ui.value;
             calculateNewScore("Health", "#health_indicators");
+            $('#health_characteristics_adj').html(disc_indicator_changes["health characteristics"]);
         }
     });
+    $('#health_characteristics').html(health_characteristics);
+
     var resource_mgmt_condition = round(hwbi_indicator_data.outputs["condition"].score, 0);
     $('#resource-mgmt_condition_value').html(resource_mgmt_condition);
     $('#resource-mgmt_condition_slider').slider({
@@ -1046,8 +1117,11 @@ function setIndicatorSliders() {
             $('#resource-mgmt_condition_value').html(ui.value);
             disc_indicator_changes["condition"] = ui.value;
             calculateNewScore("resource-mgmt", "#resource-mgmt_indicators");
+            $('#condition_adj').html(disc_indicator_changes["condition"]);
         }
     });
+    $('#condition').html(resource_mgmt_condition);
+
     var resource_mgmt_ecosystem = round(hwbi_indicator_data.outputs["extent of ecosystem types"].score, 0);
     $('#resource-mgmt_ecosystem_value').html(resource_mgmt_ecosystem);
     $('#resource-mgmt_ecosystem_slider').slider({
@@ -1058,8 +1132,11 @@ function setIndicatorSliders() {
             $('#resource-mgmt_ecosystem_value').html(ui.value);
             disc_indicator_changes["extent of ecosystem types"] = ui.value;
             calculateNewScore("resource-mgmt", "#resource-mgmt_indicators");
+            $('#ecosystem_types_adj').html(disc_indicator_changes["extent of ecosystem types"]);
         }
     });
+    $('#ecosystem_types').html(resource_mgmt_ecosystem);
+
     var hazard_exposure = round(hwbi_indicator_data.outputs["exposure"].score, 0);
     $('#hazard_exposure_value').html(hazard_exposure);
     $('#hazard_exposure_slider').slider({
@@ -1073,8 +1150,11 @@ function setIndicatorSliders() {
             $('#hazard_exposure_value').html(ui.value);
             disc_indicator_changes["exposure"] = ui.value;
             calculateNewScore("hazard", "#hazard_indicators");
+            $('#exposure_adj').html(disc_indicator_changes["exposure"]);
         }
     });
+    $('#exposure').html(hazard_exposure);
+
     var hazard_loss = round(hwbi_indicator_data.outputs["loss"].score, 0);
     $('#hazard_loss_value').html(hazard_loss);
     $('#hazard_loss_slider').slider({
@@ -1088,8 +1168,11 @@ function setIndicatorSliders() {
             $('#hazard_loss_value').html(ui.value);
             disc_indicator_changes["loss"] = ui.value;
             calculateNewScore("hazard", "#hazard_indicators");
+            $('#loss_adj').html(disc_indicator_changes["loss"]);
         }
     });
+    $('#loss').html(hazard_loss);
+
     var economy_necessities = round(hwbi_indicator_data.outputs["basic necessities"].score, 0);
     $('#economy_necessities_value').html(economy_necessities);
     $('#economy_necessities_slider').slider({
@@ -1100,8 +1183,11 @@ function setIndicatorSliders() {
             $('#economy_necessities_value').html(ui.value);
             disc_indicator_changes["basic necessities"] = ui.value;
             calculateNewScore("economy", "#economy_indicators");
+            $('#basic_necessities_adj').html(disc_indicator_changes["basic necessities"]);
         }
     });
+    $('#basic_necessities').html(economy_necessities);
+
     var economy_diversity = round(hwbi_indicator_data.outputs["economic diversity"].score, 0);
     $('#economy_diversity_value').html(economy_diversity);
     $('#economy_diversity_slider').slider({
@@ -1112,8 +1198,11 @@ function setIndicatorSliders() {
             $('#economy_diversity_value').html(ui.value);
             disc_indicator_changes["economic diversity"] = ui.value;
             calculateNewScore("economy", "#economy_indicators");
+            $('#economic_diversity_adj').html(disc_indicator_changes["economic diversity"]);
         }
     });
+    $('#economic_diversity').html(economy_diversity);
+    
     var economy_socio = round(hwbi_indicator_data.outputs["socio-economics"].score, 0);
     $('#economy_socio_value').html(economy_socio);
     $('#economy_socio_slider').slider({
@@ -1124,8 +1213,11 @@ function setIndicatorSliders() {
             $('#economy_socio_value').html(ui.value);
             disc_indicator_changes["socio-economics"] = ui.value;
             calculateNewScore("economy", "#economy_indicators");
+            $('#socio_economics_adj').html(disc_indicator_changes["socio-economics"]);
         }
     });
+    $('#socio_economics').html(economy_socio);
+
     var economy_wealth = round(hwbi_indicator_data.outputs["wealth"].score, 0);
     $('#economy_wealth_value').html(economy_wealth);
     $('#economy_wealth_slider').slider({
@@ -1136,8 +1228,11 @@ function setIndicatorSliders() {
             $('#economy_wealth_value').html(ui.value);
             disc_indicator_changes["wealth"] = ui.value;
             calculateNewScore("economy", "#economy_indicators");
+            $('#wealth_adj').html(disc_indicator_changes["wealth"]);
         }
     });
+    $('#wealth').html(economy_wealth);
+
     var economy_work = round(hwbi_indicator_data.outputs["work"].score, 0);
     $('#economy_work_value').html(economy_work);
     $('#economy_work_slider').slider({
@@ -1148,8 +1243,11 @@ function setIndicatorSliders() {
             $('#economy_work_value').html(ui.value);
             disc_indicator_changes["work"] = ui.value;
             calculateNewScore("economy", "#economy_indicators");
+            $('#work_adj').html(disc_indicator_changes["work"]);
         }
     });
+    $('#work').html(economy_work);
+
     var resilience_community = round(hwbi_indicator_data.outputs["community preparedness"].score, 0);
     $('#resilience_community_value').html(resilience_community);
     $('#resilience_community_slider').slider({
@@ -1160,8 +1258,11 @@ function setIndicatorSliders() {
             $('#resilience_community_value').html(ui.value);
             disc_indicator_changes["community preparedness"] = ui.value;
             calculateNewScore("resilience", "#resilience_indicators");
+            $('#community_preparedness_adj').html(disc_indicator_changes["community preparedness"]);
         }
     });
+    $('#community_preparedness').html(resilience_community);
+
     var resilience_conservation = round(hwbi_indicator_data.outputs["natural resource conservation"].score, 0);
     $('#resilience_conservation_value').html(resilience_conservation);
     $('#resilience_conservation_slider').slider({
@@ -1172,8 +1273,11 @@ function setIndicatorSliders() {
             $('#resilience_conservation_value').html(ui.value);
             disc_indicator_changes["natural resource conservation"] = ui.value;
             calculateNewScore("resilience", "#resilience_indicators");
+            $('#resource_conservation_adj').html(disc_indicator_changes["natural resource conservation"]);
         }
     });
+    $('#resource_conservation').html(resilience_conservation);
+
     var resilience_personal = round(hwbi_indicator_data.outputs["personal preparedness"].score, 0);
     $('#resilience_personal_value').html(resilience_personal);
     $('#resilience_personal_slider').slider({
@@ -1184,8 +1288,11 @@ function setIndicatorSliders() {
             $('#resilience_personal_value').html(ui.value);
             disc_indicator_changes["personal preparedness"] = ui.value;
             calculateNewScore("resilience", "#resilience_indicators");
+            $('#personal_preparedness_adj').html(disc_indicator_changes["personal preparedness"]);
         }
     });
+    $('#personal_preparedness').html(resilience_personal);
+
     var culture_activity = round(hwbi_indicator_data.outputs["activity participation"].score, 0);
     $('#culture_activity_value').html(culture_activity);
     $('#culture_activity_slider').slider({
@@ -1196,8 +1303,11 @@ function setIndicatorSliders() {
             $('#culture_activity_value').html(ui.value);
             disc_indicator_changes["activity participation"] = ui.value;
             calculateNewScore("culture", "#culture_indicators");
+            $('#activity_participation_adj').html(disc_indicator_changes["activity participation"]);
         }
     });
+    $('#activity_participation').html(culture_activity);
+
     var culture_biophilia = round(hwbi_indicator_data.outputs["biophilia"].score, 0);
     $('#culture_biophilia_value').html(culture_biophilia);
     $('#culture_biophilia_slider').slider({
@@ -1208,8 +1318,11 @@ function setIndicatorSliders() {
             $('#culture_biophilia_value').html(ui.value);
             disc_indicator_changes["biophilia"] = ui.value;
             calculateNewScore("culture", "#culture_indicators");
+            $('#biophilia_adj').html(disc_indicator_changes["biophilia"]);
         }
     });
+    $('#biophilia').html(culture_biophilia);
+
     var culture_time = round(hwbi_indicator_data.outputs["time spent"].score, 0);
     $('#culture_time_value').html(culture_time);
     $('#culture_time_slider').slider({
@@ -1220,8 +1333,11 @@ function setIndicatorSliders() {
             $('#culture_time_value').html(ui.value);
             disc_indicator_changes["time spent"] = ui.value;
             calculateNewScore("culture", "#culture_indicators");
+            $('#time_spent_adj').html(disc_indicator_changes["time spent"]);
         }
     });
+    $('#time_spent').html(culture_time);
+
     var culture_adults = round(hwbi_indicator_data.outputs["working age adults"].score, 0);
     $('#culture_adults_value').html(culture_adults);
     $('#culture_adults_slider').slider({
@@ -1232,8 +1348,11 @@ function setIndicatorSliders() {
             $('#culture_adults_value').html(ui.value);
             disc_indicator_changes["working age adults"] = ui.value;
             calculateNewScore("culture", "#culture_indicators");
+            $('#working_adults_adj').html(disc_indicator_changes["working age adults"]);
         }
     });
+    $('#working_adults').html(culture_adults);
+
     var safety_actual = round(hwbi_indicator_data.outputs["actual safety"].score, 0);
     $('#safety_actual_value').html(safety_actual);
     $('#safety_actual_slider').slider({
@@ -1244,9 +1363,11 @@ function setIndicatorSliders() {
             $('#safety_actual_value').html(ui.value);
             disc_indicator_changes["actual safety"] = ui.value;
             calculateNewScore("Safety", "#safety_indicators");
-
+            $('#actual_safety_adj').html(disc_indicator_changes["actual safety"]);
         }
     });
+    $('#actual_safety').html(safety_actual);
+
     var safety_perceived = round(hwbi_indicator_data.outputs["perceived safety"].score, 0);
     $('#safety_perceived_value').html(safety_perceived);
     $('#safety_perceived_slider').slider({
@@ -1257,8 +1378,11 @@ function setIndicatorSliders() {
             $('#safety_perceived_value').html(ui.value);
             disc_indicator_changes["perceived safety"] = ui.value;
             calculateNewScore("Safety", "#safety_indicators");
+            $('#perceived_safety_adj').html(disc_indicator_changes["perceived safety"]);
         }
     });
+    $('#perceived_safety').html(safety_perceived);
+
     var safety_risk = round(hwbi_indicator_data.outputs["risk"].score, 0);
     $('#safety_risk_value').html(safety_risk);
     $('#safety_risk_slider').slider({
@@ -1269,8 +1393,11 @@ function setIndicatorSliders() {
             $('#safety_risk_value').html(ui.value);
             disc_indicator_changes["risk"] = ui.value;
             calculateNewScore("Safety", "#safety_indicators");
+            $('#risk_adj').html(disc_indicator_changes["risk"]);
         }
     });
+    $('#risk').html(safety_risk);
+
 }
 
 function calculateNewScore(domainID, domainBlock) {
@@ -1286,7 +1413,17 @@ function calculateNewScore(domainID, domainBlock) {
     $('#arrow_adjusted').css("left", adjustedScoreRounded + "%");
     $('#score_adjusted').html(hwbi_indicator_value_adjusted[domainID].toFixed(1));
     $('#score_adjusted').css("left", adjustedScoreRounded + "%");
-    
+
+    $('#environment_adj').html(round(hwbi_indicator_value_adjusted["environment"], 1));
+    $('#community_adj').html(round(hwbi_indicator_value_adjusted["community"], 1));
+    $('#education_adj').html(round(hwbi_indicator_value_adjusted["Education"], 1));
+    $('#health_adj').html(round(hwbi_indicator_value_adjusted["Health"], 1));
+    $('#resource-mgmt_adj').html(round(hwbi_indicator_value_adjusted["resource-mgmt"], 1));
+    $('#hazard_adj').html(round(hwbi_indicator_value_adjusted["hazard"], 1));
+    $('#economy_adj').html(round(hwbi_indicator_value_adjusted["economy"], 1));
+    $('#resilience_adj').html(round(hwbi_indicator_value_adjusted["resilience"], 1));
+    $('#culture_adj').html(round(hwbi_indicator_value_adjusted["culture"], 1));
+    $('#safety_adj').html(round(hwbi_indicator_value_adjusted["Safety"], 1));
 }
 
 function setCompareData(data, columnNumber) {
@@ -1641,3 +1778,68 @@ function relevantIndicatorsDomains() {
         }
     }
 }
+
+function newDISC() {
+    var sum = 0;
+    var avg = 0;
+    var d = 0;
+    $('.updateddomain').each(function() {
+        sum+=parseFloat($(this).text()) || 0;
+        if ($(this).text() != 0) {
+            d++;
+        }
+    });
+    avg = sum / d;
+    $('#report-wellbeing-score-new').html(round(avg, 1));
+};
+
+function domainChange() {
+    var baseline = 0;
+    var update = 0;
+
+    $('.report-domains').each(function() {
+        baseline = parseFloat($(this).find('.baselinedomain').text());
+        update = parseFloat($(this).find('.updateddomain').text());
+        console.log(baseline);
+        console.log(update);
+
+        if (baseline > update) {
+            $(':nth-child(8)', this).html("⮟");
+        }
+        else if (baseline < update) {
+            $(':nth-child(8)', this).html("⮝");
+        }
+
+    });
+
+};
+
+function indicatorChange() {
+    var base = 0;
+    var upd = 0;
+
+    $('tr').each(function() {
+        base = parseFloat($(this).find('.baselineindicator').text());
+        upd = parseFloat($(this).find('.updatedindicator').text());
+
+        if (base > upd) {
+            if ($(this).hasClass('report-domains')) {
+                $('td:nth-child(5)', this).html("⮟")
+            }
+            else {
+            $('td:nth-child(4)', this).html("⮟");
+            }
+        }
+        
+        else if (base < upd) {
+            if ($(this).hasClass('report-domains')) {
+                $('td:nth-child(5)', this).html("⮝")
+            }
+            else {
+            $('td:nth-child(4)', this).html("⮝");
+            }
+        }
+
+    });
+
+};
