@@ -818,6 +818,12 @@ function setIndicatorSliders() {
     //     });
     // }
 
+    // restore printable table change values and arrows to default
+    $('.updatedindicator').html(''); // reset indicator changes
+    $('#printable tbody .separator').html('-');
+    $('.updateddomain').html(''); // reset domain changes
+    $('.changed').html('-')
+
     var environment_communication = round(hwbi_indicator_data.outputs["communication infrastructure"].score, 0);
     $('#environment_communication_value').html(environment_communication);
     $('#environment_communication_slider').slider({
