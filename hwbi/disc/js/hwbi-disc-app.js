@@ -698,6 +698,10 @@ function selectDomain() {
     $('#customize_domain_details').html(getDomainDescription(domainID) +
         "<br>Move a slider left or right to change the indicator score to describe your community better. Mouse over an indicator to learn more about it.");
     showDomainIndicators(domainID);
+
+    $('html, body').animate({
+        scrollTop: $('#customize_domains').offset().top
+    }, 'slow');
 }
 
 function getDomainDescription(domainID) {
