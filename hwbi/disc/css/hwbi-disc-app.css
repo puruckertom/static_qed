@@ -110,10 +110,16 @@
     outline: none !important;
 }
 
+/* .disc-body {
+    display: none;
+    padding: .5em .5em 0 0 !important;
+    height: auto !important;
+} */
 .disc-body {
     display: none;
     padding: .5em .5em 0 0 !important;
     height: auto !important;
+    width: 85%;
 }
 
 /* ABOUT SEARCH */
@@ -518,9 +524,9 @@
     display: block;
 }
 
-.active:after {
+/* .active:after {
     content: "\2212";
-}
+} */
 
 .domain-title, .domain-score {
     float: left;
