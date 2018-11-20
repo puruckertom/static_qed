@@ -1,6 +1,6 @@
 // Div list that all contain the quote class
-var quoteDivs = document.getElementsByClassName('quote');
-var quoteIndex = 0;
+//var quoteDivs = document.getElementsByClassName('quote');
+//var quoteIndex = 0;
 var acc = document.getElementsByClassName("accordion");
 var acc_i;
 var searchBox;
@@ -107,15 +107,15 @@ var discDomains = {
 
 $(document).ready(function () {
 
-    initializeTabs();
+    //initializeTabs();
 
     // fix for Firefox UIf
-    $('#community-snapshot-tab-link').trigger("click");
-    $('#about-tab-link').trigger("click");
+    //$('#community-snapshot-tab-link').trigger("click");
+    //$('#about-tab-link').trigger("click");
 
     // Run cycleQuote after 500ms delay on page load.
-    setTimeout(cycleQuote, 500);
-    setTimeout(loadPage, 600);
+    //setTimeout(cycleQuote, 500);
+    //setTimeout(loadPage, 600);
 
     // Snapshot body
     setAccordion();
@@ -143,6 +143,7 @@ $(document).ready(function () {
 
 function initializeGoogleMaps() {
     google.maps.event.addDomListener(window, 'load', initializeAutocomplete);
+    google.maps.event.addDomListener(window, 'load', initializeTopAutocomplete);
     google.maps.event.addDomListener(window, 'load', initializeComparisonAutocomplete);
 }
 
@@ -196,7 +197,10 @@ function getScoreData() {
             return "";
         }
     }
+    show('mainpage', 'homepage');
+    
     $('#community-snapshot-tab-link').trigger("click");
+    
     var location = JSON.parse(location_data);
     var data_url = "/hwbi/disc/rest/indicators/scores/?county=" + location.county + "&state_abbr=" + location.state_abbr;
     $.ajax({
@@ -305,6 +309,8 @@ function setLocationValue() {
     locationValue = JSON.stringify(location);
 
     getScoreData();
+
+    $('#search_field').val('');
 }
 
 function setCookie(cname, cvalue, exdays) {
@@ -421,9 +427,9 @@ function setScoreData(data) {
 
 function setAccordion() {
     for (acc_i = 0; acc_i < acc.length; acc_i++) {
-        acc[acc_i].addEventListener("click", function () {
+        acc[acc_i].addEventListener("click", function() {
                 var closingPanel = $(this).hasClass("active");
-                $('.domain-description').map(function () {
+                $('.domain-description').map(function() {
                     this.style.display = "none";
                 });
                 $('.domain-expand').map(function () {
@@ -435,7 +441,7 @@ function setAccordion() {
                     panel.style.display = "none";
                     $(this).removeClass("active");
                     $('html, body').animate({
-                        scrollTop: $('#disc-tabs').offset().top
+                        scrollTop: $('.content-wrapper').offset().top
                     }, 400);
                 } else {
                     panel.style.display = "block";
@@ -1853,3 +1859,60 @@ function indicatorChange() {
     });
 
 };
+
+// initializeTopAutocomplete: Initializes google maps search places function with a restriction to only us locations.
+function initializeTopAutocomplete() {
+    var pac_input = document.getElementById('top-search-bar');
+
+    (function pacSelectFirst(input) {
+        // store the original event binding function
+        var _addEventListener = (input.addEventListener) ? input.addEventListener : input.attachEvent;
+
+        function addEventListenerWrapper(type, listener) {
+            // Simulate a 'down arrow' keypress on hitting 'return' when no pac suggestion is selected,
+            // and then trigger the original listener.
+            if (type == "keydown") {
+                var orig_listener = listener;
+                listener = function(event) {
+                    var suggestion_selected = $(".pac-item-selected").length > 0;
+                    if (event.keyCode == 13 && !suggestion_selected) {
+                        var simulated_downarrow = $.Event("keydown", {
+                            keyCode: 40,
+                            which: 40
+                        });
+                        orig_listener.apply(input, [simulated_downarrow]);
+                    }
+
+                    orig_listener.apply(input, [event]);
+                };
+            }
+
+            _addEventListener.apply(input, [type, listener]);
+        }
+
+        input.addEventListener = addEventListenerWrapper;
+        input.attachEvent = addEventListenerWrapper;
+
+        topSearchBox = new google.maps.places.Autocomplete(input, {
+            types: ['(regions)'],
+            componentRestrictions: {country: 'us'}
+        });
+        topSearchBox.addListener('place_changed', setTopLocationValue);
+
+    })(pac_input);
+    $('#top-search-bar').keypress(function(event){
+        if (event.keyCode === 13) 
+            event.preventDefault();
+    });
+}
+
+function setTopLocationValue() {
+    console.log("setLocationValue called");
+    var place = topSearchBox.getPlace();
+    var location = parsePlaceResponse(place);
+    locationValue = JSON.stringify(location);
+
+    getScoreData();
+
+    $('#top-search-bar').val('');
+}
