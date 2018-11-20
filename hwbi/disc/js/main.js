@@ -21,6 +21,9 @@ jQuery(document).ready(function() {
         var selectedItem = $(this);
         $('.submenu > li > a.active-sub').removeClass('active-sub');
         selectedItem.addClass('active-sub');
+        $('.disc-body').removeClass('show');
+        var tab = selectedItem.attr('href');
+        $(tab).addClass('show');
     });
 
     $(document).on('click', function(event){
@@ -33,7 +36,7 @@ jQuery(document).ready(function() {
         var clicked = $(this);
         
         if (clicked.parent('li').hasClass('active')) {
-            clicked.parent('li').removeClass('active');
+            //clicked.parent('li').removeClass('active');
         } else {
             $('.sidenav > ul > li.active').removeClass('active');
             clicked.parent('li').addClass('active');
@@ -46,7 +49,8 @@ jQuery(document).ready(function() {
                 $('#community-snapshot-tab').addClass('show');
             }
             if ($(clicked).attr("id") === $('#customize-tab-link').attr("id")) {
-                $('#customize-tab').addClass('show');
+                var tab = $('#customize-tab-link').next('.submenu').find('a.active-sub').attr('href'); // Display the tab of the active child link
+                $(tab).addClass('show');
             }
             else if ($(clicked).attr("id") === $('#compare-tab-link').attr("id")) {
                 $('#compare-tab').addClass('show');
