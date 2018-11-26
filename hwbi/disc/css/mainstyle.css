@@ -579,7 +579,7 @@ h2.popup-title {
 }
 
 .modal .modalcontent{
-  max-height: 30%;
+  max-height: 80%;
   overflow: auto;
   font-family: sans-serif;
 }

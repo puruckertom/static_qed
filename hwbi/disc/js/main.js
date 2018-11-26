@@ -52,6 +52,9 @@ jQuery(document).ready(function() {
                 var tab = $('#customize-tab-link').next('.submenu').find('a.active-sub').attr('href'); // Display the tab of the active child link
                 $(tab).addClass('show');
             }
+            else if ($(clicked).attr("id") === $('#customize-domains-services-link').attr("id")) {
+                $('#customize-domains-services').addClass('show');
+            }
             else if ($(clicked).attr("id") === $('#compare-tab-link').attr("id")) {
                 $('#compare-tab').addClass('show');
             }
@@ -60,4 +63,9 @@ jQuery(document).ready(function() {
             }
         }
     });
+
+    var shiftWindow = function() { scrollBy(0, -75) };
+    if (location.hash) shiftWindow();
+    window.addEventListener("hashchange", shiftWindow);
+
 });
