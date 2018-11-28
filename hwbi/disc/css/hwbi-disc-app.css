@@ -581,11 +581,11 @@
     -webkit-border-radius: 9px;
 }
 
-.environment-bar {
+.environment-bar, .nature-bar {
     background-color: #82AC45;
 }
 
-.community-bar {
+.community-bar, .cultural-bar {
     background-color: #998FE4;
 }
 
@@ -597,15 +597,23 @@
     background-color: #5598C3;
 }
 
-.resource-mgmt-bar {
+.resource-mgmt-bar, .leisure-bar {
     background-color: #DC4B60;
 }
 
-.hazard-bar {
+.hazard-bar, .living-bar {
     background-color: #269683;
 }
 
 .economy-bar {
+    background-color: #E5632E;
+}
+
+.safety-bar {
+    background-color: #606060;
+}
+
+.cohesion-bar {
     background-color: #E5632E;
 }
 
@@ -677,30 +685,30 @@
     box-shadow: 1px 1px grey;
 }
 
-#environment-slider-bar {
+#nature-slider-bar {
     background-color: #82AC45;
 }
 
-#environment-slider-bar span {
+#nature-slider-bar span {
     background-color: #82AC45;
     width: 15px;
 }
 
-#environment-slider-bar span:active {
+#nature-slider-bar span:active {
     background-color: #779E3F;
     box-shadow: 1px 1px grey;
 }
 
-#community-slider-bar {
+#cultural-slider-bar {
     background-color: #998FE4;
 }
 
-#community-slider-bar span {
+#cultural-slider-bar span {
     background-color: #998FE4;
     width: 15px;
 }
 
-#community-slider-bar span:active {
+#cultural-slider-bar span:active {
     background-color: #877EC9;
     box-shadow: 1px 1px grey;
 }
@@ -733,73 +741,31 @@
     box-shadow: 1px 1px grey;
 }
 
-#resource-mgmt-slider-bar {
+#leisure-slider-bar {
     background-color: #DC4B60;
 }
 
-#resource-mgmt-slider-bar span {
+#leisure-slider-bar span {
     background-color: #DC4B60;
     width: 15px;
 }
 
-#resource-mgmt-slider-bar span:active {
+#leisure-slider-bar span:active {
     background-color: #C74457;
     box-shadow: 1px 1px grey;
 }
 
-#hazard-slider-bar {
+#living-slider-bar {
     background-color: #269683;
 }
 
-#hazard-slider-bar span {
+#living-slider-bar span {
     background-color: #269683;
     width: 15px;
 }
 
-#hazard-slider-bar span:active {
+#living-slider-bar span:active {
     background-color: #228574;
-    box-shadow: 1px 1px grey;
-}
-
-#economy-slider-bar {
-    background-color: #E5632E;
-}
-
-#economy-slider-bar span {
-    background-color: #E5632E;
-    width: 15px;
-}
-
-#economy-slider-bar span:active {
-    background-color: #E5632E;
-    box-shadow: 1px 1px grey;
-}
-
-#resilience-slider-bar {
-    background-color: rgb(253, 253, 101);
-}
-
-#resilience-slider-bar span {
-    background-color: rgb(253, 253, 101);
-    width: 15px;
-}
-
-#resilience-slider-bar span:active {
-    background-color: rgb(253, 253, 101);
-    box-shadow: 1px 1px grey;
-}
-
-#culture-slider-bar {
-    background-color: rgb(247, 88, 88);
-}
-
-#culture-slider-bar span {
-    background-color: rgb(247, 88, 88);
-    width: 15px;
-}
-
-#culture-slider-bar span:active {
-    background-color: rgb(247, 88, 88);
     box-shadow: 1px 1px grey;
 }
 
@@ -814,6 +780,20 @@
 
 #safety-slider-bar span:active {
     background-color: #545454;
+    box-shadow: 1px 1px grey;
+}
+
+#cohesion-slider-bar {
+    background-color: #E5632E;
+}
+
+#cohesion-slider-bar span {
+    background-color: #E5632E;
+    width: 15px;
+}
+
+#cohesion-slider-bar span:active {
+    background-color: #C75628;
     box-shadow: 1px 1px grey;
 }
 
