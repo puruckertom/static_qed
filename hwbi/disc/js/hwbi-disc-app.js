@@ -130,12 +130,14 @@ $(document).ready(function () {
 
     // Customize body
     $('.domain-icon').on('click', selectDomain);
+    $('.indicator_data-title').on('mouseover', displayIndicatorInformation);
+    $('.indicator_block:first-child .indicator_data-title:first-child').mouseenter(); //simulate mouseover of first indicator title to show a description by default
 
     // Comparison body
     $('.add-community').on('click', addComparison);
     $('.close-compare-search').on('click', removeComparison);
     $('.compare-search-button').on('click', getComparisonData);
-    $('.indicator_data-title').on('mouseover', displayIndicatorInformation);
+    
 
     // County and state selection search
     countyStateSelectors();
@@ -184,6 +186,13 @@ function toggleSearchType(e) {
     e.preventDefault();
     $('#statecounty').toggle();
     $('#search_form').toggle();
+}
+
+function snapshotTrigger() {
+    show('mainpage', 'homepage');
+
+    $('#community-snapshot-tab').addClass('show');
+    $('#community-snapshot-tab-link').trigger("click");
 }
 
 function getScoreData() {
@@ -441,6 +450,8 @@ function loadSkillbar() {
             width: jQuery(this).attr('data-percent')
         }, 800);
     });
+
+    $('.returnlink').removeClass('hide');
 }
 
 function setRankSliders() {
@@ -691,9 +702,9 @@ function getDomainDescription(domainID) {
 }
 
 function showDomainIndicators(domainID) {
-    $('.domain_indicator').map(function () {
+    /* $('.domain_indicator').map(function () {
         $(this).hide();
-    });
+    }); */
     if (domainID === "Connection") {
         $('#connection_indicators').show();
     }
