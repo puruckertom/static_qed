@@ -581,11 +581,11 @@
     -webkit-border-radius: 9px;
 }
 
-.environment-bar {
+.nature-bar {
     background-color: #82AC45;
 }
 
-.community-bar {
+.cultural-bar {
     background-color: #998FE4;
 }
 
@@ -597,29 +597,22 @@
     background-color: #5598C3;
 }
 
-.resource-mgmt-bar {
+.leisure-bar {
     background-color: #DC4B60;
 }
 
-.hazard-bar {
+.living-std-bar {
     background-color: #269683;
 }
 
-.economy-bar {
+.safety-bar {
     background-color: #E5632E;
 }
 
-.resilience-bar {
+.cohesion-bar {
     background-color: rgb(253, 253, 101);
 }
 
-.culture-bar {
-    background-color: rgb(247, 88, 88);
-}
-
-.safety-bar {
-    background-color: #606060;
-}
 
 .domain-description {
     display: none;
