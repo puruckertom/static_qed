@@ -68,4 +68,26 @@ jQuery(document).ready(function() {
     if (location.hash) shiftWindow();
     window.addEventListener("hashchange", shiftWindow);
 
+
+    $('.thumb').mouseup(function() {
+        $('input[type="range"]').blur();
+    })
+
 });
+
+var l_tab = 1;
+var max;
+
+function tabsOnClick(id){
+    var li = document.getElementById(id);
+    var div = document.getElementById('tab'+id);
+
+
+    for(var i=1; i<=3; i++){
+        document.getElementById(i).className = '';
+        document.getElementById("tab"+i).style.display = "none";
+    }
+
+    li.className += 'current-tab';			
+    div.style.display = "block";	
+}
