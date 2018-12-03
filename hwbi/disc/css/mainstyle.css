@@ -125,8 +125,8 @@ h2.popup-title {
   /* Control the left side */
   .left {
     left: 0;
-    background-image: url("https://source.unsplash.com/random?nature");
-    /* background-image: url("bg1.jpg"); */
+    /* background-image: url("https://source.unsplash.com/random?nature"); */
+    background-image: url("../img/bg1.jpg");
     opacity: 1;
     /*background-position: bottom;*/
     background-repeat: no-repeat;
