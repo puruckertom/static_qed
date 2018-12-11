@@ -270,7 +270,7 @@ function getScoreData() {
             $('#customize_location').html(location.county + " County, " + location.state);
             hwbi_disc_data = JSON.parse(data);
             hwbi_indicator_data = formatIndicatorData(setIndicatorData(indicatorData));
-            setIndicatorSliders(); // set sliders 
+            setMetricSliders(); // set sliders 
             hwbi_indicator_value_adjusted = {};
             setCookie('EPAHWBIDISC', location_data, 0.5);
             $('html, body').animate({
@@ -801,7 +801,7 @@ function getIndicatorData() {
         url: "/hwbi/disc/rest/indicators/scores?county=" + location.county + "&state_abbr=" + location.state_abbr,
         success: function (data, status, xhr) {
             hwbi_indicator_data = JSON.parse(data);
-            setIndicatorSliders();
+            setMetricSliders();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("getScoreData error: " + errorThrown);
@@ -1178,6 +1178,115 @@ function setIndicatorSliders() {
     });
 }
 
+
+
+
+
+function setMetricSliders() {
+
+    var biophilia = round(hwbi_indicator_data.outputs["biophilia"].score, 1);
+    
+    $('#nature_biophilia_value').html(biophilia);
+        
+    
+    var culture_activity = round(hwbi_indicator_data.outputs["activity participation"].score, 1);
+    
+     $('#culture_activity_value').html(culture_activity);
+        
+    var education_knowledge = round(hwbi_indicator_data.outputs["basic educational knowledge and skills of youth"].score, 1);
+    
+    $('#education_knowledge_value').html(education_knowledge);
+        
+    var education_participation = round(hwbi_indicator_data.outputs["participation and attainment"].score, 1);
+    
+    $('#education_participation_value').html(education_participation);
+        
+    var education_social = round(hwbi_indicator_data.outputs["social, emotional and developmental aspects"].score, 1);
+    
+    $('#education_social_value').html(education_social);
+        
+    var health_healthcare = round(hwbi_indicator_data.outputs["healthcare"].score, 1);
+    $('#health_healthcare_value').html(health_healthcare);
+    
+    var health_life_exp = round(hwbi_indicator_data.outputs["life expectancy and mortality"].score, 1);
+    
+    $('#health_life_expectancy_value').html(health_life_exp);
+        
+    var health_lifestyle = round(hwbi_indicator_data.outputs["lifestyle and behavior"].score, 1);
+    
+    $('#health_lifestyle_value').html(health_lifestyle);
+        
+    var health_personal = round(hwbi_indicator_data.outputs["personal well-being"].score, 1);
+    
+    $('#health_personal_value').html(health_personal);
+        
+    var health_conditions = round(hwbi_indicator_data.outputs["physical and mental health conditions"].score, 1);
+    
+    $('#health_conditions_value').html(health_conditions);
+        
+    var leisure_activity = round(hwbi_indicator_data.outputs["activity participation"].score, 1);
+    
+    $('#leisure_activity_value').html(leisure_activity);
+        
+    var leisure_time = round(hwbi_indicator_data.outputs["time spent"].score, 1);
+    
+    $('#leisure_time_value').html(leisure_time);
+        
+    var leisure_working_age = round(hwbi_indicator_data.outputs["working age adults"].score, 1);
+    
+    $('#leisure_working_age_value').html(leisure_working_age);
+        
+    var living_basic = round(hwbi_indicator_data.outputs["basic necessities"].score, 1);
+    
+    $('#living_basic_value').html(living_basic);
+        
+    var living_income = round(hwbi_indicator_data.outputs["income"].score, 1);
+    
+    $('#living_income_value').html(living_income);
+        
+    var living_wealth = round(hwbi_indicator_data.outputs["wealth"].score, 1);
+    
+    $('#living_wealth_value').html(living_wealth);
+        
+    var living_work = round(hwbi_indicator_data.outputs["work"].score, 1);
+    
+    $('#living_work_value').html(living_work);
+        
+    var safety_actual = round(hwbi_indicator_data.outputs["actual safety"].score, 1);
+    
+    $('#safety_actual_value').html(safety_actual);
+        
+    var safety_perceived = round(hwbi_indicator_data.outputs["perceived safety"].score, 1);
+    
+    $('#safety_perceived_value').html(safety_perceived);
+        
+    var safety_risk = round(hwbi_indicator_data.outputs["risk"].score, 1);
+    
+    $('#safety_risk_value').html(safety_risk);
+        
+    var social_attitude = round(hwbi_indicator_data.outputs["attitude toward others and the community"].score, 1);
+    
+    $('#social_attitude_value').html(social_attitude);
+        
+    var social_democratic = round(hwbi_indicator_data.outputs["democratic engagement"].score, 1);
+    
+    $('#social_democratic_value').html(social_democratic);
+        
+    var social_family = round(hwbi_indicator_data.outputs["family bonding"].score, 1);
+    
+    $('#social_family_value').html(social_family);
+        
+    var social_engagement = round(hwbi_indicator_data.outputs["social engagement"].score, 1);
+    
+    $('#social_engagement_value').html(social_engagement);
+        
+    var social_support = round(hwbi_indicator_data.outputs["social support"].score, 1);
+    
+    $('#social_support_value').html(social_support);
+        
+
+}
+
 function calculateNewScore(domainID, domainBlock) {
     var domain = $(domainBlock + " .indicator_value");
     var scores = $(domain).map(function () {
@@ -1391,6 +1500,7 @@ function displayIndicatorInformation() {
     var domain = $(this).closest('.domain_indicator').attr('id');
     $('#' + domain + '_title').html(title);
     $('#' + domain + '_description').html(description);
+    $('#' + domain + '_title > span').remove();
 }
 
 function round(number, precision) {

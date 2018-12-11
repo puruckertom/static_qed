@@ -932,3 +932,52 @@ input[type="range"]:focus::-ms-thumb {
   border-width: 0;
   box-shadow: 0px 0px 0px 0.5rem rgba(33, 150, 243, 0.5);
 }
+
+.thumb {
+  display: block;
+}
+
+.accordion-metrics {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  /* padding: 18px; */
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  margin: .5em 0 !important;
+}
+
+.active-metric, .accordion-metrics:hover {
+  background-color: #ccc !important;
+}
+
+.accordion-metrics:focus {
+  background-color: white;
+}
+
+.metric-accordion-panel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+  text-align: left;
+}
+
+.metric-accordion-panel div {
+  padding: 5% 0;
+}
+
+.accordion-metrics:before {
+  content: '+';
+  font-size: 20px;
+  color: #777;
+
+  margin-right: 10px;
+}
+
+.active-metric:before {
+  content: '-';
+}

@@ -64,16 +64,55 @@ jQuery(document).ready(function() {
         }
     });
 
+    /*moves window down so content doesnt appear under search bar on #page load*/
     var shiftWindow = function() { scrollBy(0, -75) };
     if (location.hash) shiftWindow();
     window.addEventListener("hashchange", shiftWindow);
 
-
+    /*un-focus services slider on mouse-up*/
     $('.thumb').mouseup(function() {
         $('input[type="range"]').blur();
     })
 
+
+    /* toggle indicator metric accordion */
+    // $('.accordion-metrics').click(function() {
+    var acc_m = document.getElementsByClassName("accordion-metrics");
+    var i;
+    
+
+    for (i = 0; i < acc_m.length; i++) {
+        acc_m[i].addEventListener("click", function() {
+            this.classList.toggle('active-metric');
+            var metric_panel = this.nextElementSibling;
+            // metric_panel = metric_panel.nextElementSibling;
+                /* Toggle between hiding and showing the active panel */
+            if(metric_panel.style.display==='block') {
+                metric_panel.style.display='none';
+                /* if($('.accordion-metrics').hasClass('active-metric')) {
+                    $(this).removeClass('active-metric');
+                } */
+            }
+            else {
+                metric_panel.style.display='block';
+                // $('.accordion-metrics').addClass('active-metric');
+            }
+        
+        });
+    }
+
+    $('.indicator_slider').addClass('hide');
+
+    /*removes active class and display:block style for metrics on modal close*/
+    $('.close').click(function() {
+        $('.accordion-metrics').removeClass('active-metric');
+        $('.metric-accordion-panel').css('display', 'none');
+    });
+    
+
+
 });
+    
 
 var l_tab = 1;
 var max;
@@ -91,3 +130,5 @@ function tabsOnClick(id){
     li.className += 'current-tab';			
     div.style.display = "block";	
 }
+
+
