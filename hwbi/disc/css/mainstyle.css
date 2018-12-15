@@ -648,7 +648,7 @@ h2.popup-title {
 }
 
 .ranking-list-container {
-  
+  margin-bottom: 5%;
 }
 
 #customize-domains-services p {
@@ -752,7 +752,7 @@ h2.popup-title {
 }
 
 .services {
-  margin-top: 6%;
+  margin: 0 auto;
   width: 60%;
 }
 
@@ -768,12 +768,13 @@ h2.popup-title {
 }
 
 ul.services-tabs {
-  width: 350px;
+  /* width: 350px; */
   display: flex;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   z-index: -1;
   margin-bottom: -3px;
+  justify-content: center;
 }
 
 ul.services-tabs li {
@@ -798,6 +799,8 @@ ul.services-tabs li:hover {
   height: auto;
   margin: auto;
   margin-top: 5%;
+  position: relative;
+  left: 10%;
 }
 
 #tab1 {
@@ -833,7 +836,7 @@ hr.s-tabs-below {
   border: 0;
   height: 1px;
   margin: 0 0 1.5em;
-  width: 375px;
+  /* width: 375px; */
 }
 
 /************SLIDERS************/
