@@ -26,7 +26,7 @@ a {
 }
 
 .show{
-  display: block;
+  display: block !important;
 }
 
 /* HOME PAGE */
@@ -983,4 +983,59 @@ input[type="range"]:focus::-ms-thumb {
 
 .active-metric:before {
   content: '-';
+}
+
+
+
+/* SLINKY */
+.slinky-menu {
+	overflow: hidden;
+  /* width: 500px; */
+  width: 100%;
+  height: 100vh;
+}
+.slinky-menu > ul {
+	left: 0;
+  position: relative;
+  padding-left: 0;
+}
+.slinky-menu ul,
+.slinky-menu li {
+	list-style: none;
+	margin: 0;
+}
+.slinky-menu ul {
+	width: 100%;
+}
+.slinky-menu a {
+	display: block;
+}
+.slinky-menu li ul {
+	display: none;
+	left: 100%;
+	position: absolute;
+  top: 0;
+  padding-left: 0;
+}
+
+/* Default theme */
+
+.slinky-menu a {
+	background: #AAA;
+	border: none;
+	color: #FFF;
+	padding: 1em;
+}
+.slinky-menu a:hover {
+	background: #000;
+}
+.slinky-menu a.next:after {
+	content: '\276f';
+	margin-left: 1em;
+	float: right;
+}
+.slinky-menu a.back:before {
+	content: '\276e';
+	margin-right: 1em;
+	float: left;
 }

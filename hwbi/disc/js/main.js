@@ -109,7 +109,42 @@ jQuery(document).ready(function() {
         $('.metric-accordion-panel').css('display', 'none');
     });
     
+    $('#1').click(function() {
+        var ecosys = $('#s-menu-ecosystem');
+        
+        if (!$(ecosys).hasClass('show')) {
+            $("div[id^='s-menu']").removeClass('show')
+            
+        }
+        ecosys.toggleClass('show');
+        
+    });
 
+    $('#2').click(function() {
+        var soc = $('#s-menu-social');
+        
+        if (!$(soc).hasClass('show')) {
+            $("div[id^='s-menu']").removeClass('show')
+            
+        }
+        soc.toggleClass('show');
+    
+    });
+
+    $('#3').click(function() {
+        var econ = $('#s-menu-economic');
+        
+        if (!$(econ).hasClass('show')) {
+            $("div[id^='s-menu']").removeClass('show')
+            
+        }
+        econ.toggleClass('show');
+    
+    });
+
+
+    
+    
 
 });
     
