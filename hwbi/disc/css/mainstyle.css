@@ -1039,3 +1039,9 @@ input[type="range"]:focus::-ms-thumb {
 	margin-right: 1em;
 	float: left;
 }
+
+
+/* test stuff */
+.filterDiv {
+  display: none;
+}
