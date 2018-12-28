@@ -116,8 +116,12 @@ jQuery(document).ready(function() {
             $("div[id^='s-menu']").removeClass('show')
             
         }
-        econ.toggleClass('show');
-    
+
+    econ.toggleClass('show');
+        if ($("div[id^='s-menu']").hasClass('show')) {
+            $('.filterDiv').removeClass('show');
+        }
+
     });
 
     $('#2').click(function() {
@@ -127,8 +131,11 @@ jQuery(document).ready(function() {
             $("div[id^='s-menu']").removeClass('show')
             
         }
-        ecosys.toggleClass('show');
-        
+
+    ecosys.toggleClass('show');
+        if ($("div[id^='s-menu']").hasClass('show')) {
+            $('.filterDiv').removeClass('show');
+        }
     });
 
     $('#3').click(function() {
@@ -136,12 +143,12 @@ jQuery(document).ready(function() {
         
         if (!$(soc).hasClass('show')) {
             $("div[id^='s-menu']").removeClass('show')
-            
         }
-        soc.toggleClass('show');
-    
+    soc.toggleClass('show');
+        if ($("div[id^='s-menu']").hasClass('show')) {
+            $('.filterDiv').removeClass('show');
+        }
     });
-
 });
     
 
@@ -163,6 +170,7 @@ function tabsOnClick(id){
 }
 
 
+//3 functions for filtering results of slinky menu
 filterSelection('all')
 function filterSelection(c) {
     var x, i;
