@@ -347,10 +347,6 @@
     position: relative;
 }
 
-#snapshot_results {
-    position: absolute;
-}
-
 #wellbeing-scores {
     float: right;
     width: 66%;
@@ -415,7 +411,8 @@
 /*Results*/
 #snapshot_results {
     height: 500px;
-    width: 33%
+    width: 33%;
+    position: absolute;
 }
 
 #hwbi-score {
@@ -519,15 +516,15 @@
 
 .accordion:after {
     content: '\002b';
-    font-size: 15px;
+    font-size: 20px;
     color: white;
     text-align: center;
     display: block;
 }
 
-/* .active:after {
+button.accordion.active:after {
     content: "\2212";
-} */
+} 
 
 .domain-title, .domain-score {
     float: left;
@@ -627,8 +624,8 @@
     width: 90%;
     margin-right: auto;
     margin-left: auto;
-    border-top: 1px black solid;
-    border-bottom: 1px black solid;
+    border-top: 1px #7777 solid;
+    border-bottom: 1px #7777 solid;
     margin-bottom: 20px;
     padding: 10px 0;
 }

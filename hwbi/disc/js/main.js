@@ -117,7 +117,9 @@ jQuery(document).ready(function() {
             
         }
         ecosys.toggleClass('show');
-        
+        if ($("div[id^='s-menu']").hasClass('show')) {
+            $('.filterDiv').removeClass('show');
+        }
     });
 
     $('#2').click(function() {
@@ -128,7 +130,9 @@ jQuery(document).ready(function() {
             
         }
         soc.toggleClass('show');
-    
+        if ($("div[id^='s-menu']").hasClass('show')) {
+            $('.filterDiv').removeClass('show');
+        }
     });
 
     $('#3').click(function() {
@@ -139,11 +143,10 @@ jQuery(document).ready(function() {
             
         }
         econ.toggleClass('show');
-    
+        if ($("div[id^='s-menu']").hasClass('show')) {
+            $('.filterDiv').removeClass('show');
+        }
     });
-
-
-    
     
 
 });
@@ -167,6 +170,7 @@ function tabsOnClick(id){
 }
 
 
+//3 functions for filtering results of slinky menu
 filterSelection('all')
 function filterSelection(c) {
     var x, i;
