@@ -845,7 +845,7 @@ hr.s-tabs-below {
 input[type="range"] {
   -webkit-appearance: none;
   /* Hides the slider so that custom slider can be made */
-  width: 60%;
+  width: 100%; /* 60% */
   /* Specific width is required for Firefox. */
 }
 input[type="range"]::-webkit-slider-thumb {
@@ -1053,4 +1053,19 @@ input[type="range"]:focus::-ms-thumb {
 .domain-description > div[id*='-service_score_bar'] {
   margin-bottom: 5%;
   margin-left: 5%;
+}
+
+.size-1of2 {
+  width: 40%;
+  display: inline-block;
+  text-align: left;
+}
+
+.size-2of2 {
+  width: 40%;
+  display: inline-block;
+  text-align: left;
+}
+
+.colcontainer {
 }
