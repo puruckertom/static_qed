@@ -1069,3 +1069,7 @@ input[type="range"]:focus::-ms-thumb {
 
 .colcontainer {
 }
+
+.cardimgcover {
+  object-fit: cover;
+}
