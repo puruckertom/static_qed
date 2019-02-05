@@ -457,7 +457,7 @@ function setScoreData(data) {
     //     ", State: " + round(data.outputs.domains[7].stateScore, 1) + "]");   
     $('#cohesion_score_summary').html(cohesion_score);
 
-    var ecosystem_score = round(data.outputs.domains[7].score, 1);
+    /* var ecosystem_score = round(data.outputs.domains[7].score, 1);
     $('#ecosystem_score').html(ecosystem_score);
     $('#ecosystem_score_bar').attr('data-percent', ecosystem_score + "%");
     // $('#cohesion_location').html("[Nation: " + round(data.outputs.domains[7].nationScore, 1) +
@@ -476,7 +476,7 @@ function setScoreData(data) {
     $('#economic_score_bar').attr('data-percent', economic_score + "%");
     // $('#cohesion_location').html("[Nation: " + round(data.outputs.domains[7].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[7].stateScore, 1) + "]");   
-    $('#economic_score_summary').html(economic_score);
+    $('#economic_score_summary').html(economic_score); */
 
     setTimeout(loadSkillbar, 600);
 }
@@ -538,9 +538,9 @@ function setRankSliders() {
     $('#living-slider-bar').slider(sliderOptions);
     $('#safety-slider-bar').slider(sliderOptions);
     $('#cohesion-slider-bar').slider(sliderOptions);
-    $('#ecosystem-slider-bar').slider(sliderOptions);
+/*     $('#ecosystem-slider-bar').slider(sliderOptions);
     $('#social-slider-bar').slider(sliderOptions);
-    $('#economic-slider-bar').slider(sliderOptions);
+    $('#economic-slider-bar').slider(sliderOptions); */
 }
 
 function toggleRank() {
