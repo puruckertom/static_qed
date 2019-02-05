@@ -25,6 +25,27 @@ var discDomains = {
         ],
         crsi : []
     },
+    "education" : {
+        hwbi : [
+            "basic educational knowledge and skills of youth",
+            "participation and attainment",
+            "social, emotional and developmental aspects"
+        ],
+        crsi : []
+    },
+    "health" : {
+        hwbi : [
+            "healthcare",
+            "life expectancy and mortality",
+            "lifestyle and behavior",
+            "personal well-being",
+            "physical and mental health conditions"
+        ],
+        crsi : [
+            "health characteristics",
+            "social services"
+        ]
+    },
     "leisure time" : {
         hwbi : [
             "time spent",
@@ -42,6 +63,14 @@ var discDomains = {
         ],
         crsi : []
     },
+    "safety and security" : {
+        hwbi : [
+            "actual safety",
+            "perceived safety",
+            "risk"
+        ],
+        crsi : []
+    },
     "social cohesion" : {
         hwbi : [
             "attitude toward others and the community",
@@ -52,97 +81,14 @@ var discDomains = {
         ],
         crsi : []
     },
-    "built environment" : {
-        hwbi : [],
-        crsi : [
-            "communication infrastructure",
-            "housing characteristics",
-            "transportation infrastructure",
-            "utility infrastructure",
-            "vacant structures"
-        ]
-    },
-    "community involvement" : {
-        hwbi : [
-            "attitudes towards others and the community",
-            "democratic engagement",
-            "family bonding",
-            "social engagement",
-            "social support"
-        ],
-        crsi : []
-    },
-    "education" : {
-        hwbi : [
-            "basic educational knowledge and skills of youth",
-            "participation and attainment",
-            "social, emotional and developmental aspects"
-        ],
-        crsi : []
-    },
-    "environmental resource management" : {
-        hwbi : [],
-        crsi : [
-            "condition",
-            "extent of ecosystem types"
-        ]
-    },
-    "local economy" : {
-        hwbi : [
-            "basic necessities",
-            "wealth",
-            "work"
-        ],
-        crsi : [
-            "economic diversity",
-            "socio-economics"
-        ]
-    },
-    "hazard vulnerability" : {
-        hwbi : [],
-        crsi : [
-            "exposure",
-            "loss"
-        ]
-    },
-    "health" : {
-        hwbi : [
-            "healthcare",
-            "life expectancy and mortality",
-            "lifestyle and behavior",
-            "personal well-being",
-            "physical and mental health conditions"
-        ],
-        crsi : [
-            "health characteristics",
-            "social services"
-        ]
-    },
-    "resilience planning" : {
-        hwbi : [],
-        crsi : [
-            "community preparedness",
-            "natural resource conservation",
-            "personal preparedness"
-        ]
-    },
-    "local culture" : {
-        hwbi : [
-            "activity participation",
-            "biophilia",
-            "time spent",
-            "working age adults"
-        ],
-        crsi : []
-    },
-    "safety and security" : {
-        hwbi : [
-            "actual safety",
-            "perceived safety",
-            "risk"
-        ],
-        crsi : []
-    },
+    // "resilience planning" : {
+    //     hwbi : [],
+    //     crsi : [
+    //         "community preparedness",
+    //         "natural resource conservation",
+    //         "personal preparedness"
+    //     ]
+    // }
 };
 
 $(document).ready(function () {
