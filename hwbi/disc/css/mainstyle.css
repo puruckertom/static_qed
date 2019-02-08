@@ -1073,3 +1073,13 @@ input[type="range"]:focus::-ms-thumb {
 .cardimgcover {
   object-fit: cover;
 }
+
+.domain-modal-score {
+  font-size: 20px;
+  margin-left: 15px;
+}
+
+#service_indicator_title {
+  font-family: sans-serif;
+  text-align:center;
+}

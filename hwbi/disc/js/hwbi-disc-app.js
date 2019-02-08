@@ -348,56 +348,56 @@ function setScoreData(data) {
 
     // Set Domain scores
     var nature_score = round(data.outputs.domains[0].score, 1);
-    $('#nature_score').html(nature_score);
+    $('#nature_score, #nature_modal_score').html(nature_score);
     $('#nature_score_bar').attr('data-percent', nature_score + "%");
     // $('#nature_location').html("[Nation: " + round(data.outputs.domains[0].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[0].stateScore, 1) + "]");
     $('#nature_score_summary').html(nature_score);
     
     var cultural_score = round(data.outputs.domains[1].score, 1);
-    $('#cultural_score').html(cultural_score);
+    $('#cultural_score, #cultural_modal_score').html(cultural_score);
     $('#cultural_score_bar').attr('data-percent', cultural_score + "%");
     // $('#cultural_location').html("[Nation: " + round(data.outputs.domains[1].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[1].stateScore, 1) + "]");
     $('#cultural_score_summary').html(cultural_score);
 
     var education_score = round(data.outputs.domains[2].score, 1);
-    $('#education_score').html(education_score);
+    $('#education_score, #education_modal_score').html(education_score);
     $('#education_score_bar').attr('data-percent', education_score + "%");
     // $('#education_location').html("[Nation: " + round(data.outputs.domains[2].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[2].stateScore, 1) + "]");
     $('#education_score_summary').html(education_score);
 
     var health_score = round(data.outputs.domains[3].score, 1);
-    $('#health_score').html(health_score);
+    $('#health_score, #health_modal_score').html(health_score);
     $('#health_score_bar').attr('data-percent', health_score + "%");
     // $('#health_location').html("[Nation: " + round(data.outputs.domains[3].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[3].stateScore, 1) + "]");
     $('#health_score_summary').html(health_score);
 
     var leisure_score = round(data.outputs.domains[4].score, 1);
-    $('#leisure_score').html(leisure_score);
+    $('#leisure_score, #leisure_modal_score').html(leisure_score);
     $('#leisure_score_bar').attr('data-percent', leisure_score + "%");
     // $('#leisure_location').html("[Nation: " + round(data.outputs.domains[4].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[4].stateScore, 1) + "]");
     $('#leisure_score_summary').html(leisure_score);
 
     var living_score = round(data.outputs.domains[5].score, 1);
-    $('#living_score').html(living_score);
+    $('#living_score, #living_modal_score').html(living_score);
     $('#living_score_bar').attr('data-percent', living_score + "%");
     // $('#living_location').html("[Nation: " + round(data.outputs.domains[5].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[5].stateScore, 1) + "]");
     $('#living_score_summary').html(living_score);
 
     var safety_score = round(data.outputs.domains[6].score, 1);
-    $('#safety_score').html(safety_score);
+    $('#safety_score, #safety_modal_score').html(safety_score);
     $('#safety_score_bar').attr('data-percent', safety_score + "%");
     // $('#safety_location').html("[Nation: " + round(data.outputs.domains[6].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[6].stateScore, 1) + "]");   
     $('#safety_score_summary').html(safety_score);
 
     var cohesion_score = round(data.outputs.domains[7].score, 1);
-    $('#cohesion_score').html(cohesion_score);
+    $('#cohesion_score, #social_modal_score').html(cohesion_score);
     $('#cohesion_score_bar').attr('data-percent', cohesion_score + "%");
     // $('#cohesion_location').html("[Nation: " + round(data.outputs.domains[7].nationScore, 1) +
     //     ", State: " + round(data.outputs.domains[7].stateScore, 1) + "]");   
@@ -1630,8 +1630,10 @@ function parsePlaceResponse(place) {
                 break;
         }
     }
-    if (state === '' || county === '' || state_abbr === '') {
+    if (state === '' || state_abbr === '') {
         return toast("Unable to find location. Please try another!");
+    } else if (county === '') {
+        return toast("Unable to find county for specified address. Please try another!");
     }
     var location = {};
     location["county"] = county;
