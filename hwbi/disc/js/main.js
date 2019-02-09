@@ -207,7 +207,7 @@ function removeShow(element, name) {
 
 
 function createMetricTitles() {
-    let titles = $('#tab1 div #service_indicator_title, #tab2 div #service_indicator_title, #tab3 div #service_indicator_title');
+    let titles = $('div.services #service_indicator_title');
 
     $("div[id^='s-menu'] ul li ul li a").click(function(e) {
         e.stopPropagation();
@@ -221,3 +221,19 @@ function createMetricTitles() {
         titles.html('');
     });
 }
+
+/* function createMetricTitles() {
+    let titles = $('#tab1 div #service_indicator_title, #tab2 div #service_indicator_title, #tab3 div #service_indicator_title');
+
+    $("div[id^='s-menu'] ul li ul li a").click(function(e) {
+        e.stopPropagation();
+        var target = e.target,
+            text = target.textContent || target.innerText
+        titles.html(text);
+    });
+    
+
+    $('div.services-nav').click(function() {
+        titles.html('');
+    });
+} */

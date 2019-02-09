@@ -1081,4 +1081,5 @@ input[type="range"]:focus::-ms-thumb {
 
 #service_indicator_title {
   font-family: sans-serif;
+  text-align: center;
 }
