@@ -1083,3 +1083,26 @@ input[type="range"]:focus::-ms-thumb {
   font-family: sans-serif;
   text-align: center;
 }
+
+.chartcontainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 5%;
+}
+
+.chartdesc {
+  display: none;
+}
+
+.chartdesc-container {
+  margin-bottom: 10%;
+  margin-top: -5%;
+}
+
+.transparent {
+  opacity: 0.4;
+}
+
+#chart, #chart2, #chart3 {
+  cursor: pointer;
+}

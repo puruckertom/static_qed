@@ -237,3 +237,77 @@ function createMetricTitles() {
         titles.html('');
     });
 } */
+$(function() {
+
+    $('#desc1 , #desc2 , #desc3').addClass('hide');
+
+    $('div#chart').click(function() {
+        var econ = $('#desc1');
+        
+        if (!$(econ).hasClass('show')) {
+            $("div[id^='desc']").removeClass('show').addClass('hide');
+            $('#chart2, #chart3').removeClass('transparent');
+        }
+
+        econ.toggleClass('show').removeClass('hide');
+        $('#chart, #chart2 , #chart3').addClass('transparent');
+        $('#chart').removeClass('transparent');
+        
+        
+        if ($("div[id^='desc']").hasClass('show')) {
+            $(econ).addClass('hide');
+        }
+
+        if(!$('#desc1 , #desc2 , #desc3').hasClass('show')) {
+            $('#chart, #chart2, #chart3').removeClass('transparent');
+        }
+
+    });
+
+    $('div#chart2').click(function() {
+        var ecosys = $('#desc2');
+        
+        if (!$(ecosys).hasClass('show')) {
+            $("div[id^='desc']").removeClass('show').addClass('hide');
+            $('#chart, #chart3').removeClass('transparent');
+        }
+
+        ecosys.toggleClass('show').removeClass('hide');
+        $('#chart, #chart2 , #chart3').addClass('transparent');
+        $('#chart2').removeClass('transparent');
+        
+        if ($("div[id^='desc']").hasClass('show')) {
+            $(ecosys).addClass('hide');
+        }
+
+        if(!$('#desc1 , #desc2 , #desc3').hasClass('show')) {
+            $('#chart, #chart2, #chart3').removeClass('transparent');
+        }
+
+    });
+
+    $('div#chart3').click(function() {
+        var soc = $('#desc3');
+        
+        if (!$(soc).hasClass('show')) {
+            $("div[id^='desc']").removeClass('show').addClass('hide');
+            $('#chart, #chart2').removeClass('transparent');
+        }
+
+        soc.toggleClass('show').removeClass('hide');
+        $('#chart, #chart2 , #chart3').addClass('transparent');
+        $('#chart3').removeClass('transparent');
+        
+        
+        if ($("div[id^='desc']").hasClass('show')) {
+            $(soc).addClass('hide');
+        }
+
+        if(!$('#desc1 , #desc2 , #desc3').hasClass('show')) {
+            $('#chart, #chart2, #chart3').removeClass('transparent');
+        }
+
+    });
+
+    
+});
