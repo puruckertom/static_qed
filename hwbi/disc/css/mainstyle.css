@@ -1106,3 +1106,23 @@ input[type="range"]:focus::-ms-thumb {
 #chart, #chart2, #chart3 {
   cursor: pointer;
 }
+
+.description-column {
+  position: fixed;
+  width: 35vw !important;
+  max-width: 410px;
+}
+
+#customize-resilience .indicator-column {
+  width: 50% !important;
+}
+
+.indicator-column {
+  float: right !important;
+}
+
+#customize-resilience h4 {
+  font-family: Tahoma, Arial, sans-serif;
+  color: #333;
+  font-size: 2rem;
+}
