@@ -311,3 +311,7 @@ $(function() {
 
     
 });
+
+$(function() {
+    $(document).tooltip({track: true, show: null, hide: null});
+});
