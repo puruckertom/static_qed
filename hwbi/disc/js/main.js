@@ -55,6 +55,9 @@ jQuery(document).ready(function() {
             else if ($(clicked).attr("id") === $('#customize-domains-services-link').attr("id")) {
                 $('#customize-domains-services').addClass('show');
             }
+            else if ($(clicked).attr("id") === $('#scenarios-tab-link').attr("id")) {
+                $('#scenarios-tab').addClass('show');
+            }
             else if ($(clicked).attr("id") === $('#compare-tab-link').attr("id")) {
                 $('#compare-tab').addClass('show');
             }

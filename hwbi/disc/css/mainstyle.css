@@ -704,7 +704,7 @@ h2.popup-title {
 .aster-score { 
   line-height: 1;
   font-weight: bold;
-  font-size: 250%;
+  font-size: 200%;
 }
 
 .d3-tip {
@@ -752,7 +752,7 @@ h2.popup-title {
 }
 
 .services {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   width: 60%;
 }
 
@@ -773,7 +773,7 @@ ul.services-tabs {
   margin: 0 auto;
   padding: 0;
   z-index: -1;
-  margin-bottom: -3px;
+  /* margin-bottom: -3px; */
   justify-content: center;
 }
 
@@ -991,7 +991,7 @@ input[type="range"]:focus::-ms-thumb {
 .slinky-menu {
 	overflow: hidden;
   /* width: 500px; */
-  width: 100%;
+  /* width: 100%; */
 }
 .slinky-menu > ul {
 	left: 0;
