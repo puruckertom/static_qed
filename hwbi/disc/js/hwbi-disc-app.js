@@ -822,10 +822,10 @@ function setIndicatorSliders() {
         max: 100,
         value: biophilia,
         create: function (event, ui) {
-            $('#nature_biophilia_value').html(biophilia);
+            $('#connection-to-nature_biophilia_value').html(biophilia);
         },
         slide: function (event, ui) {
-            $('#nature_biophilia_value').html(ui.value);
+            $('#connection-to-nature_biophilia_value').html(ui.value);
             calculateNewScore("Connection", "#connection_indicators");
 
         }
@@ -836,10 +836,10 @@ function setIndicatorSliders() {
         max: 100,
         value: culture_activity,
         create: function (event, ui) {
-            $('#culture_activity_value').html(culture_activity);
+            $('#cultural-fulfillment_activity-participation_value').html(culture_activity);
         },
         slide: function (event, ui) {
-            $('#culture_activity_value').html(ui.value);
+            $('#cultural-fulfillment_activity-participation_value').html(ui.value);
             calculateNewScore("Culture", "#culture_indicators");
         }
     });
@@ -849,10 +849,10 @@ function setIndicatorSliders() {
         max: 100,
         value: education_knowledge,
         create: function (event, ui) {
-            $('#education_knowledge_value').html(education_knowledge);
+            $('#education_basic-educational-knowledge-and-skills-of-youth_value').html(education_knowledge);
         },
         slide: function (event, ui) {
-            $('#education_knowledge_value').html(ui.value);
+            $('#education_basic-educational-knowledge-and-skills-of-youth_value').html(ui.value);
             calculateNewScore("Education", "#education_indicators");
         }
     });
@@ -862,10 +862,10 @@ function setIndicatorSliders() {
         max: 100,
         value: education_participation,
         create: function (event, ui) {
-            $('#education_participation_value').html(education_participation);
+            $('#education_participation-and-attainment_value').html(education_participation);
         },
         slide: function (event, ui) {
-            $('#education_participation_value').html(ui.value);
+            $('#education_participation-and-attainment_value').html(ui.value);
             calculateNewScore("Education", "#education_indicators");
         }
     });
@@ -875,10 +875,10 @@ function setIndicatorSliders() {
         max: 100,
         value: education_social,
         create: function (event, ui) {
-            $('#education_social_value').html(education_social);
+            $('#education_social-emotional-and-developmental-aspects_value').html(education_social);
         },
         slide: function (event, ui) {
-            $('#education_social_value').html(ui.value);
+            $('#education_social-emotional-and-developmental-aspects_value').html(ui.value);
             calculateNewScore("Education", "#education_indicators");
         }
     });
@@ -899,15 +899,15 @@ function setIndicatorSliders() {
     });
     $('#healthcare').html(health_healthcare);
     var health_life_exp = round(hwbi_indicator_data.outputs["life expectancy and mortality"].score, 1);
-    $('#health_life_expectancy_slider').slider({
+    $('#health_life-expectancy_slider').slider({
         min: 0,
         max: 100,
         value: health_life_exp,
         create: function (event, ui) {
-            $('#health_life_expectancy_value').html(health_life_exp);
+            $('#health_life-expectancy-and-mortality_valueh').html(health_life_exp);
         },
         slide: function (event, ui) {
-            $('#health_life_expectancy_value').html(ui.value);
+            $('#health_life-expectancy-and-mortality_value').html(ui.value);
             calculateNewScore("Health", "#health_indicators");
         }
     });
@@ -917,10 +917,10 @@ function setIndicatorSliders() {
         max: 100,
         value: health_lifestyle,
         create: function (event, ui) {
-            $('#health_lifestyle_value').html(health_lifestyle);
+            $('#health_lifestyle-and-behavior_value').html(health_lifestyle);
         },
         slide: function (event, ui) {
-            $('#health_lifestyle_value').html(ui.value);
+            $('#health_lifestyle-and-behavior_value').html(ui.value);
             calculateNewScore("Health", "#health_indicators");
         }
     });
@@ -930,10 +930,10 @@ function setIndicatorSliders() {
         max: 100,
         value: health_personal,
         create: function (event, ui) {
-            $('#health_personal_value').html(health_personal);
+            $('#health_personal-well-being_value').html(health_personal);
         },
         slide: function (event, ui) {
-            $('#health_personal_value').html(ui.value);
+            $('#health_personal-well-being_value').html(ui.value);
             calculateNewScore("Health", "#health_indicators");
         }
     });
@@ -943,10 +943,10 @@ function setIndicatorSliders() {
         max: 100,
         value: health_conditions,
         create: function (event, ui) {
-            $('#health_conditions_value').html(health_conditions);
+            $('#health_physical-and-mental-health-conditions_value').html(health_conditions);
         },
         slide: function (event, ui) {
-            $('#health_conditions_value').html(ui.value);
+            $('#health_physical-and-mental-health-conditions_value').html(ui.value);
             calculateNewScore("Health", "#health_indicators");
         }
     });
@@ -956,10 +956,10 @@ function setIndicatorSliders() {
         max: 100,
         value: leisure_activity,
         create: function (event, ui) {
-            $('#leisure_activity_value').html(leisure_activity);
+            $('#leisure-time_activity-participation_value').html(leisure_activity);
         },
         slide: function (event, ui) {
-            $('#leisure_activity_value').html(ui.value);
+            $('#leisure-time_activity-participation_value').html(ui.value);
             calculateNewScore("Leisure", "#leisure_indicators");
         }
     });
@@ -969,10 +969,10 @@ function setIndicatorSliders() {
         max: 100,
         value: leisure_time,
         create: function (event, ui) {
-            $('#leisure_time_value').html(leisure_time);
+            $('#leisure-time_time-spent_value').html(leisure_time);
         },
         slide: function (event, ui) {
-            $('#leisure_time_value').html(ui.value);
+            $('#leisure-time_time-spent_value').html(ui.value);
             calculateNewScore("Leisure", "#leisure_indicators");
         }
     });
@@ -982,10 +982,10 @@ function setIndicatorSliders() {
         max: 100,
         value: leisure_working_age,
         create: function (event, ui) {
-            $('#leisure_working_age_value').html(leisure_working_age);
+            $('#leisure-time_working-age-adults_value').html(leisure_working_age);
         },
         slide: function (event, ui) {
-            $('#leisure_working_age_value').html(ui.value);
+            $('#leisure-time_working-age-adults_value').html(ui.value);
             calculateNewScore("Leisure", "#leisure_indicators");
         }
     });
@@ -995,10 +995,10 @@ function setIndicatorSliders() {
         max: 100,
         value: living_basic,
         create: function (event, ui) {
-            $('#living_basic_value').html(living_basic);
+            $('#living-standards_basic-necessities_value').html(living_basic);
         },
         slide: function (event, ui) {
-            $('#living_basic_value').html(ui.value);
+            $('#living-standards_basic-necessities_value').html(ui.value);
             calculateNewScore("Living", "#living_indicators");
         }
     });
@@ -1008,10 +1008,10 @@ function setIndicatorSliders() {
         max: 100,
         value: living_income,
         create: function (event, ui) {
-            $('#living_income_value').html(living_income);
+            $('#living-standards_income_value').html(living_income);
         },
         slide: function (event, ui) {
-            $('#living_income_value').html(ui.value);
+            $('#living-standards_income_value').html(ui.value);
             calculateNewScore("Living", "#living_indicators");
         }
     });
@@ -1021,10 +1021,10 @@ function setIndicatorSliders() {
         max: 100,
         value: living_wealth,
         create: function (event, ui) {
-            $('#living_wealth_value').html(living_wealth);
+            $('#living-standards_wealth_value').html(living_wealth);
         },
         slide: function (event, ui) {
-            $('#living_wealth_value').html(ui.value);
+            $('#living-standards_wealth_value').html(ui.value);
             calculateNewScore("Living", "#living_indicators");
         }
     });
@@ -1034,10 +1034,10 @@ function setIndicatorSliders() {
         max: 100,
         value: living_work,
         create: function (event, ui) {
-            $('#living_work_value').html(living_work);
+            $('#living-standards_work_value').html(living_work);
         },
         slide: function (event, ui) {
-            $('#living_work_value').html(ui.value);
+            $('#living-standards_work_value').html(ui.value);
             calculateNewScore("Living", "#living_indicators");
         }
     });
@@ -1047,10 +1047,10 @@ function setIndicatorSliders() {
         max: 100,
         value: safety_actual,
         create: function (event, ui) {
-            $('#safety_actual_value').html(safety_actual);
+            $('#safety-and-security_actual-safety_value').html(safety_actual);
         },
         slide: function (event, ui) {
-            $('#safety_actual_value').html(ui.value);
+            $('#safety-and-security_actual-safety_value').html(ui.value);
             calculateNewScore("Safety", "#safety_indicators");
 
         }
@@ -1061,10 +1061,10 @@ function setIndicatorSliders() {
         max: 100,
         value: safety_perceived,
         create: function (event, ui) {
-            $('#safety_perceived_value').html(safety_perceived);
+            $('#safety-and-security_perceived-safety_value').html(safety_perceived);
         },
         slide: function (event, ui) {
-            $('#safety_perceived_value').html(ui.value);
+            $('#safety-and-security_perceived-safety_value').html(ui.value);
             calculateNewScore("Safety", "#safety_indicators");
         }
     });
@@ -1074,10 +1074,10 @@ function setIndicatorSliders() {
         max: 100,
         value: safety_risk,
         create: function (event, ui) {
-            $('#safety_risk_value').html(safety_risk);
+            $('#safety-and-security_risk_value').html(safety_risk);
         },
         slide: function (event, ui) {
-            $('#safety_risk_value').html(ui.value);
+            $('#safety-and-security_risk_value').html(ui.value);
             calculateNewScore("Safety", "#safety_indicators");
         }
     });
@@ -1087,10 +1087,10 @@ function setIndicatorSliders() {
         max: 100,
         value: social_attitude,
         create: function (event, ui) {
-            $('#social_attitude_value').html(social_attitude);
+            $('#social-cohesion_attitude-toward-others-and-the-community_value').html(social_attitude);
         },
         slide: function (event, ui) {
-            $('#social_attitude_value').html(ui.value);
+            $('#social-cohesion_attitude-toward-others-and-the-community_value').html(ui.value);
             calculateNewScore("Social", "#social_indicators");
         }
     });
@@ -1100,10 +1100,10 @@ function setIndicatorSliders() {
         max: 100,
         value: social_democratic,
         create: function (event, ui) {
-            $('#social_democratic_value').html(social_democratic);
+            $('#social-cohesion_democratic-engagement_value').html(social_democratic);
         },
         slide: function (event, ui) {
-            $('#social_democratic_value').html(ui.value);
+            $('#social-cohesion_democratic-engagement_value').html(ui.value);
             calculateNewScore("Social", "#social_indicators");
         }
     });
@@ -1113,10 +1113,10 @@ function setIndicatorSliders() {
         max: 100,
         value: social_family,
         create: function (event, ui) {
-            $('#social_family_value').html(social_family);
+            $('#social-cohesion_family-bonding_value').html(social_family);
         },
         slide: function (event, ui) {
-            $('#social_family_value').html(ui.value);
+            $('#social-cohesion_family-bonding_value').html(ui.value);
             calculateNewScore("Social", "#social_indicators");
         }
     });
@@ -1126,10 +1126,10 @@ function setIndicatorSliders() {
         max: 100,
         value: social_engagement,
         create: function (event, ui) {
-            $('#social_engagement_value').html(social_engagement);
+            $('#social-cohesion_social-engagement_value').html(social_engagement);
         },
         slide: function (event, ui) {
-            $('#social_engagement_value').html(ui.value);
+            $('#social-cohesion_social-engagement_value').html(ui.value);
             calculateNewScore("Social", "#social_indicators");
         }
     });
@@ -1139,10 +1139,10 @@ function setIndicatorSliders() {
         max: 100,
         value: social_support,
         create: function (event, ui) {
-            $('#social_support_value').html(social_support);
+            $('#social-cohesion_social-support_value').html(social_support);
         },
         slide: function (event, ui) {
-            $('#social_support_value').html(ui.value);
+            $('#social-cohesion_social-support_value').html(ui.value);
             calculateNewScore("Social", "#social_indicators");
         }
     });
@@ -1180,7 +1180,7 @@ function setMetricSliders() {
     
     var health_life_exp = round(hwbi_indicator_data.outputs["life expectancy and mortality"].score, 1);
     
-    $('#health_life_expectancy_value').html(health_life_exp);
+    $('#health_life-expectancy_value').html(health_life_exp);
         
     var health_lifestyle = round(hwbi_indicator_data.outputs["lifestyle and behavior"].score, 1);
     
