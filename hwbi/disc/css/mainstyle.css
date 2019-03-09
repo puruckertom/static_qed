@@ -674,8 +674,8 @@ h2.popup-title {
   border: none;
   padding-left: 25px;
   width: 60px;
-  position: absolute;
-  left: 23%;
+/*   position: absolute;
+  left: 23%; */
 }
 
 .rankinglist form input[type=number]::-webkit-inner-spin-button{
@@ -683,7 +683,11 @@ h2.popup-title {
 }
 
 .ranking-list-container {
-  margin-bottom: 5%;
+  /* margin-bottom: 5%; */
+  margin-top: 10%;
+  float: right;
+  display: flex;
+  text-align: right;
 }
 
 .show-baseline {
@@ -769,7 +773,7 @@ h2.popup-title {
 
 #aster svg {
   float:right;
-  margin-right: 5%;
+  /* margin-right: 5%; */
 }
 
 /* end aster */
@@ -784,7 +788,8 @@ h2.popup-title {
 
 .services {
   /* margin: 0 auto; */
-  width: 60%;
+  /* width: 60%; */
+  width: 100%;
 }
 
 
@@ -1160,5 +1165,9 @@ input[type="range"]:focus::-ms-thumb {
 
 .service-blocks h3 {
   float: none !important;
+}
+
+.scenario-cols {
+  margin: 0;
 }
 
