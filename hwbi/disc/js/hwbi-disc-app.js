@@ -303,6 +303,9 @@ function setLocationValue() {
     var location = parsePlaceResponse(place);
     locationValue = JSON.stringify(location);
 
+    $('#community-snapshot-tab').hide();
+    $('.preload-wrapper, .preload').show();
+
     getScoreData();
 
     $('#search_field').val('');
@@ -1786,6 +1789,9 @@ function setTopLocationValue() {
     var place = topSearchBox.getPlace();
     var location = parsePlaceResponse(place);
     locationValue = JSON.stringify(location);
+
+    $('#community-snapshot-tab').hide();
+    $('.preload-wrapper, .preload').show();
 
     getScoreData();
 
