@@ -1196,7 +1196,7 @@ input[type="range"]:focus::-ms-thumb {
 }
 
 div[id*='_priority_ranking'] {
-  margin-top: 20%;
+  margin-top: 5%;
 }
 
 .preload {
@@ -1209,7 +1209,7 @@ div[id*='_priority_ranking'] {
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  animation: spin 2s linear infinite;
+  animation: spin 1s linear infinite;
   margin: 0 auto;
   margin-top: 30%;
 }
@@ -1236,5 +1236,10 @@ div[id*='_priority_ranking'] {
   right:0;
   background-color: #fff;
   z-index: 99;
+}
+
+.priorityhr {
+  background: #ccc;
+  margin-top: 20%;
 }
 
