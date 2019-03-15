@@ -568,14 +568,18 @@ h2.popup-title {
 
 .services-card-list {
   width: 100%;
-  display: flex;
+  /* display:flex; */
 }
 
 .services-card-wrap {
-  float: left;
+  /* float: left;
   width: 100%;
   padding: 10px;
-  text-align: center;
+  text-align: center; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: auto;
+  grid-gap: .5rem;
 }
 
 .service-card {
@@ -598,6 +602,7 @@ h2.popup-title {
   height: 100%;
   filter: brightness(40%);
   opacity: .9;
+  width: 100%;
 }
 
 /* .modal{
