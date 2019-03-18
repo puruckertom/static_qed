@@ -1157,7 +1157,7 @@ input[type="range"]:focus::-ms-thumb {
 }
 
 #chart, #chart2, #chart3 {
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .description-column {

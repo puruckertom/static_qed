@@ -240,6 +240,9 @@ function createMetricTitles() {
         titles.html('');
     });
 } */
+
+// radial bar chart click function to show/hide descriptions
+
 $(function() {
 
     $('#desc1 , #desc2 , #desc3').addClass('hide');
