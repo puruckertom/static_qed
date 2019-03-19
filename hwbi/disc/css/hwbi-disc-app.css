@@ -323,7 +323,7 @@
 }
 
 .report_pdf_button {
-    display: none;
+    /* display: none; */
 }
 
 #report_pdf {
@@ -1288,6 +1288,22 @@ However, delay the fade out process for 2.5 seconds */
     .originaldiscscore, .newdiscscore {
         text-align: right;
         border-bottom: none;
+    }
+
+    .search {
+        display: none !important;
+    }
+
+    .main-header {
+        box-shadow: none !important;
+    }
+
+    .logo {
+        filter: invert(100%) !important;
+    }
+
+    .main-content .content-wrapper {
+        /* left: 0 !important; */
     }
 
 }
