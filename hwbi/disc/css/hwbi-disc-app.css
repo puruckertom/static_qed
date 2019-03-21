@@ -1306,11 +1306,11 @@ However, delay the fade out process for 2.5 seconds */
         /* left: 0 !important; */
     }
 
-    input[type="checkbox"] {
+    input[type="checkbox"], input[type="checkbox"] + a {
         display: none !important;
     }
 
-    input[type="checkbox"][checked="checked"] {
+    input[type="checkbox"]:checked + a {
         display: block !important;
     }
 
