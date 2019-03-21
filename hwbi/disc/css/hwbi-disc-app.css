@@ -1256,7 +1256,7 @@ However, delay the fade out process for 2.5 seconds */
     }
 
     #printable {
-        display: block;
+        /* display: block; */
         font-family: sans-serif;
     }
 
@@ -1304,6 +1304,14 @@ However, delay the fade out process for 2.5 seconds */
 
     .main-content .content-wrapper {
         /* left: 0 !important; */
+    }
+
+    input[type="checkbox"] {
+        display: none !important;
+    }
+
+    input[type="checkbox"][checked="checked"] {
+        display: block !important;
     }
 
 }

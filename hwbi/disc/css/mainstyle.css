@@ -799,7 +799,8 @@ h2.popup-title {
 /* end aster */
 
 #resources-tab ul li a {
-  color: #0071bc
+  color: #0071bc;
+  padding-left: 10px;
 }
 
 #resources-tab ul li a:hover {
@@ -1243,3 +1244,16 @@ div[id*='_priority_ranking'] {
   margin-top: 20%;
 }
 
+#resources-tab ul li {
+  list-style-type: none;
+  padding-bottom: 10px;
+}
+
+.resources-checkbox {
+  position: unset !important;
+  left: 0 !important;
+}
+
+#resources-tab h3 {
+  font-size: 1.5em !important;
+}

@@ -321,3 +321,9 @@ $(function() {
 $(function() {
     $(document).tooltip({track: true, show: null, hide: null});
 });
+
+$('input:checkbox').change(function() {
+    $(this).parent().toggleClass('show', $(this).is(':checked'));
+});
+
+
