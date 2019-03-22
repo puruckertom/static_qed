@@ -694,6 +694,7 @@ h2.popup-title {
   border: none;
   padding-left: 25px;
   width: 60px;
+  float:right;
 /*   position: absolute;
   left: 23%; */
 }
@@ -704,10 +705,11 @@ h2.popup-title {
 
 .ranking-list-container {
   /* margin-bottom: 5%; */
-  margin-top: 10%;
-  float: right;
-  display: flex;
-  text-align: right;
+  /* margin-top: 10%; */
+  /* float: right; */
+  /* display: flex; */
+  /* text-align: right; */
+  width: 300px;
 }
 
 .show-baseline {
