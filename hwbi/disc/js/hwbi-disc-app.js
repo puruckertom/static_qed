@@ -108,7 +108,7 @@ $(document).ready(function () {
     setRankSliders();
     setTimeout(getScoreData, 600);
     $('#report_pdf').on("click", generateReport);
-    $('#rank_btn').on("click", toggleRank);
+    /* $('#rank_btn').on("click", toggleRank); */
     $('#rank-exit').on("click", function () {
         $('#rank-window').hide();
     });
@@ -1535,6 +1535,16 @@ function toast(msg) {
 
 function priorityText() {
     var x = document.getElementById("priorityexplanation");
+    
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+
+function serviceText() {
+    var x = document.getElementById("service-explanation");
     
     if (x.style.display === 'none') {
         x.style.display = 'block';
