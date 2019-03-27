@@ -1200,7 +1200,7 @@ However, delay the fade out process for 2.5 seconds */
 
 @media print {
 
-    #main-tab-nav, #search_block, #rank_btn, #customize_intro, #customize_domain_details, #priorityexplanation, #report_pdf {
+    #main-tab-nav, #search_block, #rank_btn, #servicedesc_btn, #customize_intro, #customize_domain_details, #priorityexplanation, #report_pdf {
         display: none !important; 
     }
 
@@ -1266,7 +1266,7 @@ However, delay the fade out process for 2.5 seconds */
     }
 
     #printable {
-        /* display: block; */
+        display: block;
         font-family: sans-serif;
     }
 
@@ -1316,12 +1316,39 @@ However, delay the fade out process for 2.5 seconds */
         /* left: 0 !important; */
     }
 
-    input[type="checkbox"], input[type="checkbox"] + a {
+    input[type="checkbox"], input[type="checkbox"] + a, .accordion-metrics {
         display: none !important;
     }
 
-    input[type="checkbox"]:checked + a {
+    input[type="checkbox"]:checked + a, .active-metric {
         display: block !important;
+    }
+
+    input[type="checkbox"]:checked + a {
+        color: rgb(112, 143, 242);
+        text-decoration: underline;
+    }
+
+    #community-snapshot-tab {
+        margin: 0;
+        margin-bottom: 100%;
+    }
+
+    div#resources-tab {
+        display: flex !important;
+        flex-direction: column;
+    }
+
+    div#resources-tab div:nth-child(1){
+        order: 2;
+    }
+
+    div#resources-tab div:nth-child(2){
+        order: 1;
+    }
+
+    .content-wrapper {
+        padding-top: 0 !important;
     }
 
 }

@@ -326,5 +326,10 @@ $('input:checkbox').change(function() {
     $(this).parent().toggleClass('show', $(this).is(':checked'));
 });
 
+function copyDivs() {
+    $('#community-snapshot-tab').clone().appendTo('#printable');
+    $('#printable #community-snapshot-tab').addClass('show');
+};
+
 
 
