@@ -327,6 +327,7 @@ $('input:checkbox').change(function() {
 });
 
 function copyDivs() {
+    $('#printable').html('');
     $('#community-snapshot-tab').clone().appendTo('#printable');
     $('#printable #community-snapshot-tab').addClass('show');
 };
