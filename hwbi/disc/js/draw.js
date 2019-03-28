@@ -17,7 +17,7 @@ function drawAsterPlot(data) {
   rivData = data; ////give rivData updated data
 
 //use d3 to create the pie chart layout     
-var pie = d3.layout.pie()
+var pie = d3.pie()
     .sort(null)
     .value(function(d) { return d.weight; });
 
@@ -33,14 +33,14 @@ var tip = d3.tip()
 svg.call(tip);
 
 //use d3 to calculate size of arcs/angles
-var arc = d3.svg.arc()
+var arc = d3.arc()
   .innerRadius(innerRadius)
   .outerRadius(function (d) { 
     return (radius - innerRadius) * (d.data.score / 100.0) + innerRadius; 
   });
 
 //use d3 to calculate size of outline arcs    
-var outlineArc = d3.svg.arc()
+var outlineArc = d3.arc()
         .innerRadius(innerRadius)
         .outerRadius(radius);
         
@@ -107,19 +107,19 @@ function updateAsterPlot(data) {
   rivData = data; //give rivData updated data
 
   //use d3 to create the pie chart layout     
-  var pie = d3.layout.pie()
+  var pie = d3.pie()
   .sort(null)
   .value(function(d) { return d.weight; });
 
   //use d3 to calculate size of arcs/angles
-  var arc = d3.svg.arc()
+  var arc = d3.arc()
       .innerRadius(innerRadius)
       .outerRadius(function (d) {
           return (radius - innerRadius) * (d.data.score / 100) + innerRadius;
       });
 
   //use d3 to calculate size of outline arcs    
-  var outlineArc = d3.svg.arc()
+  var outlineArc = d3.arc()
       .innerRadius(innerRadius)
       .outerRadius(radius);
 
@@ -128,7 +128,7 @@ function updateAsterPlot(data) {
   svg.selectAll(".solidArc")
       .data(pie(data))
        .transition()
-       .duration(1500)
+       .duration(250)
       //assign colors to solidArc slice based on domain name
       .attr("fill", (function (d) {
           if (d.data.description == "Connection to Nature") { return "#569c83"; }
@@ -165,7 +165,7 @@ function updateAsterPlot(data) {
   //display DISC score
   d3.select("text.aster-score")
       .transition()
-      .duration(3000)
+      .duration(250)
       .text(round(score, 1));
 }
 
@@ -173,19 +173,19 @@ function updateAsterPlot(data) {
 function updateAsterRivs(data) {
   console.log("updateAsterRivs")
   //use d3 to create the pie chart layout     
-  var pie = d3.layout.pie()
+  var pie = d3.pie()
       .sort(null)
       .value(function (d) { return d.weight; });
 
   //use d3 to calculate size of arcs/angles
-  var arc = d3.svg.arc()
+  var arc = d3.arc()
       .innerRadius(innerRadius)
       .outerRadius(function (d) {
           return (radius - innerRadius) * (d.data.score / 100) + innerRadius;
       });
 
   //use d3 to calculate size of outline arcs    
-  var outlineArc = d3.svg.arc()
+  var outlineArc = d3.arc()
       .innerRadius(innerRadius)
       .outerRadius(radius);
 
@@ -194,7 +194,7 @@ function updateAsterRivs(data) {
   svg.selectAll(".solidArc")
       .data(pie(data))
        .transition()
-       .duration(1500)
+       .duration(250)
       //assign colors to solidArc slice based on domain name
       .attr("fill", (function (d) {
           if (d.data.description == "Connection to Nature") { return "#569c83"; }
@@ -231,7 +231,7 @@ function updateAsterRivs(data) {
   //display HWBI score
   d3.select("text.scoreTex")
       .transition()
-      .duration(3000)
+      .duration(250)
       .text(round(score1, 1));
 }
 
