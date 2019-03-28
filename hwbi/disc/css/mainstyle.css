@@ -710,6 +710,7 @@ h2.popup-title {
   /* display: flex; */
   /* text-align: right; */
   width: 300px;
+  display: inline-block;
 }
 
 .show-baseline {
