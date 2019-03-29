@@ -1317,11 +1317,11 @@ However, delay the fade out process for 2.5 seconds */
     }
 
     input[type="checkbox"], input[type="checkbox"] + a, .accordion-metrics {
-        display: none !important;
+        display: none;
     }
 
     input[type="checkbox"]:checked + a, .active-metric {
-        display: block !important;
+        display: block;
     }
 
     input[type="checkbox"]:checked + a {
