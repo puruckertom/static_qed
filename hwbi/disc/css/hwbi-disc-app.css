@@ -1351,4 +1351,16 @@ However, delay the fade out process for 2.5 seconds */
         padding-top: 0 !important;
     }
 
+    #apexcharts-track-0, #apexcharts-series-0 {
+        display: none;
+    }
+
+    .chartcontainer {
+        margin-top: -10%;
+    }
+
+    #priorityexplanation, #service-explanation {
+        display: none !important;
+    }
+
 }
