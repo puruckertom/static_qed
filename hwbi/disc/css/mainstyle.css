@@ -687,7 +687,7 @@ h2.popup-title {
 
 .rankinglist li {
   display: inline;
-  font-size: larger;
+  font-size: 17px;
 }
 
 .rankinglist form input, div[id*='_priority_ranking'] form input {
@@ -709,7 +709,7 @@ h2.popup-title {
   /* float: right; */
   /* display: flex; */
   /* text-align: right; */
-  width: 300px;
+  width: 250px;
   display: inline-block;
 }
 
@@ -1264,4 +1264,13 @@ div[id*='_priority_ranking'] {
 
 #resources-tab h3:nth-child(n+3) {
   padding-top: 20px !important;
+}
+
+.labelName text {
+  font-size: 12px;
+}
+
+#ranking-chart {
+  float:right;
+  margin-top: 5%;
 }
