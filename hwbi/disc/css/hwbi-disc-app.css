@@ -1366,6 +1366,6 @@ However, delay the fade out process for 2.5 seconds */
 }
 
 #snapshot-btn {
-    float: right;
-    margin: 0;
+    margin: 0 auto;
+    display: block;
 }
