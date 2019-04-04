@@ -427,7 +427,7 @@ function setScoreData(data) {
     //     ", State: " + round(data.outputs.domains[7].stateScore, 1) + "]");   
     $('#economic_score_summary').html(economic_score); */
 
-    setTimeout(loadSkillbar, 600);
+    //setTimeout(loadSkillbar, 600);
 }
 
 function setAccordion() {
@@ -451,12 +451,9 @@ function setAccordion() {
                 } else {
                     panel.style.display = "block";
                     $(this).addClass("active");
-                    if(!$(this).parent().is('#nature-block')) {
-                        $('html, body').animate({
-                        scrollTop: $('.domain-score-block').offset().top
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top
                     }, 300);
-                    }
-                    
                 }
             }
         );
