@@ -451,12 +451,14 @@ function setAccordion() {
                 } else {
                     panel.style.display = "block";
                     $(this).addClass("active");
-                    $('html, body').animate({
-                        scrollTop: $(this).offset().top
+                    if(!$(this).parent().is('#nature-block')) {
+                        $('html, body').animate({
+                        scrollTop: $('.domain-score-block').offset().top
                     }, 300);
                 }
-            }
-        );
+                }
+            });
+
     }
 }
 
