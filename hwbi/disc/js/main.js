@@ -111,6 +111,20 @@ jQuery(document).ready(function() {
         $('.accordion-metrics').removeClass('active-metric');
         $('.metric-accordion-panel').css('display', 'none');
     });
+});
+
+    /**
+     * Close the modal if there is a click registered on the background of the modal.
+     * @param {event} e - The click event.
+     * @listens click
+     */
+    document.querySelectorAll('.modal-overlay, .overlay').forEach(el => {
+        el.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay') || e.target.classList.contains('overlay')) {
+                document.querySelector(location.hash + ' > div > a.close').click();
+            }
+        });
+    });
 
     $('#1').click(function() {
         var econ = $('#s-menu-economic');
