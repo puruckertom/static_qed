@@ -111,7 +111,6 @@ jQuery(document).ready(function() {
         $('.accordion-metrics').removeClass('active-metric');
         $('.metric-accordion-panel').css('display', 'none');
     });
-});
 
     /**
      * Close the modal if there is a click registered on the background of the modal.
