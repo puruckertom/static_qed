@@ -125,6 +125,8 @@ jQuery(document).ready(function() {
         });
     });
 
+    $('#s-menu-economic').addClass('show');
+
     $('#1').click(function() {
         var econ = $('#s-menu-economic');
         
@@ -180,8 +182,8 @@ function tabsOnClick(id){
         document.getElementById(i).className = '';
         document.getElementById("tab"+i).style.display = "none";
     }
-
-    li.className += 'current-tab';			
+    
+    li.className += 'current-tab';
     div.style.display = "block";	
 }
 
@@ -345,5 +347,12 @@ function copyDivs() {
     $('#printable #community-snapshot-tab').addClass('show');
 };
 
+$(function() {
+    if (!$('.services-tabs li').hasClass('current-tab')) {
+        $('.notab-desc').addClass('show');
+    } else {
+        $('.notab-desc').removeClass('show');
+    }
+});
 
 

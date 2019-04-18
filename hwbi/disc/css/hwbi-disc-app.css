@@ -322,6 +322,18 @@
     float: none;
 }
 
+#mainpage-statecounty {
+    float: left;
+    height: 100%;
+    margin: 0 0 0 4em;
+    padding-top: 20px;
+    border-left: 1px solid #51575d;
+}
+
+#mainpage-stateform {
+    padding-left: 25px;
+}
+
 .report_pdf_button {
     /* display: none; */
 }

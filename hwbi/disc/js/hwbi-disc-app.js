@@ -127,6 +127,7 @@ $(document).ready(function () {
 
     // County and state selection search
     countyStateSelectors();
+    mainpageCountyStateSelectors();
 });
 
 function initializeGoogleMaps() {
@@ -171,7 +172,14 @@ function initializeTabs() {
 function toggleSearchType(e) {
     e.preventDefault();
     $('#statecounty').toggle();
-    $('#search_form').toggle();
+    $('.autocomplete-container').toggle();
+}
+
+function toggleMainpageSearchType(e) {
+    e.preventDefault();
+    $('#mainpage-statecounty').toggle();
+    $('.search').toggle();
+    $('#connection-icons span').toggle();
 }
 
 function snapshotTrigger() {
@@ -179,6 +187,8 @@ function snapshotTrigger() {
 
     $('#community-snapshot-tab').addClass('show');
     $('#community-snapshot-tab-link').trigger("click");
+
+    countyStateSelectors();
 }
 
 function getScoreData() {
@@ -1495,8 +1505,8 @@ function countyStateSelectors() {
         $.each(data, function(index, val) {
             stateObject[index] = val;
         });
-        var stateSel = document.getElementById("stateSel");
-        var countySel = document.getElementById("countySel");
+        var stateSel = document.querySelector(".stateSel");
+        var countySel = document.querySelector(".countySel");
         for (var state in stateObject) {
             stateSel.options[stateSel.options.length] = new Option(state, state);
         }
@@ -1513,14 +1523,54 @@ function countyStateSelectors() {
         stateAbbr = data;
     });
     //on county selection, send ajax POST call sending state and county name to server
-    $('#countySel').change(function () {
-        var stateVal = $('#stateSel').val();
-        var countyVal = $('#countySel').val();
+    $('.countySel').change(function () {
+        var stateVal = $('.stateSel').val();
+        var countyVal = $('.countySel').val();
         locationValue = JSON.stringify({
             "state": stateVal,
             "county": countyVal,
             "state_abbr" : stateAbbr[stateVal]
         });
+        $('#community-snapshot-tab').hide();
+        $('.preload-wrapper, .preload').show();
+        getScoreData();
+    });
+}
+
+function mainpageCountyStateSelectors() {
+    var stateObject = {};
+    $.getJSON('/static_qed/hwbi/disc/js/statecounty.json', function (data) {
+        $.each(data, function(index, val) {
+            stateObject[index] = val;
+        });
+        var stateSel = document.querySelector(".stateSel-2");
+        var countySel = document.querySelector(".countySel-2");
+        for (var state in stateObject) {
+            stateSel.options[stateSel.options.length] = new Option(state, state);
+        }
+         stateSel.onchange = function () {
+             countySel.length = 1; // remove all options bar first
+             if (this.selectedIndex < 1) return; // done
+             for (var county in stateObject[this.value]) {
+                 countySel.options[countySel.options.length] = new Option(stateObject[this.value][county], stateObject[this.value][county]);
+            }
+        };
+    });
+    var stateAbbr;
+    $.getJSON('/static_qed/hwbi/disc/js/statestateabbr.json', function (data) {
+        stateAbbr = data;
+    });
+    //on county selection, send ajax POST call sending state and county name to server
+    $('.countySel-2').change(function () {
+        var stateVal = $('.stateSel-2').val();
+        var countyVal = $('.countySel-2').val();
+        locationValue = JSON.stringify({
+            "state": stateVal,
+            "county": countyVal,
+            "state_abbr" : stateAbbr[stateVal]
+        });
+        $('#community-snapshot-tab').hide();
+        $('.preload-wrapper, .preload').show();
         getScoreData();
     });
 }
