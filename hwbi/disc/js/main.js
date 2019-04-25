@@ -333,14 +333,17 @@ $(function() {
     
 });
 
+//add tracking tooltip on hover
 $(function() {
     $(document).tooltip({track: true, show: null, hide: null});
 });
 
+//show resource on pdf report if checkbox checked
 $('input:checkbox').change(function() {
     $(this).parent().toggleClass('show', $(this).is(':checked'));
 });
 
+//append community snapshot tab to pdf report, show 'printable' div on report
 function copyDivs() {
     $('#printable').html('');
     $('#community-snapshot-tab').clone().appendTo('#printable');

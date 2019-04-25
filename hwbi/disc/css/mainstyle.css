@@ -527,7 +527,7 @@ h2.popup-title {
   background: #fff;
   border-radius: 2px;
   display: inline-block;
-  height: 250px;
+  height: 300px;
   margin: .5%;
   /* margin-bottom: 3%; */
   position: relative;
@@ -828,11 +828,15 @@ h2.popup-title {
 
 #resources-tab ul li a {
   color: #0071bc;
-  padding-left: 10px;
+  /* padding-left: 10px; */
 }
 
 #resources-tab ul li a:hover {
   color: #205493;
+}
+
+#resources-tab p {
+  padding-bottom: 0;
 }
 
 .services {
@@ -1275,6 +1279,7 @@ div[id*='_priority_ranking'] {
 #resources-tab ul li {
   list-style-type: none;
   padding-bottom: 10px;
+  display: -webkit-box;
 }
 
 .resources-checkbox {
@@ -1302,4 +1307,12 @@ div[id*='_priority_ranking'] {
 
 .notab-desc {
   display: none;
+}
+
+.resources-subhead {
+  padding-top: 4%;
+}
+
+input[type="checkbox"].resources-checkbox {
+  margin-right:10px;
 }

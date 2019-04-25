@@ -1328,11 +1328,11 @@ However, delay the fade out process for 2.5 seconds */
         /* left: 0 !important; */
     }
 
-    input[type="checkbox"], input[type="checkbox"] + a, .accordion-metrics {
+    input[type="checkbox"], input[type="checkbox"] + label, input[type="checkbox"] + a, .accordion-metrics {
         display: none;
     }
 
-    input[type="checkbox"]:checked + a, .active-metric {
+    input[type="checkbox"]:checked + label, input[type="checkbox"]:checked + a, .active-metric {
         display: block;
     }
 
@@ -1357,6 +1357,10 @@ However, delay the fade out process for 2.5 seconds */
 
     div#resources-tab div:nth-child(2){
         order: 1;
+    }
+
+    .resources-body p {
+        display: none;
     }
 
     .content-wrapper {
