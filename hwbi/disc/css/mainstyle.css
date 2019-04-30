@@ -1062,6 +1062,16 @@ input[type="range"]:focus::-ms-thumb {
   padding: 2% 0;
 }
 
+.metric-accordion-panel h4 {
+  font-size: 90%;
+  padding: 15px 0 0.5em;
+}
+
+.metric-accordion-panel hr {
+  margin: 0 0 1em;
+  background: #aaa;
+}
+
 .accordion-metrics:before {
   content: '\002b';
   font-size: 20px;
