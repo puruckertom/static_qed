@@ -1316,3 +1316,11 @@ div[id*='_priority_ranking'] {
 input[type="checkbox"].resources-checkbox {
   margin-right:10px;
 }
+
+.sidenav div {
+  position: absolute;
+  bottom: 1%;
+  left: 5%;
+  color: #777;
+  font-size: 13px;
+}
