@@ -511,22 +511,24 @@
     float: left;
     margin: 0 25px 0 0;
     border-radius: 50%;
-    background-color: #70AD47;
+/*     background-color: #70AD47; */
     height: 25px;
     width: 25px;
     padding: 0;
 }
 
 .domain-expand:focus {
-    background-color: #70AD47;
+    /* background-color: #70AD47; */
+    background-color: white;
 }
 
 .domain-expand:hover {
-    background-color: #568536;
+    /* background-color: #568536; */
+    background-color: #ccc;
 }
 
 .accordion {
-    background-color: #70AD47;
+    background-color: white;
     cursor: pointer;
     text-align: left;
     border: none;
@@ -535,17 +537,17 @@
 }
 
 .active {
-    background: red;
+    background: #ccc;
 }
 
 .active:focus {
-    background: red;
+    background: #ccc;
 }
 
 .accordion:after {
     content: '\002b';
-    font-size: 20px;
-    color: white;
+    font-size: 24px;
+    color: #777;
     text-align: center;
     display: block;
 }
