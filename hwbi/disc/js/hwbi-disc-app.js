@@ -186,6 +186,40 @@ $(document).ready(function () {
         resetRivs();
         updateRivUi();
     });
+
+    /**
+     * Reset the HWBI Domains
+     * @listens click
+     */
+    document.getElementById("reset-hwbi-domains").addEventListener("click", () => {
+        for (let domain in dataStructure.HWBI_DOMAIN) {
+            resetValues(dataStructure.HWBI_DOMAIN[domain], 'custom_val');
+            resetSlidersRecursive(dataStructure.HWBI_DOMAIN[domain], 'custom_val', 'customize-hwbi-metrics');
+        }
+
+        // Update scores after resetting domain tree
+        updateAllWeightedAvgValues('METRIC_GROUP', 'custom_val', dataStructure); // calculate the metric group scores by averaging each metric group's child domains
+        
+        let location = JSON.parse(locationValue);
+        setScoreData(location.state_abbr, location.county, 'custom_val'); // set the domain scores
+        loadSkillbar(); // update the colored bars on the snapshot page
+    });
+
+    /**
+     * Reset the all Service customizations
+     * @listens click
+     */
+    document.getElementById("reset-service-btn").addEventListener("click", () => {
+        for (let prop in dataStructure.METRIC_GROUP) {
+            if (dataStructure.METRIC_GROUP[prop].name !== "HWBI") {
+                resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val');
+                resetSlidersRecursive(dataStructure.METRIC_GROUP[prop], 'original_val', 'customize-service-metrics');
+            }
+        }
+
+        // Reset Charts
+        updateApexCharts("custom_val");
+    });
 });
 
 function initializeGoogleMaps() {
