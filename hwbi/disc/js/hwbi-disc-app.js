@@ -128,6 +128,55 @@ $(document).ready(function () {
     // County and state selection search
     countyStateSelectors();
     mainpageCountyStateSelectors();
+
+    /**
+     * Reset the Scenario Builder to the original values for the locale
+     * @listens click
+     */
+    document.getElementById("reset-scenario-builder-btn").addEventListener("click", function () {
+        resetValues(dataStructure.METRIC_GROUP[2], 'scenario_val');
+        resetValues(dataStructure.METRIC_GROUP[3], 'scenario_val');
+        resetValues(dataStructure.METRIC_GROUP[4], 'scenario_val');
+        
+        resetSliders(dataStructure.SERVICE_METRIC, 'scenario_val', 'scenario-builder-metric');
+
+        calculateServiceHWBI();
+        runAsterPlot();
+    });
+
+    /**
+     * Reset the to the original values for the locale
+     * @listens click
+     */
+    $(".reset-hwbi-custom-btn").on("click", function () {
+        let id = this.dataset.id;
+        resetValues(dataStructure.HWBI_DOMAIN[id], 'custom_val');
+        resetSlidersRecursive(dataStructure.HWBI_DOMAIN[id], 'custom_val', 'customize-hwbi-metrics');
+
+        // Update scores after resetting domain tree
+        updateAllWeightedAvgValues('METRIC_GROUP', 'custom_val', dataStructure); // calculate the metric group scores by averaging each metric group's child domains
+        
+        let location = JSON.parse(locationValue);
+        setScoreData(location.state_abbr, location.county, 'custom_val'); // set the domain scores
+        loadSkillbar(); // update the colored bars on the snapshot page
+    });
+
+    /**
+     * Reset the to the original values for the locale
+     * @listens click
+     */
+    $(".reset-service-custom-btn").on("click", function () {
+        let type = this.dataset.type;
+        for (let prop in dataStructure.METRIC_GROUP) {
+            if (dataStructure.METRIC_GROUP[prop].name === type) {
+                resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val');
+                resetSlidersRecursive(dataStructure.METRIC_GROUP[prop], 'original_val', 'customize-service-metrics');
+            }
+        }
+
+        // Reset Charts
+        updateApexCharts("custom_val");
+    });
 });
 
 function initializeGoogleMaps() {
@@ -1858,6 +1907,55 @@ function setTopLocationValue() {
     getScoreData();
 
     $('#top-search-bar').val('');
+}
+
+/**
+ * Resets the specified node values to the original value.
+ * @param {object} node - The initial node to reset.
+ * @param {string} type - The data type to reset. custom_val || scenario_val
+ * @function
+ */
+function resetValues(node, type) {
+    if (node.hasOwnProperty(type)) {
+        node[type] = node.original_val;
+    }
+	
+	if (node.hasOwnProperty("children") && node.children) {
+		node.children.forEach( child => {
+			resetValues(child, type);
+		});
+	}
+}
+
+/**
+ * Resets specified slider values to the original values
+ * @param {string} sliderType - A string contianing the type of slider to reset. customize-hwbi-metrics || customize-service-metrics || scenario-builder-metric
+ * @param {string} valueType - A string containing the data type to reset. custom_val || scenario_val
+ * @function
+ */
+function resetSliders(startNode, valueType, sliderType) {
+    for (let metricName in startNode) {
+        const metric = startNode[metricName];
+        const ele = document.querySelector(`[data-var="${metric.id}"].${sliderType}`);
+        if (ele.value !== metric[valueType]) {
+            ele.value = metric[valueType];
+            
+            updateSliderLabel(ele);
+        }
+    }
+}
+
+function resetSlidersRecursive(startNode, valueType, sliderType) {
+    if (startNode.hasOwnProperty("children") && startNode.children.length) {
+        startNode.children.forEach(child => {
+            resetSlidersRecursive(child, valueType, sliderType);
+        });
+    } else {
+        const ele = document.querySelector(`[data-var="${startNode.id}"].${sliderType}`);
+        ele.value = startNode[valueType];
+
+        updateSliderLabel(ele);
+    }
 }
 
 function updateSliderLabel(ele) {
