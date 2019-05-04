@@ -1860,6 +1860,30 @@ function setTopLocationValue() {
     $('#top-search-bar').val('');
 }
 
+function updateSliderLabel(ele) {
+    const sign = ele.dataset.sign;
+    const units = ele.dataset.units;
+    let val = 0;
+    let roundValue = 2;
+
+    if (sign === "P") {
+        val = (+ele.value * (+ele.dataset.max - +ele.dataset.min)) + +ele.dataset.min;
+    } else if (sign === "N") {
+        val = -1 * ((+ele.value - 1) * (+ele.dataset.max - +ele.dataset.min)) + +ele.dataset.min;
+    }
+
+    if (units.toLowerCase().trim() === "percent" && ele.classList.contains('customize-hwbi-metrics')) {
+        val *= 100;
+        roundValue = 1;
+    }
+
+    if (units.toLowerCase().trim() === "dollars") {
+        roundValue = 2;
+    }
+
+    ele.previousElementSibling.innerHTML = "<span> " + round(val, roundValue) + " (" + units + ")</span>";
+  }
+
 function updateApexCharts(valueType) {
     econChart.updateSeries([round(dataStructure.METRIC_GROUP["2"][valueType] * 100, 1)]);
     ecoChart.updateSeries([round(dataStructure.METRIC_GROUP["3"][valueType] * 100, 1)]);
