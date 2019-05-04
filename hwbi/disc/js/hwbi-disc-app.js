@@ -1929,8 +1929,9 @@ function resetValues(node, type) {
 
 /**
  * Resets specified slider values to the original values
- * @param {string} sliderType - A string contianing the type of slider to reset. customize-hwbi-metrics || customize-service-metrics || scenario-builder-metric
+ * @param {object} startNode - The node to reset
  * @param {string} valueType - A string containing the data type to reset. custom_val || scenario_val
+ * @param {string} sliderType - A string contianing the type of slider to reset. customize-hwbi-metrics || customize-service-metrics || scenario-builder-metric
  * @function
  */
 function resetSliders(startNode, valueType, sliderType) {
@@ -1945,6 +1946,13 @@ function resetSliders(startNode, valueType, sliderType) {
     }
 }
 
+/**
+ * Resets specified slider values to the original values. Travels down tree and resets all children
+ * @param {object} startNode - The starting node to reset all children of
+ * @param {string} valueType - A string containing the data type to reset. custom_val || scenario_val
+ * @param {string} sliderType - A string contianing the type of slider to reset. customize-hwbi-metrics || customize-service-metrics || scenario-builder-metric
+ * @function
+ */
 function resetSlidersRecursive(startNode, valueType, sliderType) {
     if (startNode.hasOwnProperty("children") && startNode.children.length) {
         startNode.children.forEach(child => {
@@ -1958,6 +1966,11 @@ function resetSlidersRecursive(startNode, valueType, sliderType) {
     }
 }
 
+/**
+ * Updates the label of a metric slider with the appropriote value
+ * @param {HTMLElement} ele - The HTML Element that needs its label updated
+ * @function
+ */
 function updateSliderLabel(ele) {
     const sign = ele.dataset.sign;
     const units = ele.dataset.units;
@@ -1982,6 +1995,11 @@ function updateSliderLabel(ele) {
     ele.previousElementSibling.innerHTML = "<span> " + round(val, roundValue) + " (" + units + ")</span>";
   }
 
+/**
+ * Updates the apex charts with the type of value specified. 
+ * @param {string} ele - A string containing the value type. original_val || custom_val || scenario_val
+ * @function
+ */
 function updateApexCharts(valueType) {
     econChart.updateSeries([round(dataStructure.METRIC_GROUP["2"][valueType] * 100, 1)]);
     ecoChart.updateSeries([round(dataStructure.METRIC_GROUP["3"][valueType] * 100, 1)]);
