@@ -177,6 +177,15 @@ $(document).ready(function () {
         // Reset Charts
         updateApexCharts("custom_val");
     });
+
+    /**
+     * Reset the RIVs to 1
+     * @listens click
+     */
+    document.getElementById("riv-reset-btn").addEventListener("click", () => {
+        resetRivs();
+        updateRivUi();
+    });
 });
 
 function initializeGoogleMaps() {
@@ -2004,4 +2013,60 @@ function updateApexCharts(valueType) {
     econChart.updateSeries([round(dataStructure.METRIC_GROUP["2"][valueType] * 100, 1)]);
     ecoChart.updateSeries([round(dataStructure.METRIC_GROUP["3"][valueType] * 100, 1)]);
     socialChart.updateSeries([round(dataStructure.METRIC_GROUP["4"][valueType] * 100, 1)]);
+}
+
+/**
+ * Resets the RIV's to 1
+ * @function
+ */
+function resetRivs() {
+    for (let node in dataStructure.HWBI_DOMAIN) {
+        let domain = dataStructure.HWBI_DOMAIN[node];
+        domain.weight = 1;
+        document.querySelector(`.rankinglist input[name="${slugify(domain.name)}-rank-number"]`).value = 1;
+    }
+}
+
+/**
+ * Updates the ranking donut, the HWBI Domain scores, sets the score data, calculates the Service HWBI domain scores, and updates the aster plot
+ * @function
+ */
+function updateRivUi() {
+    const location = JSON.parse(locationValue);
+
+    initializeRankingDonut();
+    updateAllWeightedAvgValues('METRIC_GROUP', 'custom_val', dataStructure); // calculate the metric group scores by averaging each metric group's child domains
+    setScoreData(location.state_abbr, location.county, "custom_val"); // set the domain scores
+    calculateServiceHWBI();
+    runAsterPlot();
+  }
+
+const donut = donutChart()
+  .width(540)
+  .height(300)
+  .transTime(250) // length of transitions in ms
+  .cornerRadius(3) // sets how rounded the corners are on each slice
+  .padAngle(0.015) // effectively dictates the gap between slices
+  .variable('weight')
+  .category('domain');
+
+/**
+ * Initialized the ranking donut with the domain name and weights in the datastructure
+ * @function
+ */
+function initializeRankingDonut() {
+  let data = [];
+  for (let domain in dataStructure.HWBI_DOMAIN) {
+    data.push({
+      domain: dataStructure.HWBI_DOMAIN[domain].name,
+      weight: dataStructure.HWBI_DOMAIN[domain].weight	
+    });
+  }
+
+  donut.data(data);
+
+  if (!$('#ranking-chart svg').length) {
+    d3.select('#ranking-chart')
+      .call(donut); // draw chart in div
+  }
 }
