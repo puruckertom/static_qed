@@ -1859,3 +1859,9 @@ function setTopLocationValue() {
 
     $('#top-search-bar').val('');
 }
+
+function updateApexCharts(valueType) {
+    econChart.updateSeries([round(dataStructure.METRIC_GROUP["2"][valueType] * 100, 1)]);
+    ecoChart.updateSeries([round(dataStructure.METRIC_GROUP["3"][valueType] * 100, 1)]);
+    socialChart.updateSeries([round(dataStructure.METRIC_GROUP["4"][valueType] * 100, 1)]);
+}
