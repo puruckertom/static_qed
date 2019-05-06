@@ -68,9 +68,20 @@ jQuery(document).ready(function() {
     });
 
     /*moves window down so content doesnt appear under search bar on #page load*/
-    var shiftWindow = function() { scrollBy(0, -75) };
-    if (location.hash) shiftWindow();
+    var shiftWindow = function() { /* scrollBy(0, -75) */
+        $(window).scrollTop(0);
+    };
+    if (window.location.hash) shiftWindow();
     window.addEventListener("hashchange", shiftWindow);
+
+    $('.returntop').css('display','none');
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('.returntop:hidden').stop(true, true).fadeIn('fast');
+        } else {
+            $('.returntop').stop(true, true).fadeOut('fast');
+        }
+    });
 
     /*un-focus services slider on mouse-up*/
     $('.thumb').mouseup(function() {

@@ -1394,6 +1394,10 @@ However, delay the fade out process for 2.5 seconds */
         list-style-type: disc !important;
     }
 
+    .domain-expand {
+        display: none;
+    }
+
 }
 
 #snapshot-btn {

@@ -280,6 +280,12 @@ function snapshotTrigger() {
     $('#community-snapshot-tab').addClass('show');
     $('#community-snapshot-tab-link').trigger("click");
 
+    /* $('html, body').animate({
+        scrollTop: $('.content-wrapper').offset().top
+    }, 0); */
+
+    $(window).scrollTop(0);
+
     countyStateSelectors();
 }
 
@@ -321,9 +327,7 @@ function getScoreData() {
             setMetricSliders(); // set sliders 
             hwbi_indicator_value_adjusted = {};
             setCookie('EPAHWBIDISC', location_data, 0.5);
-            $('html, body').animate({
-                scrollTop: $('#disc-tabs').offset().top
-            }, 'slow');
+            $(window).scrollTop(0);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             $('#search_error_notification').show();
@@ -806,9 +810,7 @@ function selectDomain() {
         "<br>Move a slider left or right to change the indicator score to describe your community better. Mouse over an indicator to learn more about it.");
     showDomainIndicators(domainID);
 
-    $('html, body').animate({
-        scrollTop: $('#customize_domains').offset().top
-    }, 'slow');
+    $(window).scrollTop(0);
 }
 
 function getDomainDescription(domainID) {

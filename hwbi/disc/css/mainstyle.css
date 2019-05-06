@@ -839,6 +839,10 @@ h2.popup-title {
   padding-bottom: 0;
 }
 
+#resources-tab {
+  margin-bottom: 5%;
+}
+
 .services {
   /* margin: 0 auto; */
   /* width: 60%; */
@@ -1267,9 +1271,9 @@ div[id*='_priority_ranking'] {
   100% { transform: rotate(360deg); }
 }
 
-#community-snapshot-tab {
+/* #community-snapshot-tab {
   display: none;
-}
+} */
 
 .preload-wrapper {
   position:fixed;
@@ -1338,8 +1342,31 @@ input[type="checkbox"].resources-checkbox {
 #scenario-btns {
   display: grid; 
   justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 
 #scenario-btns > button {
-  width: 50%;
+  width: 90%;
+}
+
+#reset-hwbi-domains, #reset-service-btn, #riv-reset-btn {
+  float: right;
+  margin-top: -10px;
+} 
+
+.returntop {
+  position:fixed;
+  right: 3%;
+  bottom: 3%;
+  color: #777;
+  font-size: 13px;
+  width: 99px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+}
+
+.returntop:hover {
+  background-color: #ccc;
+  color: #777;
 }
