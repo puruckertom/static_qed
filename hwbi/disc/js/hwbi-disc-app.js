@@ -134,14 +134,37 @@ $(document).ready(function () {
      * @listens click
      */
     document.getElementById("reset-scenario-builder-btn").addEventListener("click", function () {
-        resetValues(dataStructure.METRIC_GROUP[2], 'scenario_val');
-        resetValues(dataStructure.METRIC_GROUP[3], 'scenario_val');
-        resetValues(dataStructure.METRIC_GROUP[4], 'scenario_val');
-        
-        resetSliders(dataStructure.SERVICE_METRIC, 'scenario_val', 'scenario-builder-metric');
+        var choice = dialog.showMessageBox(
+            {
+              type: 'question',
+              buttons: ['Yes', 'No'],
+              title: 'Reset Scenario Builder',
+              message: 'Resetting the Scenario Builder will erase any changes you have made below.\n\nDo you still want to proceed?'
+            });
+          if (choice === 0) {
+            let baselineValue; 
 
-        calculateServiceHWBI();
-        runAsterPlot();
+            function isCustomized() {
+                const metrics = {...dataStructure.HWBI_METRIC, ...dataStructure.SERVICE_METRIC};
+                for (let metric in metrics) {
+                    if (metrics[metric].original_val !== metrics[metric].custom_val) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            isCustomized() ? baselineValue = 'custom_val' : baselineValue = 'original_val';
+
+            resetValues(dataStructure.METRIC_GROUP[2], 'scenario_val', baselineValue);
+            resetValues(dataStructure.METRIC_GROUP[3], 'scenario_val', baselineValue);
+            resetValues(dataStructure.METRIC_GROUP[4], 'scenario_val', baselineValue);
+            
+            resetSliders(dataStructure.SERVICE_METRIC, 'scenario_val', 'scenario-builder-metric');
+
+            calculateServiceHWBI();
+            runAsterPlot();
+        }
     });
 
     /**
@@ -150,7 +173,7 @@ $(document).ready(function () {
      */
     $(".reset-hwbi-custom-btn").on("click", function () {
         let id = this.dataset.id;
-        resetValues(dataStructure.HWBI_DOMAIN[id], 'custom_val');
+        resetValues(dataStructure.HWBI_DOMAIN[id], 'custom_val', 'original_val');
         resetSlidersRecursive(dataStructure.HWBI_DOMAIN[id], 'custom_val', 'customize-hwbi-metrics');
 
         // Update scores after resetting domain tree
@@ -169,7 +192,7 @@ $(document).ready(function () {
         let type = this.dataset.type;
         for (let prop in dataStructure.METRIC_GROUP) {
             if (dataStructure.METRIC_GROUP[prop].name === type) {
-                resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val');
+                resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val', 'original_val');
                 resetSlidersRecursive(dataStructure.METRIC_GROUP[prop], 'original_val', 'customize-service-metrics');
             }
         }
@@ -193,7 +216,7 @@ $(document).ready(function () {
      */
     document.getElementById("reset-hwbi-domains").addEventListener("click", () => {
         for (let domain in dataStructure.HWBI_DOMAIN) {
-            resetValues(dataStructure.HWBI_DOMAIN[domain], 'custom_val');
+            resetValues(dataStructure.HWBI_DOMAIN[domain], 'custom_val', 'original_val');
             resetSlidersRecursive(dataStructure.HWBI_DOMAIN[domain], 'custom_val', 'customize-hwbi-metrics');
         }
 
@@ -212,7 +235,7 @@ $(document).ready(function () {
     document.getElementById("reset-service-btn").addEventListener("click", () => {
         for (let prop in dataStructure.METRIC_GROUP) {
             if (dataStructure.METRIC_GROUP[prop].name !== "HWBI") {
-                resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val');
+                resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val', 'original_val');
                 resetSlidersRecursive(dataStructure.METRIC_GROUP[prop], 'original_val', 'customize-service-metrics');
             }
         }
@@ -1955,17 +1978,18 @@ function setTopLocationValue() {
 /**
  * Resets the specified node values to the original value.
  * @param {object} node - The initial node to reset.
- * @param {string} type - The data type to reset. custom_val || scenario_val
+ * @param {string} typeToReset - The data type to reset. custom_val || scenario_val
+ * @param {string} baselineValue - String containing the new baseline to load. custom_val || original_val
  * @function
  */
-function resetValues(node, type) {
-    if (node.hasOwnProperty(type)) {
-        node[type] = node.original_val;
+function resetValues(node, typeToReset, baselineValue) {
+    if (node.hasOwnProperty(typeToReset)) {
+        node[typeToReset] = node[baselineValue];
     }
 	
 	if (node.hasOwnProperty("children") && node.children) {
 		node.children.forEach( child => {
-			resetValues(child, type);
+			resetValues(child, typeToReset, baselineValue);
 		});
 	}
 }
