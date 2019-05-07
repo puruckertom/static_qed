@@ -443,7 +443,15 @@
     width: 100%;
     font-size: 14px;
     white-space: nowrap;
+    text-align:center;
+}
 
+#wellbeing-score-scale {
+    margin-top: -130px;
+}
+
+#wellbeing-score-location {
+    padding-bottom: 15px;
 }
 
 #hwbi-info p {
