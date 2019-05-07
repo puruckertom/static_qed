@@ -535,6 +535,13 @@ function setScoreData(data) {
     //     ", State: " + round(data.outputs.domains[7].stateScore, 1) + "]");   
     $('#cohesion_score_summary').html(cohesion_score);
 
+    var resilience_score = round(data.outputs.domains[7].score, 1);
+    $('#resilience_score, #resilience_modal_score').html(resilience_score);
+    $('#resilience_score_bar').attr('data-percent', resilience_score + "%");
+    // $('#cohesion_location').html("[Nation: " + round(data.outputs.domains[7].nationScore, 1) +
+    //     ", State: " + round(data.outputs.domains[7].stateScore, 1) + "]");   
+    $('#resilience_score_summary').html(resilience_score);
+
     /* var ecosystem_score = round(data.outputs.domains[7].score, 1);
     $('#ecosystem_score').html(ecosystem_score);
     $('#ecosystem_score_bar').attr('data-percent', ecosystem_score + "%");
@@ -618,6 +625,7 @@ function setRankSliders() {
     $('#living-slider-bar').slider(sliderOptions);
     $('#safety-slider-bar').slider(sliderOptions);
     $('#cohesion-slider-bar').slider(sliderOptions);
+    $('#resilience-slider-bar').slider(sliderOptions);
 /*     $('#ecosystem-slider-bar').slider(sliderOptions);
     $('#social-slider-bar').slider(sliderOptions);
     $('#economic-slider-bar').slider(sliderOptions); */
@@ -681,9 +689,14 @@ function calculateScore() {
     var cohesionWeight = $('#cohesion-slider-bar').slider("value");
     var adjustedCohesionScore = cohesionScore * cohesionWeight;
     hwbi_disc_data["outputs"]["domains"][7]["weight"] = cohesionWeight;
+
+    var resilienceScore = hwbi_disc_data["outputs"]["domains"][8]["score"];
+    var resilienceScore = $('#resilience-slider-bar').slider("value");
+    var adjustedResilienceScore = resilienceScore * resilienceScore;
+    hwbi_disc_data["outputs"]["domains"][8]["weight"] = resilienceWeight;
     
     var totalScore = adjustedNatureScore + adjustedEducationScore + adjustedHealthScore + adjustedLeisureScore + 
-    adjustedLivingScore + adjustedSafetyScore + adjustedCulturalScore + adjustedCohesionScore;
+    adjustedLivingScore + adjustedSafetyScore + adjustedCulturalScore + adjustedCohesionScore + adjustedResilienceScore;
 
     var newScore = totalScore / totalWeight;
     $('#wellbeing-score').html(newScore.toFixed(1));
@@ -893,6 +906,9 @@ function showDomainIndicators(domainID) {
     }
     else if (domainID === "Social") {
         $('#social_indicators').show();
+    }
+    else if (domainID === "Resilience") {
+        $('#resilience_indicators').show();
     }
 }
 
@@ -1767,6 +1783,7 @@ function formatDomainData(data) {
     data.outputs.domains.push({ "score" : discDomains["living standards"].score, weight: 1, description: "Living Standards", domainID : 'Living Standards' });
     data.outputs.domains.push({ "score" : discDomains["safety and security"].score, weight: 1, description: "Safety and Security", domainID : 'safety' });
     data.outputs.domains.push({ "score" : discDomains["social cohesion"].score, weight: 1, description: "Social Cohesion", domainID : 'Social Cohesion' });
+    data.outputs.domains.push({ "score" : discDomains["resilience"].score, weight: 1, description: "Resilience", domainID : 'Resilience' });
 
     data.outputs.hwbi = 0;
     for (var i = 0; i < data.outputs.domains.length; i++) {
