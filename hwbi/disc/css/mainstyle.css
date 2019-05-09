@@ -1354,6 +1354,11 @@ input[type="checkbox"].resources-checkbox {
   margin-top: -10px;
 } 
 
+.reset-hwbi-custom-btn {
+  position: absolute;
+  bottom: 20px;
+}
+
 .returntop {
   position:fixed;
   right: 3%;
