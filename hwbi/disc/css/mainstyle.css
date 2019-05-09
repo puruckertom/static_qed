@@ -12,9 +12,9 @@ body {
     font-family: "Open Sans", sans-serif;
 }  
 
-body::-webkit-scrollbar {
+/* body::-webkit-scrollbar {
   display: none;
-}
+} */
 
 a {
     color: #ddd;
@@ -360,10 +360,16 @@ h2.popup-title {
   }
 
   .main-content .content-wrapper {
-      position: relative;
-      left: 21%;
-      padding-top: 9%;
-      width: 100%;
+      /* position: relative;
+      left: 21%; */
+      padding-top: 8%;
+      /* width: 80vw; */
+      margin-left: 215px;
+  }
+
+  .main-content {
+    overflow: hidden;
+    max-width: 70em !important; /* override s.css */
   }
 
   .main-header span img {
@@ -1374,4 +1380,13 @@ input[type="checkbox"].resources-checkbox {
 .returntop:hover {
   background-color: #ccc;
   color: #777;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 5px;
 }
