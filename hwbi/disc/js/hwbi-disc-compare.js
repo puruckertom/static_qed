@@ -2,12 +2,12 @@
 const comp_width = 820;
 const comp_height = 440;
 const center = [comp_width / 2, comp_height / 2];
-const noMatchFill = '#FFFFFF';
+const noMatchFill = '#f1f1f1';
 const selectedFill = '#32BA46';
 
 const formatHwbi = d3.format('.1f');
-const qcolors = ['#8c510a', '#D9A55F', '#e0e0e0', '#80cdc1', '#35978f'];
-const qlabels = ['Much More', 'More', 'About same', 'Less', 'Much Less'];
+const qcolors = ['#8c510a', '#D9A55F', '#aeb0b5', '#80cdc1', '#35978f'];
+const qlabels = ['Much More', 'More', 'About Same', 'Less', 'Much Less'];
 
 let countiesData = [];
 
