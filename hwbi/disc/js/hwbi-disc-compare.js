@@ -117,16 +117,16 @@ function ready(us) {
 function setText(id, div) {
     let county = hwbiByFIPS.get(id);
     div.select('.name').text(county['name']);
-    div.select('.hwbi').html('<text>Well-Being:  <span class="hwbi right">' + formatHwbi(county['hwbi']) + '</span> &plusmn; <span class="moe right">' + formatHwbi(county.moe) + '</span></text>');
-    div.select('.cn').html('<text>Connection to Nature:  </text><span class="cn right">' + formatHwbi(county['Connection to Nature']) + '</span> &plusmn; <span class="cn_moe right">' + formatHwbi(county.cn_moe) + '</span>');
-    div.select('.cf').html('<text>Cultural Fulfillment:  </text><span class="cf right">' + formatHwbi(county['Cultural Fulfillment']) + '</span> &plusmn; <span class="cf_moe right">' + formatHwbi(county.cf_moe) + '</span>');
-    div.select('.ed').html('<text>Education:  </text><span class="ed right">' + formatHwbi(county['Education']) + '</span> &plusmn; <span class="ed_moe right">' + formatHwbi(county.ed_moe) + '</span>');
-    div.select('.he').html('<text>Health:  </text><span class="he right">' + formatHwbi(county['Health']) + '</span> &plusmn; <span class="he_moe right">' + formatHwbi(county.he_moe) + '</span>');
-    div.select('.lt').html('<text>Leisure Time:  </text><span class="lt right">' + formatHwbi(county['Leisure Time']) + '</span> &plusmn; <span class="lt_moe right">' + formatHwbi(county.lt_moe) + '</span>');
-    div.select('.ls').html('<text>Living Standards:  </text><span class="ls right">' + formatHwbi(county['Living Standards']) + '</span> &plusmn; <span class="ls_moe right">' + formatHwbi(county.ls_moe) + '</span>');
-    div.select('.ss').html('<text>Safety &amp; Security:  </text><span class="ss right">' + formatHwbi(county['Safety and Security']) + '</span> &plusmn; <span class="ss_moe right">' + formatHwbi(county.ss_moe) + '</span>');
-    div.select('.sc').html('<text>Social Cohesion:  </text><span class="sc right">' + formatHwbi(county['Social Cohesion']) + '</span> &plusmn; <span class="sc_moe right">' + formatHwbi(county.sc_moe) + '</span>');
-    div.select('.re').html('<text>Resiliency:  </text><span class="re right">' + formatHwbi(county['Resiliency']) + '</span> &plusmn; <span class="re_moe right">' + formatHwbi(county.re_moe) + '</span>');
+    div.select('.hwbi').html('<text>Well-Being:  <span class="hwbi right">' + formatHwbi(county['hwbi']) + '</span></text>');
+    div.select('.cn').html('<text>Connection to Nature:  </text><span class="cn right">' + formatHwbi(county['Connection to Nature']) + '</span>');
+    div.select('.cf').html('<text>Cultural Fulfillment:  </text><span class="cf right">' + formatHwbi(county['Cultural Fulfillment']) + '</span>');
+    div.select('.ed').html('<text>Education:  </text><span class="ed right">' + formatHwbi(county['Education']) + '</span>');
+    div.select('.he').html('<text>Health:  </text><span class="he right">' + formatHwbi(county['Health']) + '</span>');
+    div.select('.lt').html('<text>Leisure Time:  </text><span class="lt right">' + formatHwbi(county['Leisure Time']) + '</span>');
+    div.select('.ls').html('<text>Living Standards:  </text><span class="ls right">' + formatHwbi(county['Living Standards']) + '</span>');
+    div.select('.ss').html('<text>Safety &amp; Security:  </text><span class="ss right">' + formatHwbi(county['Safety and Security']) + '</span>');
+    div.select('.sc').html('<text>Social Cohesion:  </text><span class="sc right">' + formatHwbi(county['Social Cohesion']) + '</span>');
+    div.select('.re').html('<text>Basic Resilience:  </text><span class="re right">' + formatHwbi(county['Basic Resilience']) + '</span>');
 }
 
 function compareScores() {
