@@ -148,10 +148,10 @@ $(document).ready(function () {
                 const metrics = {...dataStructure.HWBI_METRIC, ...dataStructure.SERVICE_METRIC};
                 for (let metric in metrics) {
                     if (metrics[metric].original_val !== metrics[metric].custom_val) {
-                        return false;
+                        return true;
                     }
                 }
-                return true;
+                return false;
             }
 
             isCustomized() ? baselineValue = 'custom_val' : baselineValue = 'original_val';
@@ -2077,8 +2077,11 @@ function updateSliderLabel(ele) {
     if (units.toLowerCase().trim() === "dollars") {
         roundValue = 2;
     }
-
-    ele.previousElementSibling.innerHTML = "<span> " + round(val, roundValue) + " (" + units + ")</span>";
+    if (units) {
+        ele.previousElementSibling.innerHTML = "<span> " + round(val, roundValue) + " (" + units + ")</span>";
+    } else {
+        ele.previousElementSibling.innerHTML = "<span> " + round(val, roundValue) + "</span>";
+    }
   }
 
 /**
