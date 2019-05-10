@@ -2077,8 +2077,11 @@ function updateSliderLabel(ele) {
     if (units.toLowerCase().trim() === "dollars") {
         roundValue = 2;
     }
-
-    ele.previousElementSibling.innerHTML = "<span> " + round(val, roundValue) + " (" + units + ")</span>";
+    if (units) {
+        ele.previousElementSibling.innerHTML = "<span> " + round(val, roundValue) + " (" + units + ")</span>";
+    } else {
+        ele.previousElementSibling.innerHTML = "<span> " + round(val, roundValue) + "</span>";
+    }
   }
 
 /**
