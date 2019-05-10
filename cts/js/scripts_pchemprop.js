@@ -1,6 +1,25 @@
 var pchempropsDefaults = ["chemaxon", "ion_con", "kow_no_ph", "kow_wph"]; //checkbox names
 
+var pchemPopupMap = {
+  'melting_point': 'mp',
+  'boiling_point': 'bp',
+  'water_sol': 'ws',
+  'vapor_press': 'vp',
+  'mol_diss': 'mdw',
+  'mol_diss_air': 'mda',
+  'ion_con': 'ic',
+  'henrys_law_con': 'hlc',
+  'kow_no_ph': 'kow',
+  'koc': 'koc',
+  'log_bcf': 'bcf',
+  'log_baf': 'baf', 
+  'kow_wph': 'd_ow',
+  'water_sol_ph': 'wsph'
+};
+
 $(document).ready(function() {
+
+    var hasBeenTipped = false;  // bool for whether tooltips have been initialized
 
     if ( typeof uberNavTabs == 'function' ) {
         uberNavTabs(
@@ -55,7 +74,7 @@ $(document).ready(function() {
     });
 
     //submit button logic:
-    $('.submit.input_button').prop('disabled', true); //initialize submit as disabled
+    // $('.submit.input_button').prop('disabled', true); //initialize submit as disabled
 
 
     // Triggered if any checkbox is clicked on pchem table:
@@ -64,20 +83,14 @@ $(document).ready(function() {
         submitButtonLogic(); //tie submitLogic() to any checkbox changes
         pchempropTableLogic();
 
-        var workflow_url = window.location.href;
-
-        // abandon if not in gentrans workflow to begin with:
-        // if (workflow_url.indexOf("gentrans") < 0) { return; }
-
+        // Brings up warning that TEST is slow (no longer needed for TESTWS, 08/08/18)
+        // NOTE: This is now being used for OPERA as TESTWS is much faster.
         var is_checked = this.checked;
-        var is_TEST = false;
-
-        if (this.id.indexOf("test") > -1) { is_TEST = true; }
-
-        if (is_checked && is_TEST) {
-            // warn user that TEST takes awhile:
-            // TODO: maybe do a fancier popup near the TEST checkbox, not an obtrusive alert message!!!
-            alert("Note: The TEST calculator can take several minutes to run");
+        var is_opera = false;
+        if (this.id.indexOf("opera") > -1) { is_opera = true; }
+        if (is_checked && is_opera) {
+            // Warns user that opera takes awhile:
+            alert("Note: The OPERA calculator can take several minutes to run");
         }
 
     });
@@ -94,6 +107,8 @@ $(document).ready(function() {
 
     $('#btn-pchem-cleardata').on('click', clearPchemData);
 
+    tipPchemTable();  // adds popups when document loads
+
 });
 
 
@@ -106,7 +121,8 @@ function submitButtonLogic() {
     // disable submit if no calculator is checked (and not gentrans/batch)
     // if ($(calc_checkbox).is(':not(:checked)') && window.location.href.indexOf('gentrans') < 0) {
     if ($(calc_checkbox).is(':not(:checked)' && window.location.href.indexOf('gentrans/batch') < 0)) {
-        $('.submit.input_button').prop('disabled', true).removeClass('brightBorders');
+        // $('.submit.input_button').prop('disabled', true).removeClass('brightBorders');
+        $('.submit.input_button').removeClass('brightBorders');
     }
 
     // if (window.location.href.indexOf('pchemprop') > -1) {
@@ -118,7 +134,8 @@ function submitButtonLogic() {
                 var availableProps = $('td.ChemCalcs_available.' + calcName);
                 //enable submit if checked calculator has checked properties
                 if ($(availableProps).parent().find('input[type=checkbox]').is(':checked')) {
-                    $('.submit.input_button').prop('disabled', false).addClass('brightBorders');
+                    // $('.submit.input_button').prop('disabled', false).addClass('brightBorders');
+                    $('.submit.input_button').addClass('brightBorders');
                 }
             }
         });
@@ -139,4 +156,56 @@ function pchempropTableLogic() {
 function clearPchemData() {
     // Clears all data on pchemprop table:
     $('#pchemprop_table td').not('td.colorKey').html('');
+}
+
+
+
+function tipPchemTable() {
+  /*
+  Uses qtip2 JS library to create popups (tooltips)
+  for pchem table definitions.
+  */
+
+  // NOTE: This worked!
+  $('th.chemprop').each(function() {
+
+    var propName = $(this).children('input').attr('name');  // get pchem name (in CTS format)
+    var propLabel = $(this).children('span');  // gets pchem label inside table cell
+
+    // Loops pchem popup map (top of this file) to match cts p-chem props
+    // with the p-chem definitions (some cts props will have the same definition):
+    for (var ctsProp in pchemPopupMap) {
+      
+      if (propName == ctsProp) {
+        // append popup to this pchem name in table
+        var pchemKey = pchemPopupMap[ctsProp];
+        var tippedProp = $('div#' + pchemKey);
+
+        // Removes 'display: none' from tooltip div:
+        // $(tooltip).css('display', 'inline');
+
+        // Adds qtip2 popup to p-chem property label (and not the checkbox):
+        $(propLabel).qtip({
+          content: {
+            text: $(tippedProp)
+          },
+            style: {
+            classes: 'qtip-light'
+          },
+          position: {
+            my: 'bottom left',  // set bottom-left of popup div..
+            at: 'center right',  // at center right of label..
+            target: 'mouse'  // triggered by mouse.
+          }
+        });
+
+        // Adds 'none' back after qtip popup is built, so it doesn't show up initially in pchem table
+        // Note: this tooltip div gets converted to a qtip div (i.e., removed from <th> elements in cts_pchem.html)
+        // $(tooltip).css('display', 'none');
+      
+      }
+
+    }
+
+  });
 }
