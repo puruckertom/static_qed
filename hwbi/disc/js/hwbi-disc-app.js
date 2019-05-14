@@ -4,7 +4,6 @@
 var acc = document.getElementsByClassName("accordion");
 var acc_i;
 var searchBox;
-var compareSearchBox = [];
 var locationValue = '{}';
 var active_domain;
 var hwbi_disc_data;
@@ -118,12 +117,6 @@ $(document).ready(function () {
     $('.domain-icon').on('click', selectDomain);
     $('.indicator_data-title').on('mouseover', displayIndicatorInformation);
     $('.indicator_block:first-child .indicator_data-title:first-child').mouseenter(); //simulate mouseover of first indicator title to show a description by default
-
-    // Comparison body
-    $('.add-community').on('click', addComparison);
-    $('.close-compare-search').on('click', removeComparison);
-    $('.compare-search-button').on('click', getComparisonData);
-    
 
     // County and state selection search
     countyStateSelectors();
@@ -248,7 +241,6 @@ $(document).ready(function () {
 function initializeGoogleMaps() {
     google.maps.event.addDomListener(window, 'load', initializeAutocomplete);
     google.maps.event.addDomListener(window, 'load', initializeTopAutocomplete);
-    google.maps.event.addDomListener(window, 'load', initializeComparisonAutocomplete);
 }
 
 function setSearchBlock(selectedTab) {
@@ -342,8 +334,6 @@ function getScoreData() {
             var indicatorData = data;
             data = JSON.stringify(formatDomainData(JSON.parse(data)));
             setScoreData(data);
-            setCompareData(data, 0);
-            displayCompareData(JSON.parse(sessionStorage.getItem("compareCommunities")).length);
             $('#customize_location').html(location.county + " County, " + location.state);
             hwbi_disc_data = JSON.parse(data);
             hwbi_indicator_data = formatIndicatorData(setIndicatorData(indicatorData));
@@ -1431,121 +1421,9 @@ function calculateNewScore(domainID, domainBlock) {
     $('#safety_adj').html(round(hwbi_indicator_value_adjusted["Safety"], 1));
 }
 
-function setCompareData(data, columnNumber) {
-    data = JSON.parse(data);
-
-    var compareCommunities = JSON.parse(sessionStorage.getItem("compareCommunities"));
-    if (!compareCommunities) {
-        compareCommunities = [];
-    }
-
-    if (compareCommunities.length >= 3) {
-        return; // don't allow more than three comparisons
-    }
-
-    var community = {};
-
-    community.location = data["inputs"][1]["value"] + " County, " + data["inputs"][0]["value"];
-    for (var i = 0; i < compareCommunities.length; i++) {
-        if (community.location === compareCommunities[i].location) { // check for duplicates
-            return "dupe"; // don't add the duplicate
-        }
-    }
-    community.score = data["outputs"]["hwbi"].toFixed(1);
-    /*
-    community.environment_score = data["outputs"]["domains"][0]["score"].toFixed(1);
-    community.community_score = data["outputs"]["domains"][1]["score"].toFixed(1);
-    community.education_score = data["outputs"]["domains"][2]["score"].toFixed(1);
-    community.health_score = data["outputs"]["domains"][3]["score"].toFixed(1);
-    community.resource_mgmt_score = data["outputs"]["domains"][4]["score"].toFixed(1);
-    community.hazard_score = data["outputs"]["domains"][5]["score"].toFixed(1);
-    community.economy_score = data["outputs"]["domains"][6]["score"].toFixed(1);
-    community.resilience_score = data["outputs"]["domains"][7]["score"].toFixed(1);
-    community.culture_score = data["outputs"]["domains"][8]["score"].toFixed(1);
-    community.safety_score = data["outputs"]["domains"][9]["score"].toFixed(1);
-    */
-
-    community.nature_score = data["outputs"]["domains"][0]["score"].toFixed(1);
-    community.cultural_score = data["outputs"]["domains"][1]["score"].toFixed(1);
-    community.education_score = data["outputs"]["domains"][2]["score"].toFixed(1);
-    community.health_score = data["outputs"]["domains"][3]["score"].toFixed(1);
-    community.leisure_score = data["outputs"]["domains"][4]["score"].toFixed(1);
-    community.living_score = data["outputs"]["domains"][5]["score"].toFixed(1);
-    community.safety_score = data["outputs"]["domains"][6]["score"].toFixed(1);
-    community.social_score = data["outputs"]["domains"][7]["score"].toFixed(1);
-    
-    compareCommunities.push(community);
-    sessionStorage.setItem('compareCommunities', JSON.stringify(compareCommunities));
-}
-
-function displayCompareData() {
-    var compareCommunities = JSON.parse(sessionStorage.getItem("compareCommunities"));
-
-    for (var i = 0; i < compareCommunities.length; i++) {
-        var community = compareCommunities[i];
-
-        $('#community-button-' + i).hide();
-        $('#community-close-button-' + i).show();
-        $('#community-button-' + (+i + 1))
-            .prop('disabled', false)
-            .removeClass('button-disabled');
-
-        $('#community-location-' + i).html(community.location);
-        $('#compare-score-' + i).html(community.score);
-        
-        /*
-        $('#compare-environment-' + i).html(community.environment_score);
-        $('#compare-community-' + i).html(community.community_score);
-        $('#compare-education-' + i).html(community.education_score);
-        $('#compare-health-' + i).html(community.health_score);
-        $('#compare-leisure-' + i).html(community.leisure_score);
-        $('#compare-living-' + i).html(community.living_score);
-        $('#compare-safety-' + i).html(community.safety_score);
-        */
-
-        $('#compare-nature-' + i).html(community.nature_score);
-        $('#compare-cultural-' + i).html(community.cultural_score);
-        $('#compare-education-' + i).html(community.education_score);
-        $('#compare-health-' + i).html(community.health_score);
-        $('#compare-leisure-' + i).html(community.leisure_score);
-        $('#compare-living-' + i).html(community.living_score);
-        $('#compare-safety-' + i).html(community.safety_score);
-        $('#compare-social-' + i).html(community.social_score);
-    }
-}
-
-function clearComparisonData(columnNumber) {
-    var compareCommunities = JSON.parse(sessionStorage.getItem("compareCommunities"));
-    compareCommunities.splice(columnNumber, 1);
-    sessionStorage.setItem('compareCommunities', JSON.stringify(compareCommunities));
-}
-
-function clearComparisonDisplay() {
-    var compareCommunities = JSON.parse(sessionStorage.getItem("compareCommunities"));
-    for (var i = 0; i < compareCommunities.length; i++) {
-        $('#community-button-' + i).show();
-        $('#community-button-' + (+i + 1))
-            .prop('disabled', true)
-            .addClass('button-disabled');
-        $('#community-close-button-' + i).hide();
-
-        $('#community-location-' + i).empty();
-        $('#compare-score-' + i).empty();
-        $('#compare-nature-' + i).empty();
-        $('#compare-cultural-' + i).empty();
-        $('#compare-education-' + i).empty();
-        $('#compare-health-' + i).empty();
-        $('#compare-leisure-' + i).empty();
-        $('#compare-living-' + i).empty();
-        $('#compare-safety-' + i).empty();
-        $('#compare-cohesion-' + i).empty();
-    }
-}
-
 $(document).click(function (e)
 {
     var searchcontainer = $(".add-community-search");
-    var autocomplete = $(".compare-search-input");
     var button = $(".add-community");
 
     if (!searchcontainer.is(e.target) && !button.is(e.target) // if the target of the click isn't the container or button
@@ -1554,63 +1432,6 @@ $(document).click(function (e)
         searchcontainer.hide();
     }
 });
-
-function addComparison() {
-    $me = $(this);
-    var communityNumber = $me.attr('data-community');
-    $('#compare-search-' + communityNumber).parent().toggle();
-}
-
-function removeComparison() {
-    $me = $(this);
-    var communityNumber = +$me.attr('data-community');
-    clearComparisonDisplay();
-    clearComparisonData(communityNumber);
-    displayCompareData();
-}
-
-function getComparisonData() {
-    var communityNumber = +$(this).attr('data-community'); // get the community number
-    var place = compareSearchBox[communityNumber].getPlace();
-    var location = parsePlaceResponse(place);
-    var data_url = "/hwbi/disc/rest/indicators/scores/?county=" + location.county + "&state_abbr=" + location.state_abbr;
-    $.ajax({ // get score data
-        url: data_url,
-        type: "GET",
-        beforeSend: function () {
-            $('.compare-search-button').eq(communityNumber).addClass('searching');
-            $('.compare-search-error').hide();
-        },
-        success: function (data, status, xhr) {
-            data = JSON.stringify(formatDomainData(JSON.parse(data)));
-            if (setCompareData(data, communityNumber) !== "dupe") {
-                $('.add-community-search').eq(communityNumber).hide();
-            } else {
-                $('.compare-search-error').eq(communityNumber).html('This community has already been added. Please try another location.').show();
-            }
-            displayCompareData();
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            $('.compare-search-error').eq(communityNumber).html('Your search could not be completed. Please try another location.').show();
-        },
-        complete: function (jqXHR, textStatus) {
-            $('.compare-search-button').eq(communityNumber).removeClass('searching');
-            return false;
-        }
-    });
-}
-
-// initializeComparisonAutocomplete: Initializes google maps search places function with a restriction to only us locations.
-function initializeComparisonAutocomplete() {
-    var compareInputs = document.getElementsByClassName('compare-search-input');
-    for (var i = 0; i < compareInputs.length; i++) {
-        input = compareInputs[i];
-        compareSearchBox[i] = new google.maps.places.Autocomplete(input, {
-            types: ['(regions)'],
-            componentRestriction: {country: 'us'}
-        });
-    }
-}
 
 function displayIndicatorInformation() {
     var title = $(this).html().replace(':', '');
