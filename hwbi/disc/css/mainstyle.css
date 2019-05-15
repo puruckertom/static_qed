@@ -1392,3 +1392,11 @@ input[type="checkbox"].resources-checkbox {
   background: #bbb;
   border-radius: 5px;
 }
+
+.bull::after {
+  content: '  •';
+  color: rgb(52, 160, 196);
+  font-size: 25px;
+  padding-left: 7px;
+  line-height: 18px;
+}
