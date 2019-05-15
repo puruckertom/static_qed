@@ -131,7 +131,7 @@ $(document).ready(function () {
         loadSkillbar(); // update the colored bars on the snapshot page
 
         //remove all hwbi bullets
-        $(this).find('.bull').removeClass('bull');
+        $(this).find('.card-list').find('.bull').removeClass('bull');
     });
 
     /**
@@ -147,7 +147,7 @@ $(document).ready(function () {
         }
 
         //remove all services bullets
-        $(this).find('.bull').removeClass('bull');
+        $(this).find('.services-card-list').find('.bull').removeClass('bull');
 
         // Reset Charts
         updateApexCharts("custom_val");
