@@ -1410,3 +1410,7 @@ input[type="checkbox"].resources-checkbox {
   padding-left: 7px;
   line-height: 18px;
 }
+
+.metric-accordion-panel a span {
+  font-weight: bold;
+}
