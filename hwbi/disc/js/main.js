@@ -147,8 +147,10 @@ jQuery(document).ready(function() {
         }
 
     econ.toggleClass('show');
+    
         if ($("div[id^='s-menu']").hasClass('show')) {
             $('.filterDiv').removeClass('show');
+            $('.container-back').removeClass('show');
         }
 
     });
@@ -162,8 +164,10 @@ jQuery(document).ready(function() {
         }
 
     ecosys.toggleClass('show');
+    
         if ($("div[id^='s-menu']").hasClass('show')) {
             $('.filterDiv').removeClass('show');
+            $('.container-back').removeClass('show');
         }
     });
 
@@ -171,11 +175,14 @@ jQuery(document).ready(function() {
         var soc = $('#s-menu-social');
         
         if (!$(soc).hasClass('show')) {
-            $("div[id^='s-menu']").removeClass('show')
+            $("div[id^='s-menu']").removeClass('show');
+            
         }
     soc.toggleClass('show');
+    
         if ($("div[id^='s-menu']").hasClass('show')) {
             $('.filterDiv').removeClass('show');
+            $('.container-back').removeClass('show');
         }
     });
 });
@@ -249,6 +256,8 @@ function createMetricTitles() {
     $('div.services-nav').click(function() {
         titles.html('');
     });
+
+    $('.container-back').addClass('show');
 }
 
 /* function createMetricTitles() {
@@ -369,4 +378,6 @@ $(function() {
     }
 });
 
-
+function serviceTabContainerReturn() {
+    $('.services-tabs li.current-tab').trigger('click');
+};

@@ -1127,26 +1127,36 @@ input[type="range"]:focus::-ms-thumb {
   padding-left: 0;
 }
 
-/* Default theme */
-
 .slinky-menu a {
-	background: #9a9a9a;
+	background: white;
 	border: none;
-	color: #FFF;
+	color: #333;
 	padding: 1em;
 }
 .slinky-menu a:hover {
-	background: #000;
+	background: #ccc;
 }
 .slinky-menu a.next:after {
 	content: '\276f';
 	margin-left: 1em;
 	float: right;
 }
-.slinky-menu a.back:before {
+.slinky-menu a.back:before, .services a.back:before {
 	content: '\276e';
 	margin-right: 1em;
 	float: left;
+}
+
+.slinky-menu a.back {
+  font-weight: bold;
+  line-height: 5px;
+}
+
+.container-back {
+  position: relative;
+  left: 12%;
+  color: #777;
+  display: none;
 }
 
 
