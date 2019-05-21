@@ -153,8 +153,6 @@ $(document).ready(function () {
         updateApexCharts("custom_val");
         $('.customize-service-metrics').parent().parent().find('.accordion-metrics').removeClass('bull');
     });
-
-    navigator.onLine ? onlineSearch(true) : onlineSearch(false);
 });
 
 function initializeGoogleMaps() {
