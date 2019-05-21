@@ -149,7 +149,12 @@ function compareScores() {
 
 async function comp_setCompareMapData(state, county) {
     currFIPS = parseInt((await db_get_fips(county, state)).FIPS);
-    hwbiByFIPS.set(currFIPS, await(dbGetCountyScores(currFIPS)));
+    let data = getCachedData(currFIPS);
+    if (!data) {
+        data = await(dbGetCountyScores(currFIPS));
+        countiesData.push(data);
+    }
+    hwbiByFIPS.set(currFIPS, data);
     setText(currFIPS, resultPanel);
     setFill();
     scoreWithinRangeByFIPS(currFIPS);
@@ -203,22 +208,34 @@ async function scoreWithinRangeByFIPS(fips) {
     centerAndZoom(currentCentroid, compareRange);
 
     // SCORE WITHIN RANGE
-    countiesData = [];
     for (let i = 0; i < counties._groups[0].length; i++) {
         let countyID = counties._groups[0][i].__data__.id;
         if (fips !== countyID) {
             let otherCentroid = comp_path.centroid(counties._groups[0][i].__data__);
-            // TODO: could check here to see if the county has been scored on a previous search
             if (distance(currentCentroid, otherCentroid) < compareRange) {
-                let data = await dbGetCountyScores(countyID);
+                //check here to see if the county has been scored on a previous search
+                let data = getCachedData(countyID);
+                if (!data) {
+                    data = await dbGetCountyScores(countyID);
+                    countiesData.push(data);
+                }
                 setData(data);
             }
         }
     }
 }
 
+function getCachedData(countyID) {
+    for (let i = 0; i < countiesData.length; i++) {
+        let county = countiesData[i];
+        if (county.FIPS === countyID) {
+            return county;
+        }
+    }
+    return false;
+}
+
 function setData(d) {
-    countiesData.push(d);
     hwbiByFIPS.set(d.FIPS, d);
     setFill();
 }
@@ -274,6 +291,7 @@ function db_get_location(fips) {
 }
 
 function db_get_data(county, state) {
+    console.log(`db_get_data: ${county}, ${state}`)
     let stmt_data = 'SELECT DOMAIN, avg(SCORE) from(' +
         'SELECT Domains.DOMAIN, Indicators.INDICATOR, avg(MetricScores.SCORE) as SCORE ' +
         'FROM MetricScores ' +
