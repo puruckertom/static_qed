@@ -35,6 +35,10 @@
     }
 }
 
+button > * {
+    pointer-events: none !important;
+}
+
 /*Contact Us*/
 
 #block-pane-epa-web-area-connect {

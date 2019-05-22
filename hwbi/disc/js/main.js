@@ -381,3 +381,64 @@ $(function() {
 function serviceTabContainerReturn() {
     $('.services-tabs li.current-tab').trigger('click');
 };
+
+//tutorial for customize - quality of life section
+function startCustomizeIntro() {
+    var intro = introJs();
+    intro.setOptions({
+    steps: [
+        {
+            intro: "This is the Customize - Quality of Life page. Here you can customize your HWBI scores if you wish, but it is not required."
+        },
+        {
+            element: document.querySelector('.card1'),
+            intro: "These are cards that correlate with each HWBI domain. Click one to start customizing the specific domain."
+        },
+        
+        ]
+    });
+    intro.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().oncomplete(function() {
+        window.location.href = '#connection-to-nature-modal';
+        setTimeout(startCustomizeModal, 500);
+    });
+    
+};
+
+//tutorial for customize - quality of life modal
+function startCustomizeModal() {
+    var introNext = introJs();
+        introNext.setOptions({
+        steps: [
+            {
+                intro: "Here is a modal window. This is where you customize each indicator for the specified domain."
+            },
+            /* {
+                element: document.querySelector('.connection-to-nature-modal .indicator_data-title'),
+                intro: "This is an indicator. Click here to reveal the metrics associated with this specific indicator and move the slider left or right to manipulate the value."
+            },
+            {
+                element: document.querySelector('.connection-to-nature-modal .reset-hwbi-custom-btn'),
+                intro: "Use this button to reset all the customized values back to their baseline."
+            }, */
+            ]
+        });
+
+    introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start();
+};
+
+//tutorial for compare page
+function startCompareIntro() {
+    var introNext = introJs();
+        introNext.setOptions({
+        steps: [
+            {
+                intro: "This is the compare page. Here you can compare the DISC score of the county you entered with surrounding counties."
+            },
+            ]
+        });
+
+    introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().oncomplete(function() {
+        $('#customize-tab-link').trigger('click');
+        setTimeout(startCustomizeIntro, 500);
+    });
+};
