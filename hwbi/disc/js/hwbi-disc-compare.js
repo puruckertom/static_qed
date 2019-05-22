@@ -47,26 +47,21 @@ let legend = comp_svg.append('g')
     .attr('class', 'legend');
 legend.append("rect")
     .attr('x', comp_width - 110)
-    .attr('y', comp_height - 170)
+    .attr('y', comp_height - 140)
     .attr('width', 110)
-    .attr('height', 170)
+    .attr('height', 150)
     .attr('fill', '#ffffff')
     .attr('opacity', 0.7);
 legend.append('text')
     .attr('class', 'legendheader')
     .attr('x', comp_width - 90)
-    .attr('y', comp_height - 150)
-    .text('DISC');
-legend.append('text')
-    .attr('class', 'legendheader')
-    .attr('x', comp_width - 90)
-    .attr('y', comp_height - 135)
-    .text('Score');
+    .attr('y', comp_height - 120)
+    .text('DISC Score');
 legend.selectAll('rect.legend')
     .data([0, 1, 2, 3, 4])
     .enter().append('rect')
     .attr('x', comp_width - 90)
-    .attr('y', function(d, i) { return comp_height - i * 20 - 45; })
+    .attr('y', function(d, i) { return comp_height - i * 20 - 30; })
     .attr('width', 10)
     .attr('height', 20)
     .style('fill', function(d, i) { return qcolors[i]; });
@@ -75,7 +70,7 @@ legend.selectAll('.ticklabel')
     .enter().append('text')
     .attr('class', 'ticklabel')
     .attr('x', comp_width - 75)
-    .attr('y', function(d, i) { return comp_height - i * 20 - 31; })
+    .attr('y', function(d, i) { return comp_height - i * 20 - 15; })
     .text(function(d, i) { return qlabels[i]; });
 
 d3.json('comp_map_data/us.json').then(ready);
