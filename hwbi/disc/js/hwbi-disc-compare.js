@@ -7,8 +7,9 @@ const selectedFill = '#32BA46';
 
 const formatHwbi = d3.format('.1f');
 const qcolors = ['#8c510a', '#D9A55F', '#aeb0b5', '#80cdc1', '#35978f'];
-const qlabels = ['Much More', 'More', 'About Same', 'Less', 'Much Less'];
+const qlabels = ['Much Less', 'Less', 'About Same', 'More', 'Much More'];
 
+let countiesDataCache = [];
 let countiesData = [];
 
 let compareRange = 20; // this is the default compare range
@@ -46,26 +47,16 @@ let legend = comp_svg.append('g')
     .attr('class', 'legend');
 legend.append("rect")
     .attr('x', comp_width - 110)
-    .attr('y', comp_height - 170)
+    .attr('y', comp_height - 140)
     .attr('width', 110)
-    .attr('height', 170)
+    .attr('height', 150)
     .attr('fill', '#ffffff')
     .attr('opacity', 0.7);
 legend.append('text')
     .attr('class', 'legendheader')
     .attr('x', comp_width - 90)
-    .attr('y', comp_height - 150)
-    .text('Human');
-legend.append('text')
-    .attr('class', 'legendheader')
-    .attr('x', comp_width - 90)
-    .attr('y', comp_height - 135)
-    .text('Well-Being');
-legend.append('text')
-    .attr('class', 'legendheader')
-    .attr('x', comp_width - 90)
     .attr('y', comp_height - 120)
-    .text('Index');
+    .text('DISC Score');
 legend.selectAll('rect.legend')
     .data([0, 1, 2, 3, 4])
     .enter().append('rect')
@@ -79,7 +70,7 @@ legend.selectAll('.ticklabel')
     .enter().append('text')
     .attr('class', 'ticklabel')
     .attr('x', comp_width - 75)
-    .attr('y', function(d, i) { return comp_height - i * 20 - 16; })
+    .attr('y', function(d, i) { return comp_height - i * 20 - 15; })
     .text(function(d, i) { return qlabels[i]; });
 
 d3.json('comp_map_data/us.json').then(ready);
@@ -117,7 +108,7 @@ function ready(us) {
 function setText(id, div) {
     let county = hwbiByFIPS.get(id);
     div.select('.name').text(county['name']);
-    div.select('.hwbi').html('<text>Well-Being:  <span class="hwbi right">' + formatHwbi(county['hwbi']) + '</span></text>');
+    div.select('.hwbi').html('<text>DISC Score:  <span class="hwbi right">' + formatHwbi(county['hwbi']) + '</span></text>');
     div.select('.cn').html('<text>Connection to Nature:  </text><span class="cn right">' + formatHwbi(county['Connection to Nature']) + '</span>');
     div.select('.cf').html('<text>Cultural Fulfillment:  </text><span class="cf right">' + formatHwbi(county['Cultural Fulfillment']) + '</span>');
     div.select('.ed').html('<text>Education:  </text><span class="ed right">' + formatHwbi(county['Education']) + '</span>');
@@ -149,7 +140,13 @@ function compareScores() {
 
 async function comp_setCompareMapData(state, county) {
     currFIPS = parseInt((await db_get_fips(county, state)).FIPS);
-    hwbiByFIPS.set(currFIPS, await(dbGetCountyScores(currFIPS)));
+    let data = getCachedData(currFIPS);
+    if (!data) {
+        data = await(dbGetCountyScores(currFIPS));
+        countiesDataCache.push(data);
+    }
+    countiesData.push(data);
+    hwbiByFIPS.set(currFIPS, data);
     setText(currFIPS, resultPanel);
     setFill();
     scoreWithinRangeByFIPS(currFIPS);
@@ -208,17 +205,31 @@ async function scoreWithinRangeByFIPS(fips) {
         let countyID = counties._groups[0][i].__data__.id;
         if (fips !== countyID) {
             let otherCentroid = comp_path.centroid(counties._groups[0][i].__data__);
-            // TODO: could check here to see if the county has been scored on a previous search
             if (distance(currentCentroid, otherCentroid) < compareRange) {
-                let data = await dbGetCountyScores(countyID);
+                //checks here to see if the county has been scored on a previous search
+                let data = getCachedData(countyID);
+                if (!data) {
+                    data = await dbGetCountyScores(countyID);
+                    countiesDataCache.push(data);
+                }
+                countiesData.push(data);
                 setData(data);
             }
         }
     }
 }
 
+function getCachedData(countyID) {
+    for (let i = 0; i < countiesDataCache.length; i++) {
+        let county = countiesDataCache[i];
+        if (county.FIPS === countyID) {
+            return county;
+        }
+    }
+    return false;
+}
+
 function setData(d) {
-    countiesData.push(d);
     hwbiByFIPS.set(d.FIPS, d);
     setFill();
 }
@@ -274,6 +285,7 @@ function db_get_location(fips) {
 }
 
 function db_get_data(county, state) {
+    console.log(`db_get_data: ${county}, ${state}`)
     let stmt_data = 'SELECT DOMAIN, avg(SCORE) from(' +
         'SELECT Domains.DOMAIN, Indicators.INDICATOR, avg(MetricScores.SCORE) as SCORE ' +
         'FROM MetricScores ' +
@@ -343,16 +355,16 @@ function classByHwbi(FIPS) {
         else if (county.hwbi < currCounty.hwbi) {
             let diffRate = currCounty.hwbi - county.hwbi;
             if (diffRate > currCounty.moe*2) {
-                return qcolors[4];
+                return qcolors[0];
             } else {
-                return qcolors[3];
+                return qcolors[1];
             }
         } else {
             let diffRate = county.hwbi - currCounty.hwbi;
             if (diffRate > currCounty.moe*2) {
-                return qcolors[0];
+                return qcolors[4];
             } else {
-                return qcolors[1];
+                return qcolors[3];
             }
         }
     }

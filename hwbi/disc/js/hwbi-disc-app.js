@@ -156,8 +156,8 @@ $(document).ready(function () {
 });
 
 function initializeGoogleMaps() {
-    google.maps.event.addDomListener(window, 'load', initializeAutocomplete);
-    google.maps.event.addDomListener(window, 'load', initializeTopAutocomplete);
+    initializeAutocomplete();
+    initializeTopAutocomplete();
 }
 
 function loadPage() {
@@ -884,4 +884,36 @@ function initializeRankingDonut() {
     d3.select('#ranking-chart')
       .call(donut); // draw chart in div
   }
+}
+
+/**
+ * Shows the autocomplete if there's internet, shows the drop down selectors if not.
+ * @param {bool} online - A boolean value representing the internet status of the computer
+ * @function
+ */
+function onlineSearch(online) {
+    if (online) {
+        if (typeof google !== 'object') {
+            $.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyDEC5r_Tq31qfF8BKIdhUAH1KorOfjLV4g&libraries=places&callback=initializeGoogleMaps" )
+                .done(function( script, textStatus ) {
+                    console.log( textStatus );
+                    console.log( "Load complete.")
+                })
+                .fail(function( jqxhr, settings, exception ) {
+                    console.log(jqxhr.status);
+                    console.log(`exception: ${exception}`);
+            });
+        }
+        $('#statecounty').hide();
+        $('.autocomplete-container').show();
+      
+        $('#mainpage-statecounty').hide();
+        $('.search').show();
+    } else {
+        $('#statecounty').show();
+        $('.autocomplete-container').hide();
+      
+        $('#mainpage-statecounty').show();
+        $('.search').hide();
+    }
 }
