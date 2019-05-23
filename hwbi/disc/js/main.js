@@ -438,7 +438,7 @@ function startCompareIntro() {
         });
 
     introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().oncomplete(function() {
-        $('#customize-tab-link').trigger('click');
+        $('#customize-indicators-metrics-link').trigger('click');
         setTimeout(startCustomizeIntro, 500);
     });
 };
