@@ -1384,7 +1384,7 @@ button.accordion.active:after {
         display: none !important;
     }
 
-    .metric-accordion-panel h4 {
+    .metric-accordion-panel h4, .metric-accordion-panel hr {
         display: none;
     }
 
