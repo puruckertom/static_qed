@@ -73,6 +73,7 @@ $(document).ready(function () {
 
         //remove blue dots on card overlay and accordion buttons
         $(this).parent().find('.modalcontent').find('.accordion-metrics').removeClass('bull');
+        $(this).parent().find('.modalcontent').find('.metric-accordion-panel span').removeClass('bull');
         $(this).closest('.card').children('a').find('.card-text-overlay').removeClass('bull');
 
         // Update scores after resetting domain tree
@@ -99,6 +100,7 @@ $(document).ready(function () {
         //remove blue dots on card overlay and accordion buttons
         $(this).parent().find('.modalcontent').find('.accordion-metrics').removeClass('bull');
         $(this).closest('.service-card').children('a').find('.card-text-overlay').removeClass('bull');
+        $(this).parent().find('.modalcontent').find('.metric-accordion-panel span').removeClass('bull');
 
         // Reset Charts
         updateApexCharts("custom_val");
