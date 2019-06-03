@@ -297,7 +297,7 @@ function setLocationValue() {
     var location = parsePlaceResponse(place);
     locationValue = JSON.stringify(location);
 
-    $('#community-snapshot-tab').hide();
+    show('mainpage', 'homepage');
     $('.preload-wrapper, .preload').show();
 
     getScoreData();
