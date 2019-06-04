@@ -6,8 +6,10 @@ const noMatchFill = '#f1f1f1';
 const selectedFill = '#32BA46';
 
 const formatHwbi = d3.format('.1f');
-const qcolors = ['#8c510a', '#D9A55F', '#aeb0b5', '#80cdc1', '#35978f'];
-const qlabels = ['Much Less', 'Less', 'About Same', 'More', 'Much More'];
+//const qcolors = ['#8c510a', '#D9A55F', '#aeb0b5', '#80cdc1', '#35978f'];
+//const qlabels = ['Much Less', 'Less', 'About Same', 'More', 'Much More'];
+const qcolors = ['#D9A55F', '#aeb0b5', '#80cdc1'];
+const qlabels = ['Less', 'About Same', 'More'];
 
 let countiesDataCache = [];
 let countiesData = [];
@@ -47,7 +49,7 @@ let legend = comp_svg.append('g')
     .attr('class', 'legend');
 legend.append("rect")
     .attr('x', comp_width - 110)
-    .attr('y', comp_height - 140)
+    .attr('y', comp_height - 100)
     .attr('width', 110)
     .attr('height', 150)
     .attr('fill', '#ffffff')
@@ -55,10 +57,10 @@ legend.append("rect")
 legend.append('text')
     .attr('class', 'legendheader')
     .attr('x', comp_width - 90)
-    .attr('y', comp_height - 120)
+    .attr('y', comp_height - 80)
     .text('DISC Score');
 legend.selectAll('rect.legend')
-    .data([0, 1, 2, 3, 4])
+    .data([0, 1, 2])
     .enter().append('rect')
     .attr('x', comp_width - 90)
     .attr('y', function(d, i) { return comp_height - i * 20 - 30; })
@@ -346,26 +348,13 @@ function classByHwbi(FIPS) {
     let county = hwbiByFIPS.get(FIPS);
 
     if (typeof county !== 'undefined') {
-        let countyMin = county.hwbi - county.moe;
-        let countyMax = county.hwbi + county.moe;
-
-        if (currCounty.hwbi <= countyMax && countyMin <= currCounty.hwbi) {
-            return qcolors[2];
+        if (formatHwbi(currCounty.hwbi) === formatHwbi(county.hwbi)) {
+            return qcolors[1];
         }
         else if (county.hwbi < currCounty.hwbi) {
-            let diffRate = currCounty.hwbi - county.hwbi;
-            if (diffRate > currCounty.moe*2) {
-                return qcolors[0];
-            } else {
-                return qcolors[1];
-            }
+            return qcolors[0];
         } else {
-            let diffRate = county.hwbi - currCounty.hwbi;
-            if (diffRate > currCounty.moe*2) {
-                return qcolors[4];
-            } else {
-                return qcolors[3];
-            }
+            return qcolors[2];
         }
     }
     else {
