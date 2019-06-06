@@ -1,7 +1,7 @@
 var rivData;
 var drawn = false;
-var width = 275,
-    height = 275,
+var width = 300,
+    height = 300,
     radius = Math.min(width, height) / 2,
     innerRadius = 0.3 * radius;
 

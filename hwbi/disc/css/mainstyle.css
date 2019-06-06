@@ -834,6 +834,11 @@ h2.popup-title {
   margin: auto;
 }
 
+.aster-area {
+  width: 50%;
+  margin-top: 8%;
+}
+
 /* end aster */
 
 #resources-tab ul li a {
@@ -1360,13 +1365,23 @@ input[type="checkbox"].resources-checkbox {
 }
 
 #scenario-btns {
-  display: grid; 
-  justify-items: center;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  /* display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); */
+  display: flex;
+  width: 364px;
+  height: 36.97px;
+  float: right;
+  margin-top: -10px;
+  justify-content: center;
 }
 
 #scenario-btns > button {
-  width: 90%;
+  /* width: 100%; */
+  height: 100%;
+}
+
+#reset-scenario-builder-btn {
+  margin-right: 5%;
 }
 
 #reset-hwbi-domains, #reset-service-btn, #riv-reset-btn {
@@ -1433,4 +1448,8 @@ input[type="checkbox"].resources-checkbox {
 .tutButton:hover {
   background-color: #015085;
   color: white;
+}
+
+.tab-desc {
+  padding-top: 1%;
 }
