@@ -1331,8 +1331,11 @@ div[id*='_priority_ranking'] {
   padding: 0 !important;
 }
 
-#resources-tab h3:nth-child(n+3) {
+/* #resources-tab h3:nth-child(n+3) {
   padding-top: 20px !important;
+} */
+div[class*='-resources-section']:nth-child(n+3) {
+  padding-top: 20px;
 }
 
 .labelName text {
