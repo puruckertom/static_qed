@@ -444,3 +444,35 @@ function startCompareIntro() {
         setTimeout(startCustomizeIntro, 500);
     });
 };
+
+function resourceLabelCheck() {
+    let econchecked = $('div.economic-resources-section input:checkbox:checked');
+    let envchecked = $('div.environment-resources-section input:checkbox:checked');
+    let socchecked = $('div.social-resources-section input:checkbox:checked');
+    let addchecked = $('div.additional-resources-section input:checkbox:checked');
+
+    if ($(econchecked).length > 0) {
+        $('div.economic-resources-section h3').removeClass('no-print');
+    } else {
+        $('div.economic-resources-section h3').addClass('no-print');
+    }
+
+    if ($(envchecked).length > 0) {
+        $('div.environment-resources-section h3').removeClass('no-print');
+    } else {
+        $('div.environment-resources-section h3').addClass('no-print');
+    }
+
+    if ($(socchecked).length > 0) {
+        $('div.social-resources-section h3').removeClass('no-print');
+    } else {
+        $('div.social-resources-section h3').addClass('no-print');
+    }
+
+    if ($(addchecked).length > 0) {
+        $('div.additional-resources-section h3').removeClass('no-print');
+    } else {
+        $('div.additional-resources-section h3').addClass('no-print');
+    }
+}
+

@@ -1213,6 +1213,10 @@ button.accordion.active:after {
 
 @media print {
 
+    .no-print, .no-print * {
+        display: none !important;
+    }
+
     #main-tab-nav, #search_block, #rank_btn, #servicedesc_btn, #customize_intro, #customize_domain_details, #priorityexplanation, #report_pdf {
         display: none !important; 
     }
