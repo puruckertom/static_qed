@@ -19,7 +19,7 @@ let compareRange = 20; // this is the default compare range
 const range_multiplier = 1.4; // (by centroids) is multiplied by this to get search range.
 
 let currFIPS;
-let hwbiByFIPS = d3.map();
+let hwbiByFIPS;
 
 let projection = d3.geoAlbersUsa();
 
@@ -141,6 +141,7 @@ function compareScores() {
 }
 
 async function comp_setCompareMapData(state, county) {
+    hwbiByFIPS = d3.map();
     currFIPS = parseInt((await db_get_fips(county, state)).FIPS);
     let data = getCachedData(currFIPS);
     if (!data) {
