@@ -180,8 +180,12 @@ async function scoreWithinRangeByFIPS(fips) {
         let countyID = countyData.id;
         if (fips !== countyID) {
             let countyGeo = countyData.geometry.coordinates[0];
-            for (let j = 0; j < currentCountyGeo.geometry.coordinates[0].length; j++) {
-                let coord1 = currentCountyGeo.geometry.coordinates[0][j];
+            var currentCountyGeoCoords = currentCountyGeo.geometry.coordinates;
+            while (typeof currentCountyGeoCoords[0][0][0] !== "number") {
+                currentCountyGeoCoords = currentCountyGeoCoords[0];
+            }
+            for (let j = 0; j < currentCountyGeoCoords[0].length; j++) {
+                let coord1 = currentCountyGeoCoords[0][j];
                 // see if any of the coord pairs match, if so they are touching
                 for (let k = 0; k < countyGeo.length; k++) {
                     let coord2 = countyGeo[k];
