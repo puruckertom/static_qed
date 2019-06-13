@@ -154,7 +154,10 @@ async function comp_setCompareMapData(state, county) {
     scoreWithinRangeByFIPS(currFIPS);
 }
 
+let globalCompareCountiesNonce;
+
 async function scoreWithinRangeByFIPS(fips) {
+    const localNonce = globalCompareCountiesNonce = new Object();
     // SET THE COMPARE RANGE...
     // this could be more accurate by allowing a range of deviation for points to be "the same"
     // using path coords instead of centroids would most likely give a more complete search
@@ -208,6 +211,9 @@ async function scoreWithinRangeByFIPS(fips) {
         if (fips !== countyID) {
             let otherCentroid = comp_path.centroid(counties._groups[0][i].__data__);
             if (distance(currentCentroid, otherCentroid) < compareRange) {
+                if (localNonce !== globalCompareCountiesNonce) {
+                    return;
+                }
                 //checks here to see if the county has been scored on a previous search
                 let data = getCachedData(countyID);
                 if (!data) {
