@@ -424,6 +424,22 @@ h2.popup-title {
     right: -245px;
   }
 
+  #mainpage-statecounty {
+    float: right !important;
+    position: absolute;
+    right: -500px;
+    border-left: none !important;
+    background-color: #3e454c;
+  }
+
+  #mainpage-county-state-select .close {
+    display: inline;
+    font-size: 30px;
+    line-height: 0;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
   .search input {
     border-left: none !important;
   }
