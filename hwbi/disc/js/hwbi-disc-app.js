@@ -862,7 +862,7 @@ const donut = donutChart()
   .width(540)
   .height(300)
   .transTime(250) // length of transitions in ms
-  .cornerRadius(3) // sets how rounded the corners are on each slice
+  .cornerRadius(0) // sets how rounded the corners are on each slice
   .padAngle(0.015) // effectively dictates the gap between slices
   .variable('weight')
   .category('domain');

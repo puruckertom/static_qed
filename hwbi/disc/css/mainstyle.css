@@ -387,79 +387,6 @@ h2.popup-title {
   display: none;
 }
 
-@media screen and (max-width: 970px) {
-  .no-mobile {
-    display: none;
-  }
-
-  .search-icon-toggle {
-    display: block;
-    position: absolute;
-    width: 30px;
-    top: 20px;
-    right: 15px;
-    cursor: pointer;
-  }
-
-  #hamburger {
-    display: block;
-  }
-
-  /* .sidenav {
-    display: none;
-  } */
-
-  .content-wrapper {
-    margin-left: 40px !important;
-  }
-
-  .disc-body {
-    width: auto;
-  }
-
-  .search {
-    float: right !important;
-    margin: 0 !important;
-    position: absolute;
-    right: -245px;
-  }
-
-  #mainpage-statecounty {
-    float: right !important;
-    position: absolute;
-    right: -500px;
-    border-left: none !important;
-    background-color: #3e454c;
-  }
-
-  #mainpage-county-state-select .close {
-    display: inline;
-    font-size: 30px;
-    line-height: 0;
-    vertical-align: middle;
-    margin-right: 10px;
-  }
-
-  .search input {
-    border-left: none !important;
-  }
-
-  .logo {
-    /* margin-left: 90px; */
-    -webkit-transition: transform 0s;
-    margin: 0 auto;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    left: 50%;
-    top: 70%;
-  }
-
-  .logo img {
-    margin-left: 0 !important;
-  }
-
-}
-
  .main-header {
     position: fixed;
     z-index: 3;
@@ -855,8 +782,9 @@ h2.popup-title {
   /* float: right; */
   /* display: flex; */
   /* text-align: right; */
-  width: 250px;
+  width: 350px;
   display: inline-block;
+  margin: auto;
 }
 
 .show-baseline {
@@ -1456,6 +1384,7 @@ div[class*='-resources-section']:nth-child(n+3) {
 #ranking-chart {
   float:right;
   margin-top: 5%;
+  margin: auto;
 }
 
 .notab-desc {
@@ -1566,4 +1495,170 @@ input[type="checkbox"].resources-checkbox {
 
 .tab-desc {
   padding-top: 1%;
+}
+
+.ranking-chart-list-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 970px) {
+  .no-mobile {
+    display: none;
+  }
+
+  .search-icon-toggle {
+    display: block;
+    position: absolute;
+    width: 30px;
+    top: 20px;
+    right: 15px;
+    cursor: pointer;
+  }
+
+  #hamburger {
+    display: block;
+  }
+
+  /* .sidenav {
+    display: none;
+  } */
+
+  .content-wrapper {
+    margin-left: 0 !important;
+  }
+
+  .disc-body {
+    /* width: auto; */
+    width: 90% !important;
+    margin: 0 auto !important;
+  }
+
+  .search {
+    float: right !important;
+    margin: 0 !important;
+    position: absolute;
+    right: -245px;
+  }
+
+  #mainpage-statecounty {
+    float: right !important;
+    position: absolute;
+    right: -500px;
+    border-left: none !important;
+    background-color: #3e454c;
+  }
+
+  #mainpage-county-state-select .close {
+    display: inline;
+    font-size: 30px;
+    line-height: 0;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  .search input {
+    border-left: none !important;
+  }
+
+  .logo {
+    /* margin-left: 90px; */
+    -webkit-transition: transform 0s;
+    margin: 0 auto;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 70%;
+  }
+
+  .logo img {
+    margin-left: 0 !important;
+  }
+
+  .description-column {
+    /* width: 25vw !important; */
+    width: 100% !important;
+    margin: 0 auto !important;
+    margin-bottom: 5% !important;
+    position: unset;
+    max-width: 100% !important;
+  }
+
+  .indicator-column {
+    /* width: 65% !important; */
+    width: 100% !important;
+    padding: 0;
+  }
+
+  .indicator_block {
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  .modal .modalcontent {
+    max-height: 75%;
+  }
+
+  #customize_domain_indicators {
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+@media only screen and (max-width: 768px){
+  #disc-tabs ul li a {
+      font-size: smaller;
+  }
+
+  .about_search form button {
+      margin: -41px 20.4% 0 0;
+  }
+
+  .domain-icon {
+      /*height: 14% !important;*/
+      width: 14% !important;
+      font-size: 12px !important;
+      display: table-header-group;
+  }
+
+  .search_block form label {
+      font-size: 16px;
+  }
+
+  #results_body {
+      display: flex;
+      flex-direction: column;
+  }
+
+  #snapshot_results {
+      width: 80% !important;
+      margin: 0 auto;
+      margin-bottom: 10%;
+      position: unset !important;
+  }
+
+  #wellbeing-scores {
+      padding-left: 0 !important;
+      width: 80% !important;
+  }
+
+  .content-wrapper {
+      margin-left: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .chartcontainer {
+      display: flex !important;
+      flex-direction: column !important;
+      margin: 0 auto !important;
+  }
+
+  .radialbar {
+      margin: 0 auto !important;
+  }
 }
