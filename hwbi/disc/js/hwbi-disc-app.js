@@ -295,6 +295,9 @@ function setLocationValue() {
     console.log("setLocationValue called");
     var place = searchBox.getPlace();
     var location = parsePlaceResponse(place);
+    if (!location) {
+        return;
+    }
     locationValue = JSON.stringify(location);
 
     show('mainpage', 'homepage');
@@ -595,9 +598,11 @@ function parsePlaceResponse(place) {
         }
     }
     if (state === '' || state_abbr === '') {
-        return toast("Unable to find location. Please try another!");
+        toast("Unable to find location. Please try another!");
+        return null;
     } else if (county === '') {
-        return toast("Unable to find county for specified address. Please try another!");
+        toast("Unable to find county for specified address. Please try another!");
+        return null;
     }
     var location = {};
     location["county"] = county;
@@ -721,6 +726,9 @@ function setTopLocationValue() {
     console.log("setTopLocationValue called");
     var place = topSearchBox.getPlace();
     var location = parsePlaceResponse(place);
+    if (!location) {
+        return;
+    }
     locationValue = JSON.stringify(location);
 
     $('#community-snapshot-tab').hide();
