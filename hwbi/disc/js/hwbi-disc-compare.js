@@ -173,6 +173,11 @@ async function scoreWithinRangeByFIPS(fips) {
     }
     let currentCentroid = comp_path.centroid(currentCountyGeo);
 
+    var currentCountyGeoCoords = currentCountyGeo.geometry.coordinates;
+    while (typeof currentCountyGeoCoords[0][0][0] !== "number") {
+        currentCountyGeoCoords = currentCountyGeoCoords[0];
+    }
+
     let adjacentCounties = [];
 
     // for every county in the list whose ID != currentCountyID
@@ -180,16 +185,16 @@ async function scoreWithinRangeByFIPS(fips) {
         let countyData = counties._groups[0][i].__data__;
         let countyID = countyData.id;
         if (fips !== countyID) {
-            let countyGeo = countyData.geometry.coordinates[0];
-            var currentCountyGeoCoords = currentCountyGeo.geometry.coordinates;
-            while (typeof currentCountyGeoCoords[0][0][0] !== "number") {
-                currentCountyGeoCoords = currentCountyGeoCoords[0];
+            let countyGeo = countyData.geometry.coordinates;
+            while (typeof countyGeo[0][0][0] !== "number") {
+                countyGeo = countyGeo[0];
             }
+
             for (let j = 0; j < currentCountyGeoCoords[0].length; j++) {
                 let coord1 = currentCountyGeoCoords[0][j];
                 // see if any of the coord pairs match, if so they are touching
-                for (let k = 0; k < countyGeo.length; k++) {
-                    let coord2 = countyGeo[k];
+                for (let k = 0; k < countyGeo[0].length; k++) {
+                    let coord2 = countyGeo[0][k];
                     if (coord1[0] === coord2[0] && coord1[1] === coord2[1]) {
                         adjacentCounties.push(distance(currentCentroid, comp_path.centroid(countyData)));
                     }
