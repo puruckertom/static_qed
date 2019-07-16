@@ -382,6 +382,24 @@ function serviceTabContainerReturn() {
     $('.services-tabs li.current-tab').trigger('click');
 };
 
+function initializeWalkthrough() {
+    if ($('.snapshot').hasClass('active')) {
+        startIntro();
+    } else if ($('.compare').hasClass('active')) {
+        startCompareIntro();
+    } else if ($('.customize').hasClass('active') && $('#customize-indicators-metrics-link').hasClass('active-sub')) {
+        startCustomizeIntro();
+    } else if ($('.customize').hasClass('active') && $('#customize-ranking-link').hasClass('active-sub')) {
+        startRankingIntro();
+    } else if ($('.scenarios').hasClass('active')) {
+        startScenarioIntro();
+    } else if ($('.resources').hasClass('active')) {
+        startResourcesIntro();
+    } else {
+        return
+    }
+}
+
 //tutorial for compare page
 function startCompareIntro() {
     var introNext = introJs();

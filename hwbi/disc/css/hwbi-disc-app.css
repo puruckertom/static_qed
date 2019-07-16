@@ -1190,7 +1190,7 @@ button.accordion.active:after {
 }
 
 #search_field {
-    width: 96%;
+    width: 100%;
 }
 
 @media print {

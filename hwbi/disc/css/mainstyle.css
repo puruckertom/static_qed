@@ -1402,9 +1402,13 @@ input[type="checkbox"].resources-checkbox {
 .sidenav div {
   position: absolute;
   bottom: 1%;
-  left: 5%;
+  /* right: 5%; */
   color: #777;
   font-size: 13px;
+}
+
+.version {
+  right: 5%;
 }
 
 #scenario-btns {
@@ -1503,8 +1507,53 @@ input[type="checkbox"].resources-checkbox {
 }
 
 
+.introjs-helperLayer:before {
+  opacity: 0;
+  content: '';
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  border-radius: 2px;
+  /* border: .2em solid rgba(255,217,68, 0.8); */
+  box-shadow: 0 0 0 1000em rgba(0,0,0, .7);
+  opacity: 1;
+}
 
-/* MEDIA QUERIES */
+.introjs-helperLayer:after {
+  content: '';
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 1000;
+}
+
+.introjs-helperLayer {
+  background: transparent !important;
+  /* pointer-events: none; */
+}
+
+.introjs-overlay {
+  display: none !important;
+}
+
+.introjs-tooltipReferenceLayer {
+  z-index: 9999998 !important;
+}
+
+.tutorialicon {
+  left: 5%;
+  cursor: pointer;
+}
+
+.tutorialicon img {
+  width: 25px;
+  filter: invert(100%);
+}
+
+
+/********************** MEDIA QUERIES ************************/
 @media screen and (max-width: 970px) {
   .no-mobile {
     display: none;
@@ -1661,38 +1710,4 @@ input[type="checkbox"].resources-checkbox {
   .radialbar {
       margin: 0 auto !important;
   }
-}
-
-.introjs-helperLayer:before {
-  opacity: 0;
-  content: '';
-  position: absolute;
-  width: inherit;
-  height: inherit;
-  border-radius: 2px;
-  /* border: .2em solid rgba(255,217,68, 0.8); */
-  box-shadow: 0 0 0 1000em rgba(0,0,0, .7);
-  opacity: 1;
-}
-
-.introjs-helperLayer:after {
-  content: '';
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  position: fixed;
-  z-index: 1000;
-}
-
-.introjs-helperLayer {
-  background: transparent !important;
-}
-
-.introjs-overlay {
-  display: none !important;
-}
-
-.introjs-tooltipReferenceLayer {
-  z-index: 9999998 !important;
 }
