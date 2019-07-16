@@ -593,7 +593,7 @@ function parsePlaceResponse(place) {
                 state_abbr = place.address_components[i].short_name;
                 break;
             case "administrative_area_level_2":
-                county = place.address_components[i].long_name.replace(" County", "");
+                county = place.address_components[i].long_name.replace(" County", "").replace(" Parish", "");
                 break;
         }
     }
