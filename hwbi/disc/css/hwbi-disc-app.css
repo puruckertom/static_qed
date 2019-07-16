@@ -640,7 +640,7 @@ button.accordion.active:after {
     margin-right: auto;
     margin-left: auto;
     border-top: 1px #7777 solid;
-    border-bottom: 1px #7777 solid;
+    /* border-bottom: 1px #7777 solid; */
     margin-bottom: 20px;
     padding: 10px 0;
 }

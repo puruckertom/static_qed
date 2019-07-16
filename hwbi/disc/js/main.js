@@ -382,6 +382,26 @@ function serviceTabContainerReturn() {
     $('.services-tabs li.current-tab').trigger('click');
 };
 
+//tutorial for compare page
+function startCompareIntro() {
+    var introNext = introJs();
+        introNext.setOptions({
+        steps: [
+            {
+                intro: "This is the compare page. Here you can compare the DISC score of the county you entered with surrounding counties."
+            },
+            ],
+        doneLabel: 'Continue'
+        });
+
+    introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().oncomplete(function() {
+        $('.compare').removeClass('active');
+        $('.customize').addClass('active');
+        $('#customize-indicators-metrics-link').trigger('click');
+        setTimeout(startCustomizeIntro, 500);
+    });
+};
+
 //tutorial for customize - quality of life section
 function startCustomizeIntro() {
     var intro = introJs();
@@ -392,12 +412,23 @@ function startCustomizeIntro() {
         },
         {
             element: document.querySelector('.card1'),
-            intro: "These are cards that correlate with each HWBI domain. Click one to start customizing the specific domain."
+            intro: "These are cards that correlate with each HWBI domain. Click one to start customizing the specific domain.",
+            position: 'right',
+            scrollToElement: false
         },
         
-        ]
+        ],
+    doneLabel: 'Continue',
+    scrollToElement: false
     });
-    intro.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().oncomplete(function() {
+    
+    intro.setOption('showStepNumbers', false).setOption('disableInteraction', true)    
+    intro.start().onafterchange(function(targetElement) {
+        if (this._currentStep === 1) {
+            $(window).scrollTop(0)
+        }
+            
+        }).oncomplete(function() {
         window.location.href = '#connection-to-nature-modal';
         setTimeout(startCustomizeModal, 500);
     });
@@ -413,36 +444,133 @@ function startCustomizeModal() {
                 intro: "Here is a modal window. This is where you customize each indicator for the specified domain."
             },
             /* {
-                element: document.querySelector('.connection-to-nature-modal .indicator_data-title'),
+                element: document.querySelector('#connection-to-nature_indicators').querySelector(' .indicator_data-title'),
                 intro: "This is an indicator. Click here to reveal the metrics associated with this specific indicator and move the slider left or right to manipulate the value."
             },
             {
-                element: document.querySelector('.connection-to-nature-modal .reset-hwbi-custom-btn'),
+                element: document.querySelector('#connection-to-nature-modal').querySelector('.reset-hwbi-custom-btn'),
                 intro: "Use this button to reset all the customized values back to their baseline."
             }, */
-            ]
+            ],
+        doneLabel: 'Continue',
+        scrollToElement: false
         });
 
-    introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start();
+        /* introNext.onchange(function(targetElement) {
+
+            // Find the parent having the introjs-fixParent class
+            $parentElement = $(targetElement).parents(".introjs-fixParent");
+
+            $parentElement.removeClass('introjs-fixParent');
+        }); */
+    
+    introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().oncomplete(function() {
+        $('.close').trigger('click');
+        $('#customize-ranking-link').trigger('click');
+        setTimeout(startRankingIntro, 500);
+    });
 };
 
-//tutorial for compare page
-function startCompareIntro() {
+//tutorial for customize - priority ranking page
+function startRankingIntro() {
     var introNext = introJs();
         introNext.setOptions({
         steps: [
             {
-                intro: "This is the compare page. Here you can compare the DISC score of the county you entered with surrounding counties."
+                intro: "This is the Priority Ranking page. You can change the ranking of each community characteristic's importance based on your preferences. The graph shows a visual representation of these rankings."
             },
-            ]
+            {
+                element: document.querySelector('.ranking-list-container'),
+                intro: "Use the up or down arrows to modify the ranking values."
+            },
+            ],
+        doneLabel: 'Continue'
         });
 
     introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().oncomplete(function() {
-        $('.compare').removeClass('active');
-        $('.customize').addClass('active');
-        $('#customize-indicators-metrics-link').trigger('click');
-        setTimeout(startCustomizeIntro, 500);
+        $('.customize').removeClass('active');
+        $('.scenarios').addClass('active');
+        $('#scenarios-tab-link').trigger('click');
+        setTimeout(startScenarioIntro, 500);
     });
+};
+
+//tutorial for scenario page
+function startScenarioIntro() {
+    var introNext = introJs();
+        introNext.setOptions({
+        steps: [
+            {
+                intro: "This is the Scenario page."
+            },
+            {
+                element: document.querySelector('.services'),
+                intro: "You can choose the service you are interested in customizing, then click through any of the indicators to edit the metrics for that specific indicator."
+            },
+            {
+                element: document.querySelector('#aster'),
+                intro: "This is an aster plot showing your DISC score and a visualization of each HWBI domain, which changes dynamically as you edit the service metrics."
+            },
+            {
+                element: document.querySelector('#scenario-btns'),
+                intro: "Use these buttons to either reset your scenario back to the baseline values, or load the values previously customized on the 'Customize Data' page."
+            }
+            ],
+        doneLabel: 'Continue'
+        });
+
+    introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().onafterchange(function(targetElement) {
+        if (this._currentStep === 3) {
+            $(window).scrollTop(0)
+        }
+            
+        }).oncomplete(function() {
+        $('#resources-tab-link').trigger('click');
+        setTimeout(startResourcesIntro, 500);
+    });
+};
+
+//tutorial for resources page
+function startResourcesIntro() {
+    var introNext = introJs();
+        introNext.setOptions({
+        steps: [
+            {
+                intro: "This is the Resources page."
+            },
+            {
+                element: document.querySelector('.economic-resources-section').querySelectorAll('.accordion-metrics')[0],
+                intro: "Click on a link to reveal resources related to that indicator."
+            },
+            {
+                element: document.querySelector('.economic-resources-section').querySelectorAll('.metric-accordion-panel')[0].querySelectorAll('ul li')[0],
+                intro: "Check any of the checkboxes beside the links that you are interested in saving."
+            },
+            {
+                element: document.querySelector('#report_pdf'),
+                intro: "Click this button to save a PDF of your Community Snapshot page, as well as all the links you selected to save."
+            }
+            ],
+        doneLabel: 'Done'
+        });
+    
+    introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().onchange(function(targetElement) {
+        if (this._currentStep === 2) {
+            if (!$('.economic-resources-section .accordion-metrics:eq(0)').hasClass('active-metric')) {
+                $('.economic-resources-section .accordion-metrics:eq(0)').trigger('click');
+            }
+            
+        }
+        if (this._currentStep === 3) {
+            if ($('.economic-resources-section .accordion-metrics:eq(0)').hasClass('active-metric')) {
+                $('.economic-resources-section .accordion-metrics:eq(0)').trigger('click');
+            }
+        }
+    }).onafterchange(function(targetElement) {
+        if (this._currentStep) {
+            $(window).scrollTop(0)
+        }
+    })
 };
 
 function resourceLabelCheck() {
@@ -475,4 +603,3 @@ function resourceLabelCheck() {
         $('div.additional-resources-section h3').addClass('no-print');
     }
 }
-
