@@ -174,11 +174,6 @@ $(document).ready(function () {
             if (choice === 0) {
                 resetServices();
             }
-        $(this).find('.services-card-list').find('.bull').removeClass('bull');
-
-        // Reset Charts
-        updateApexCharts("custom_val");
-        $('.customize-service-metrics').parent().parent().find('.accordion-metrics').removeClass('bull');
     });
 });
 
@@ -952,7 +947,26 @@ function onlineSearch(online) {
         $('.search').hide();
     }
 }
+
+function resetDomains() {
+    for (let domain in dataStructure.HWBI_DOMAIN) {
+        resetValues(dataStructure.HWBI_DOMAIN[domain], 'custom_val', 'original_val');
+        resetSlidersRecursive(dataStructure.HWBI_DOMAIN[domain], 'custom_val', 'customize-hwbi-metrics');
+    }
+
     // Update scores after resetting domain tree
+    updateAllWeightedAvgValues('METRIC_GROUP', 'custom_val', dataStructure); // calculate the metric group scores by averaging each metric group's child domains
+    
+    let location = JSON.parse(locationValue);
+    setScoreData(location.state_abbr, location.county, 'custom_val'); // set the domain scores
+    loadSkillbar(); // update the colored bars on the snapshot page
+
+    // Remove all hwbi bullets
+    $('.card-list .bull').removeClass('bull');
+}
+
+function resetServices() {
+    for (let prop in dataStructure.METRIC_GROUP) {
         if (dataStructure.METRIC_GROUP[prop].name !== "HWBI") {
             resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val', 'original_val');
             resetSlidersRecursive(dataStructure.METRIC_GROUP[prop], 'original_val', 'customize-service-metrics');
