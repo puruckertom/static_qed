@@ -142,22 +142,29 @@ function compareScores() {
 
 async function comp_setCompareMapData(state, county) {
     hwbiByFIPS = d3.map();
-    currFIPS = parseInt((await db_get_fips(county, state)).FIPS);
+    let countyData = await db_get_fips(county, state);
+    if (!countyData) {
+        return;
+    }
+    currFIPS = parseInt(countyData.FIPS);
+
+    console.log("currFIPS " + currFIPS)
+
     let data = getCachedData(currFIPS);
     if (!data) {
-        data = await(dbGetCountyScores(currFIPS));
+        data = await dbGetCountyScores(currFIPS);
         countiesDataCache.push(data);
     }
     countiesData.push(data);
     hwbiByFIPS.set(currFIPS, data);
     setText(currFIPS, resultPanel);
     setFill();
-    scoreWithinRangeByFIPS(currFIPS);
+    scoreAdjacentByFIPS(currFIPS);
 }
 
 let globalCompareCountiesNonce;
 
-async function scoreWithinRangeByFIPS(fips) {
+async function scoreAdjacentByFIPS(fips) {
     const localNonce = globalCompareCountiesNonce = new Object();
     let currentCountyGeo = null;
     let counties = comp_svg.selectAll('.counties path');
@@ -174,7 +181,8 @@ async function scoreWithinRangeByFIPS(fips) {
     if (adjacentCounties.length >= 1) {
         compareRange = farthestDistance > 61 ? 61 : farthestDistance;
     } else {
-        console.log("No border counties found!")
+        scoreWithinRangeByFIPS(fips);
+        return;
     }
 
     centerAndZoom(currentCentroid, compareRange);
@@ -192,6 +200,86 @@ async function scoreWithinRangeByFIPS(fips) {
             }
             countiesData.push(data);
             setData(data);
+        }
+    }
+}
+
+async function scoreWithinRangeByFIPS(fips) {
+    const localNonce = globalCompareCountiesNonce = new Object();
+    // SET THE COMPARE RANGE...
+    // this could be more accurate by allowing a range of deviation for points to be "the same"
+    // using path coords instead of centroids would most likely give a more complete search
+    let currentCountyGeo = null;
+
+    let counties = comp_svg.selectAll('.counties path');
+
+    for (let i = 0; i < counties._groups[0].length; i++) {
+        if (fips === counties._groups[0][i].__data__.id) {
+            currentCountyGeo = counties._groups[0][i].__data__;
+        }
+    }
+    let currentCentroid = comp_path.centroid(currentCountyGeo);
+
+    var currentCountyGeoCoords = currentCountyGeo.geometry.coordinates;
+    while (typeof currentCountyGeoCoords[0][0][0] !== "number") {
+        currentCountyGeoCoords = currentCountyGeoCoords[0];
+    }
+
+    let adjacentCounties = [];
+
+    // for every county in the list whose ID != currentCountyID
+    for (let i = 0; i < counties._groups[0].length; i++) {
+        let countyData = counties._groups[0][i].__data__;
+        let countyID = countyData.id;
+        if (fips !== countyID) {
+            let countyGeo = countyData.geometry.coordinates;
+            while (typeof countyGeo[0][0][0] !== "number") {
+                countyGeo = countyGeo[0];
+            }
+
+            for (let j = 0; j < currentCountyGeoCoords[0].length; j++) {
+                let coord1 = currentCountyGeoCoords[0][j];
+                // see if any of the coord pairs match, if so they are touching
+                for (let k = 0; k < countyGeo[0].length; k++) {
+                    let coord2 = countyGeo[0][k];
+                    if (coord1[0] === coord2[0] && coord1[1] === coord2[1]) {
+                        adjacentCounties.push(distance(currentCentroid, comp_path.centroid(countyData)));
+                    }
+                }
+            }
+        }
+    }
+    if (adjacentCounties.length >= 1) {
+        let farthest = adjacentCounties[0];
+        for (let i = 1; i < adjacentCounties.length; i++) {
+            if (farthest < adjacentCounties[i]) {
+                farthest = adjacentCounties[i];
+            }
+        }
+        compareRange = farthest * range_multiplier;
+    }
+
+    centerAndZoom(currentCentroid, compareRange);
+
+    // SCORE WITHIN RANGE
+    countiesData = [];
+    for (let i = 0; i < counties._groups[0].length; i++) {
+        let countyID = counties._groups[0][i].__data__.id;
+        if (fips !== countyID) {
+            let otherCentroid = comp_path.centroid(counties._groups[0][i].__data__);
+            if (distance(currentCentroid, otherCentroid) < compareRange) {
+                if (localNonce !== globalCompareCountiesNonce) {
+                    return;
+                }
+                //checks here to see if the county has been scored on a previous search
+                let data = getCachedData(countyID);
+                if (!data) {
+                    data = await dbGetCountyScores(countyID);
+                    countiesDataCache.push(data);
+                }
+                countiesData.push(data);
+                setData(data);
+            }
         }
     }
 }
