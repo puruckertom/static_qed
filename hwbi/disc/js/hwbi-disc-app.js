@@ -67,21 +67,30 @@ $(document).ready(function () {
      * @listens click
      */
     $(".reset-hwbi-custom-btn").on("click", function () {
-        let id = this.dataset.id;
-        resetValues(dataStructure.HWBI_DOMAIN[id], 'custom_val', 'original_val');
-        resetSlidersRecursive(dataStructure.HWBI_DOMAIN[id], 'custom_val', 'customize-hwbi-metrics');
+        const id = this.dataset.id;
+        const choice = dialog.showMessageBox(
+            {
+              type: 'question',
+              buttons: ['Yes', 'No'],
+              title: `Reset ${dataStructure.HWBI_DOMAIN[id].name} Customizations`,
+              message: `Are you sure you want to reset all the customizations for the ${dataStructure.HWBI_DOMAIN[id].name} domain?`,
+            });
+          if (choice === 0) {
+            resetValues(dataStructure.HWBI_DOMAIN[id], 'custom_val', 'original_val');
+            resetSlidersRecursive(dataStructure.HWBI_DOMAIN[id], 'custom_val', 'customize-hwbi-metrics');
 
-        //remove blue dots on card overlay and accordion buttons
-        $(this).parent().find('.modalcontent').find('.accordion-metrics').removeClass('bull');
-        $(this).parent().find('.modalcontent').find('.metric-accordion-panel span').removeClass('bull');
-        $(this).closest('.card').children('a').find('.card-text-overlay').removeClass('bull');
+            //remove blue dots on card overlay and accordion buttons
+            $(this).parent().find('.modalcontent').find('.accordion-metrics').removeClass('bull');
+            $(this).parent().find('.modalcontent').find('.metric-accordion-panel span').removeClass('bull');
+            $(this).closest('.card').children('a').find('.card-text-overlay').removeClass('bull');
 
-        // Update scores after resetting domain tree
-        updateAllWeightedAvgValues('METRIC_GROUP', 'custom_val', dataStructure); // calculate the metric group scores by averaging each metric group's child domains
-        
-        let location = JSON.parse(locationValue);
-        setScoreData(location.state_abbr, location.county, 'custom_val'); // set the domain scores
-        loadSkillbar(); // update the colored bars on the snapshot page
+            // Update scores after resetting domain tree
+            updateAllWeightedAvgValues('METRIC_GROUP', 'custom_val', dataStructure); // calculate the metric group scores by averaging each metric group's child domains
+            
+            const location = JSON.parse(locationValue);
+            setScoreData(location.state_abbr, location.county, 'custom_val'); // set the domain scores
+            loadSkillbar(); // update the colored bars on the snapshot page
+          }
     });
 
     /**
@@ -89,21 +98,30 @@ $(document).ready(function () {
      * @listens click
      */
     $(".reset-service-custom-btn").on("click", function () {
-        let type = this.dataset.type;
-        for (let prop in dataStructure.METRIC_GROUP) {
-            if (dataStructure.METRIC_GROUP[prop].name === type) {
-                resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val', 'original_val');
-                resetSlidersRecursive(dataStructure.METRIC_GROUP[prop], 'original_val', 'customize-service-metrics');
+        const type = this.dataset.type;
+        const choice = dialog.showMessageBox(
+            {
+              type: 'question',
+              buttons: ['Yes', 'No'],
+              title: `Reset ${type} Customizations`,
+              message: `Are you sure you want to reset all the customizations for the ${type} service?`,
+            });
+          if (choice === 0) {
+            for (let prop in dataStructure.METRIC_GROUP) {
+                if (dataStructure.METRIC_GROUP[prop].name === type) {
+                    resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val', 'original_val');
+                    resetSlidersRecursive(dataStructure.METRIC_GROUP[prop], 'original_val', 'customize-service-metrics');
+                }
             }
+
+            // remove blue dots on card overlay and accordion buttons
+            $(this).parent().find('.modalcontent').find('.accordion-metrics').removeClass('bull');
+            $(this).closest('.service-card').children('a').find('.card-text-overlay').removeClass('bull');
+            $(this).parent().find('.modalcontent').find('.metric-accordion-panel span').removeClass('bull');
+
+            // Reset Charts
+            updateApexCharts("custom_val");
         }
-
-        //remove blue dots on card overlay and accordion buttons
-        $(this).parent().find('.modalcontent').find('.accordion-metrics').removeClass('bull');
-        $(this).closest('.service-card').children('a').find('.card-text-overlay').removeClass('bull');
-        $(this).parent().find('.modalcontent').find('.metric-accordion-panel span').removeClass('bull');
-
-        // Reset Charts
-        updateApexCharts("custom_val");
     });
 
     /**
@@ -111,8 +129,17 @@ $(document).ready(function () {
      * @listens click
      */
     document.getElementById("riv-reset-btn").addEventListener("click", () => {
-        resetRivs();
-        updateRivUi();
+        const choice = dialog.showMessageBox(
+        {
+            type: 'question',
+            buttons: ['Yes', 'No'],
+            title: `Reset Priority Ranking Customizations`,
+            message: `Are you sure you want to reset the Priority Ranking customizations below?`,
+        });
+        if (choice === 0) {
+            resetRivs();
+            updateRivUi();
+        }
     });
 
     /**
@@ -120,20 +147,16 @@ $(document).ready(function () {
      * @listens click
      */
     document.getElementById("reset-hwbi-domains").addEventListener("click", () => {
-        for (let domain in dataStructure.HWBI_DOMAIN) {
-            resetValues(dataStructure.HWBI_DOMAIN[domain], 'custom_val', 'original_val');
-            resetSlidersRecursive(dataStructure.HWBI_DOMAIN[domain], 'custom_val', 'customize-hwbi-metrics');
+        const choice = dialog.showMessageBox(
+        {
+            type: 'question',
+            buttons: ['Yes', 'No'],
+            title: `Reset Domain Customizations`,
+            message: `Are you sure you want to reset all of the Domain customizations?`,
+        });
+        if (choice === 0) {
+            resetDomains();
         }
-
-        // Update scores after resetting domain tree
-        updateAllWeightedAvgValues('METRIC_GROUP', 'custom_val', dataStructure); // calculate the metric group scores by averaging each metric group's child domains
-        
-        let location = JSON.parse(locationValue);
-        setScoreData(location.state_abbr, location.county, 'custom_val'); // set the domain scores
-        loadSkillbar(); // update the colored bars on the snapshot page
-
-        //remove all hwbi bullets
-        $(this).find('.card-list').find('.bull').removeClass('bull');
     });
 
     /**
@@ -141,14 +164,16 @@ $(document).ready(function () {
      * @listens click
      */
     document.getElementById("reset-service-btn").addEventListener("click", () => {
-        for (let prop in dataStructure.METRIC_GROUP) {
-            if (dataStructure.METRIC_GROUP[prop].name !== "HWBI") {
-                resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val', 'original_val');
-                resetSlidersRecursive(dataStructure.METRIC_GROUP[prop], 'original_val', 'customize-service-metrics');
+        const choice = dialog.showMessageBox(
+            {
+                type: 'question',
+                buttons: ['Yes', 'No'],
+                title: `Reset Service Customizations`,
+                message: `Are you sure you want to reset all of the Service customizations?`,
+            });
+            if (choice === 0) {
+                resetServices();
             }
-        }
-
-        //remove all services bullets
         $(this).find('.services-card-list').find('.bull').removeClass('bull');
 
         // Reset Charts
@@ -926,4 +951,18 @@ function onlineSearch(online) {
         $('#mainpage-statecounty').show();
         $('.search').hide();
     }
+}
+    // Update scores after resetting domain tree
+        if (dataStructure.METRIC_GROUP[prop].name !== "HWBI") {
+            resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val', 'original_val');
+            resetSlidersRecursive(dataStructure.METRIC_GROUP[prop], 'original_val', 'customize-service-metrics');
+        }
+    }
+
+    // Remove all services bullets
+    $('.services-card-list .bull').removeClass('bull');
+
+    // Reset Charts
+    updateApexCharts("custom_val");
+    $('.customize-service-metrics').parent().parent().find('.accordion-metrics').removeClass('bull');
 }
