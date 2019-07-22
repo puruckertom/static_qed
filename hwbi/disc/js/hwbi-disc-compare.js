@@ -3,13 +3,13 @@ const comp_width = 820;
 const comp_height = 440;
 const center = [comp_width / 2, comp_height / 2];
 const noMatchFill = '#f1f1f1';
-const selectedFill = '#32BA46';
+const selectedFill = '#32ba46';
 
 const formatHwbi = d3.format('.1f');
 //const qcolors = ['#8c510a', '#D9A55F', '#aeb0b5', '#80cdc1', '#35978f'];
 //const qlabels = ['Much Less', 'Less', 'About Same', 'More', 'Much More'];
-const qcolors = ['#D9A55F', '#aeb0b5', '#80cdc1'];
-const qlabels = ['Less', 'About Same', 'More'];
+const qcolors = ['#D9A55F', '#aeb0b5', '#80cdc1', '#32ba46'];
+const qlabels = ['Lower', 'Same', 'Higher', 'You'];
 
 let countiesDataCache = [];
 let countiesData = [];
@@ -49,18 +49,18 @@ let legend = comp_svg.append('g')
     .attr('class', 'legend');
 legend.append("rect")
     .attr('x', comp_width - 110)
-    .attr('y', comp_height - 100)
+    .attr('y', comp_height - 120)
     .attr('width', 110)
-    .attr('height', 150)
+    .attr('height', 170)
     .attr('fill', '#ffffff')
     .attr('opacity', 0.7);
 legend.append('text')
     .attr('class', 'legendheader')
     .attr('x', comp_width - 90)
-    .attr('y', comp_height - 80)
+    .attr('y', comp_height - 100)
     .text('DISC Score');
 legend.selectAll('rect.legend')
-    .data([0, 1, 2])
+    .data([0, 1, 2, 4])
     .enter().append('rect')
     .attr('x', comp_width - 90)
     .attr('y', function(d, i) { return comp_height - i * 20 - 30; })
