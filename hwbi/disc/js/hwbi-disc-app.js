@@ -847,8 +847,11 @@ function resetSlidersRecursive(startNode, valueType, sliderType) {
         });
     } else {
         const ele = document.querySelector(`[data-var="${startNode.id}"].${sliderType}`);
-        ele.value = startNode[valueType];
-
+        if (startNode[valueType] === null) {
+            ele.value = 0;
+        } else {
+            ele.value = startNode[valueType];
+        }
         updateSliderLabel(ele);
     }
 }
