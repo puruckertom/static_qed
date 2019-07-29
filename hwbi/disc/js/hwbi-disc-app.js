@@ -34,10 +34,10 @@ $(document).ready(function () {
               type: 'question',
               buttons: ['Yes', 'No'],
               title: 'Reset Scenario Builder',
-              message: 'Resetting the Scenario Builder will erase any changes you have made below.\n\nDo you still want to proceed?'
+              message: 'Resetting the Scenario Builder will restore the sliders below to the default data. This will reset any changes you have made below and unload any customized metrics.\n\nDo you still want to proceed?'
             });
           if (choice === 0) {
-            let baselineValue; 
+            let baselineValue = 'original_val'; 
 
             function isCustomized() {
                 const metrics = {...dataStructure.HWBI_METRIC, ...dataStructure.SERVICE_METRIC};
@@ -49,11 +49,13 @@ $(document).ready(function () {
                 return false;
             }
 
-            isCustomized() ? baselineValue = 'custom_val' : baselineValue = 'original_val';
+            // isCustomized() ? baselineValue = 'custom_val' : baselineValue = 'original_val';
 
-            resetValues(dataStructure.METRIC_GROUP[2], 'scenario_val', baselineValue);
-            resetValues(dataStructure.METRIC_GROUP[3], 'scenario_val', baselineValue);
-            resetValues(dataStructure.METRIC_GROUP[4], 'scenario_val', baselineValue);
+            resetValues(dataStructure.METRIC_GROUP.HWBI, 'scenario_val', baselineValue);
+            resetValues(dataStructure.METRIC_GROUP.CRSI, 'scenario_val', baselineValue);
+            resetValues(dataStructure.METRIC_GROUP.Social, 'scenario_val', baselineValue);
+            resetValues(dataStructure.METRIC_GROUP.Economic, 'scenario_val', baselineValue);
+            resetValues(dataStructure.METRIC_GROUP.Ecosystem, 'scenario_val', baselineValue);
             
             resetSliders(dataStructure.SERVICE_METRIC, 'scenario_val', 'scenario-builder-metric');
 
@@ -121,6 +123,10 @@ $(document).ready(function () {
 
             // Reset Charts
             updateApexCharts("custom_val");
+
+            const location = JSON.parse(locationValue);
+            setScoreData(location.state_abbr, location.county, 'custom_val'); // set the domain scores
+            loadSkillbar(); // update the colored bars on the snapshot page
         }
     });
 
@@ -173,7 +179,37 @@ $(document).ready(function () {
             });
             if (choice === 0) {
                 resetServices();
+                resetServiceScores("custom_val");
             }
+    });
+
+    $("#local_search").autocomplete({
+        minLength: 3,
+        source: (request, response) => {
+            var results = $.ui.autocomplete.filter(cities, request.term);
+            response(results.slice(0, 10));
+        },
+        select: async (event, ui) => {
+            let location = ui.item.value.split(', ');
+            console.log(location);
+            let rows = await getCounty(location);
+            console.log(rows[0])
+            
+            let json = {
+                county: rows[0].COUNTY_NAME,
+                state: location[1],
+                state_abbr: rows[0].STATE_CODE,
+            }
+
+            console.log(json)
+
+            locationValue = JSON.stringify(json);
+
+            show('mainpage', 'homepage');
+            $('.preload-wrapper, .preload').show();
+            getScoreData();
+            $('#local_search').val('');
+        }
     });
 });
 
@@ -365,17 +401,17 @@ function setAccordion() {
                 if (closingPanel) {
                     panel.style.display = "none";
                     $(this).removeClass("active");
-                    $('html, body').animate({
-                        scrollTop: $('.content-wrapper').offset().top
-                    }, 400);
+                    // $('html, body').animate({
+                    //     scrollTop: $('.content-wrapper').offset().top
+                    // }, 400);
                 } else {
                     panel.style.display = "block";
                     $(this).addClass("active");
                     if(!$(this).parent().is('#nature-block')) {
-                        $('html, body').animate({
-                        scrollTop: $('.domain-score-block').offset().top
-                    }, 300);
-                }
+                        // $('html, body').animate({
+                        //     scrollTop: $('.domain-score-block').offset().top
+                        // }, 300);
+                    }
                 }
             });
 
@@ -613,7 +649,7 @@ function parsePlaceResponse(place) {
                 state_abbr = place.address_components[i].short_name;
                 break;
             case "administrative_area_level_2":
-                county = place.address_components[i].long_name.replace(" County", "").replace(" Parish", "");
+                county = place.address_components[i].long_name;
                 break;
         }
     }
@@ -834,9 +870,12 @@ function updateSliderLabel(ele) {
         val = -1 * ((+ele.value - 1) * (+ele.dataset.max - +ele.dataset.min)) + +ele.dataset.min;
     }
 
-    if (units.toLowerCase().trim() === "percent" && ele.classList.contains('customize-hwbi-metrics')) {
-        val *= 100;
+    if ((units.toLowerCase().trim() === "percent" 
+    || units.toLowerCase().trim() === "percent changed")) {
         roundValue = 1;
+        if (ele.classList.contains('customize-hwbi-metrics')) {
+            val *= 100;
+        }
     }
 
     if (units.toLowerCase().trim() === "dollars") {
@@ -855,9 +894,9 @@ function updateSliderLabel(ele) {
  * @function
  */
 function updateApexCharts(valueType) {
-    econChart.updateSeries([round(dataStructure.METRIC_GROUP["2"][valueType] * 100, 1)]);
-    ecoChart.updateSeries([round(dataStructure.METRIC_GROUP["3"][valueType] * 100, 1)]);
-    socialChart.updateSeries([round(dataStructure.METRIC_GROUP["4"][valueType] * 100, 1)]);
+    econChart.updateSeries([round(dataStructure.METRIC_GROUP['Social'][valueType] * 100, 1)]);
+    ecoChart.updateSeries([round(dataStructure.METRIC_GROUP['Economic'][valueType] * 100, 1)]);
+    socialChart.updateSeries([round(dataStructure.METRIC_GROUP['Ecosystem'][valueType] * 100, 1)]);
 }
 
 /**
@@ -967,7 +1006,7 @@ function resetDomains() {
 
 function resetServices() {
     for (let prop in dataStructure.METRIC_GROUP) {
-        if (dataStructure.METRIC_GROUP[prop].name !== "HWBI") {
+        if (dataStructure.METRIC_GROUP[prop].name !== 'HWBI' && dataStructure.METRIC_GROUP[prop].name !== 'CRSI') {
             resetValues(dataStructure.METRIC_GROUP[prop], 'custom_val', 'original_val');
             resetSlidersRecursive(dataStructure.METRIC_GROUP[prop], 'original_val', 'customize-service-metrics');
         }

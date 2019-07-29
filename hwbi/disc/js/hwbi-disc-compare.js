@@ -9,7 +9,7 @@ const formatHwbi = d3.format('.1f');
 //const qcolors = ['#8c510a', '#D9A55F', '#aeb0b5', '#80cdc1', '#35978f'];
 //const qlabels = ['Much Less', 'Less', 'About Same', 'More', 'Much More'];
 const qcolors = ['#D9A55F', '#aeb0b5', '#80cdc1', '#32ba46'];
-const qlabels = ['Lower', 'Same', 'Higher', 'You'];
+const qlabels = ['Lower', 'Same', 'Higher', 'Selected County'];
 
 let countiesDataCache = [];
 let countiesData = [];
@@ -56,13 +56,13 @@ legend.append("rect")
     .attr('opacity', 0.7);
 legend.append('text')
     .attr('class', 'legendheader')
-    .attr('x', comp_width - 90)
+    .attr('x', comp_width - comp_width)
     .attr('y', comp_height - 100)
     .text('DISC Score');
 legend.selectAll('rect.legend')
     .data([0, 1, 2, 4])
     .enter().append('rect')
-    .attr('x', comp_width - 90)
+    .attr('x', comp_width - comp_width)
     .attr('y', function(d, i) { return comp_height - i * 20 - 30; })
     .attr('width', 10)
     .attr('height', 20)
@@ -71,7 +71,7 @@ legend.selectAll('.ticklabel')
     .data([0, 1, 2, 3, 4])
     .enter().append('text')
     .attr('class', 'ticklabel')
-    .attr('x', comp_width - 75)
+    .attr('x', comp_width - comp_width + 15)
     .attr('y', function(d, i) { return comp_height - i * 20 - 15; })
     .text(function(d, i) { return qlabels[i]; });
 
@@ -119,7 +119,7 @@ function setText(id, div) {
     div.select('.ls').html('<text>Living Standards:  </text><span class="ls right">' + formatHwbi(county['Living Standards']) + '</span>');
     div.select('.ss').html('<text>Safety &amp; Security:  </text><span class="ss right">' + formatHwbi(county['Safety and Security']) + '</span>');
     div.select('.sc').html('<text>Social Cohesion:  </text><span class="sc right">' + formatHwbi(county['Social Cohesion']) + '</span>');
-    div.select('.re').html('<text>Basic Resilience:  </text><span class="re right">' + formatHwbi(county['Basic Resilience']) + '</span>');
+    div.select('.re').html('<text>Resilience:  </text><span class="re right">' + formatHwbi(county['Resilience']) + '</span>');
 }
 
 function compareScores() {
@@ -144,11 +144,10 @@ async function comp_setCompareMapData(state, county) {
     hwbiByFIPS = d3.map();
     let countyData = await db_get_fips(county, state);
     if (!countyData) {
+        console.log("no data");
         return;
     }
     currFIPS = parseInt(countyData.FIPS);
-
-    console.log("currFIPS " + currFIPS)
 
     let data = getCachedData(currFIPS);
     if (!data) {
@@ -181,6 +180,7 @@ async function scoreAdjacentByFIPS(fips) {
     if (adjacentCounties.length >= 1) {
         compareRange = farthestDistance > 61 ? 61 : farthestDistance;
     } else {
+        console.log("No border counties found!");
         scoreWithinRangeByFIPS(fips);
         return;
     }
@@ -308,7 +308,7 @@ async function dbGetCountyScores(fips) {
     }
 
     let comp_location = await db_get_location(id);
-    let name = comp_location['COUNTY_NAME'] + ' County, ' + comp_location['STATE_CODE'];
+    let name = comp_location['COUNTY_NAME'] + ', ' + comp_location['STATE_CODE'];
 
     let scores = await db_get_data(comp_location['COUNTY_NAME'], comp_location['STATE_CODE']);
     let hwbi = 0;
@@ -324,7 +324,6 @@ async function dbGetCountyScores(fips) {
 }
 
 function db_get_fips(county, state) {
-    console.log('db_get_fips(',county,', ',state);
     let stmt_fips = 'SELECT FIPS FROM counties WHERE COUNTY_NAME = ? AND STATE_CODE = ?';
     return new Promise( ( resolve, reject ) => {
         db.get(stmt_fips, [county, state], (err, row) => {
@@ -351,19 +350,18 @@ function db_get_location(fips) {
 }
 
 function db_get_data(county, state) {
-    console.log(`db_get_data: ${county}, ${state}`)
     let stmt_data = 'SELECT DOMAIN, avg(SCORE) from(' +
-        'SELECT Domains.DOMAIN, Indicators.INDICATOR, avg(MetricScores.SCORE) as SCORE ' +
-        'FROM MetricScores ' +
-        'INNER JOIN Counties ON MetricScores.FIPS = Counties.FIPS ' +
-        'INNER JOIN MetricVariables ON MetricScores.METRIC_VAR_ID = MetricVariables.ID ' +
-        'INNER JOIN MetricGroups ON MetricVariables.METRIC_GROUP_ID = MetricGroups.ID ' +
-        'INNER JOIN Domains ON MetricVariables.DOMAIN_ID = Domains.ID ' +
-        'INNER JOIN Indicators ON MetricVariables.INDICATOR_ID = Indicators.ID ' +
-        'WHERE Counties.COUNTY_NAME = ? AND Counties.STATE_CODE = ? AND METRIC_GROUP = ? ' +
-        'Group By Domains.DOMAIN, Indicators.INDICATOR) Group By DOMAIN';
+        'SELECT Domains_Indicators.DOMAIN, Indicators_MetricVars.INDICATOR, avg(MetricVarScores.SCORE) as SCORE ' +
+        'FROM MetricVarScores ' +
+        'INNER JOIN Counties ON MetricVarScores.FIPS = Counties.FIPS ' +
+        'INNER JOIN MetricVars ON MetricVarScores.METRIC_VAR = MetricVars.METRIC_VAR ' +
+        'INNER JOIN Indicators_MetricVars ON Indicators_MetricVars.METRIC_VAR = MetricVars.METRIC_VAR ' +
+        'INNER JOIN Domains_Indicators ON Domains_Indicators.INDICATOR = Indicators_MetricVars.INDICATOR ' +
+        'INNER JOIN MetricGroups_Domains ON MetricGroups_Domains.DOMAIN = Domains_Indicators.DOMAIN ' +
+        'WHERE Counties.COUNTY_NAME = ? AND Counties.STATE_CODE = ? AND (MetricGroups_Domains.METRIC_GRP = ? OR MetricGroups_Domains.METRIC_GRP = ?)' +
+        'Group By Domains_Indicators.DOMAIN, Indicators_MetricVars.INDICATOR) Group By DOMAIN';
     return new Promise( ( resolve, reject ) => {
-        db.all(stmt_data, [county, state, 'HWBI'], (err, rows) => {
+        db.all(stmt_data, [county, state, 'HWBI', 'CRSI'], (err, rows) => {
             if (err) {
                 console.log('Error - db_get_data(' + county + ', ' + state + '): ' + err);
                 reject(err);
