@@ -1195,6 +1195,11 @@ button.accordion.active:after {
 
 @media print {
 
+    @page {
+        size: auto;
+        margin: 5px;
+    }
+
     .no-print, .no-print * {
         display: none !important;
     }
@@ -1305,6 +1310,7 @@ button.accordion.active:after {
 
     .main-header {
         box-shadow: none !important;
+        display: none;
     }
 
     .logo {
@@ -1313,6 +1319,7 @@ button.accordion.active:after {
 
     .main-content .content-wrapper {
         /* margin-left: 115px !important; */
+        margin-left: 5% !important;
     }
 
     input[type="checkbox"], input[type="checkbox"] + label, input[type="checkbox"] + a, .accordion-metrics {
@@ -1363,12 +1370,13 @@ button.accordion.active:after {
     }
 
     .chartcontainer {
-        margin-top: -3%;
+        margin-top: -6%;
         left: -195px;
     }
 
     #domain-scores h3 {
         margin-bottom: 0;
+        margin-top: 0;
     }
 
     #priorityexplanation, #service-explanation {
