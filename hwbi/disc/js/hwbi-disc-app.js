@@ -822,7 +822,7 @@ function resetValues(node, typeToReset, baselineValue) {
  * @function
  */
 function resetSliders(startNode, valueType, sliderType) {
-    for (let metricName in startNode) {
+    for (const metricName in startNode) {
         const metric = startNode[metricName];
         const ele = document.querySelector(`[data-var="${metric.id}"].${sliderType}`);
         if (ele.value !== metric[valueType]) {
@@ -864,13 +864,16 @@ function resetSlidersRecursive(startNode, valueType, sliderType) {
 function updateSliderLabel(ele) {
     const sign = ele.dataset.sign;
     const units = ele.dataset.units;
-    let val = 0;
+    let val = +ele.value;
     let roundValue = 2;
 
     if (sign === "P") {
         val = (+ele.value * (+ele.dataset.max - +ele.dataset.min)) + +ele.dataset.min;
     } else if (sign === "N") {
         val = -1 * ((+ele.value - 1) * (+ele.dataset.max - +ele.dataset.min)) + +ele.dataset.min;
+    } else {
+        ele.disabled = true;
+        ele.hidden = true;
     }
 
     if ((units.toLowerCase().trim() === "percent" 
