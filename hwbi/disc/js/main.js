@@ -382,6 +382,7 @@ function serviceTabContainerReturn() {
     $('.services-tabs li.current-tab').trigger('click');
 };
 
+//starts walkthrough when question mark glyph is clicked
 function initializeWalkthrough() {
     if ($('.snapshot').hasClass('active')) {
         startIntro();
@@ -391,6 +392,8 @@ function initializeWalkthrough() {
         startCustomizeIntro();
     } else if ($('.customize').hasClass('active') && $('#customize-ranking-link').hasClass('active-sub')) {
         startRankingIntro();
+    } else if ($('.customize').hasClass('active') && $('#customize-domains-services-link').hasClass('active-sub')) {
+        startCustomizeServicesIntro();
     } else if ($('.scenarios').hasClass('active')) {
         startScenarioIntro();
     } else if ($('.resources').hasClass('active')) {
@@ -506,11 +509,32 @@ function startRankingIntro() {
         });
 
     introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().oncomplete(function() {
+        $('#customize-domains-services-link').trigger('click');
+        setTimeout(startCustomizeServicesIntro, 500);
+    });
+};
+
+//tutorial for customize-services page
+function startCustomizeServicesIntro() {
+    var intro = introJs();
+    intro.setOptions({
+    steps: [
+        {
+            intro: "This is the Customize - Services page. Here you can customize your Services scores if you wish, but it is not required."
+        }
+        ],
+    doneLabel: 'Continue',
+    scrollToElement: false
+    });
+    
+    intro.setOption('showStepNumbers', false).setOption('disableInteraction', true)    
+    intro.start().oncomplete(function() {
         $('.customize').removeClass('active');
         $('.scenarios').addClass('active');
         $('#scenarios-tab-link').trigger('click');
         setTimeout(startScenarioIntro, 500);
     });
+    
 };
 
 //tutorial for scenario page
