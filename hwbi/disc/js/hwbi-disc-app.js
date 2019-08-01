@@ -873,7 +873,7 @@ function updateSliderLabel(ele) {
         val = -1 * ((+ele.value - 1) * (+ele.dataset.max - +ele.dataset.min)) + +ele.dataset.min;
     } else {
         ele.disabled = true;
-        ele.hidden = true;
+        ele.style = 'display: none;';
     }
 
     if ((units.toLowerCase().trim() === "percent" 
