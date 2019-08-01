@@ -211,6 +211,8 @@ $(document).ready(function () {
             $('#local_search').val('');
         }
     });
+    // Hide and disable TWIN metric sliders
+    $('.customize-service-metrics.crs, .crs2, .customize-service-metrics.pct_shm, .pct_shm2, .customize-service-metrics.divcons, .divcons2, .customize-service-metrics.homeins, .homeins2, .customize-service-metrics.numnfip, .numnfip2').css('visibility', 'hidden').prop('disabled', true);
 });
 
 function initializeGoogleMaps() {
@@ -911,7 +913,7 @@ function updateSliderLabel(ele) {
         val = -1 * ((+ele.value - 1) * (+ele.dataset.max - +ele.dataset.min)) + +ele.dataset.min;
     } else {
         ele.disabled = true;
-        ele.style = 'display: none;';
+        ele.style = 'visibility: hidden;';
     }
 
     if ((units.toLowerCase().trim() === "percent" 
