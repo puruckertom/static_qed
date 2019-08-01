@@ -1366,7 +1366,7 @@ div[id*='_priority_ranking'] {
 }
 
 #resources-tab h3 {
-  font-size: 1.5em !important;
+  font-size: 1.5em;
   padding: 0 !important;
 }
 
@@ -1375,6 +1375,10 @@ div[id*='_priority_ranking'] {
 } */
 div[class*='-resources-section']:nth-child(n+3) {
   padding-top: 20px;
+}
+
+div[class*='-resources-section'] h3 {
+  font-size: 1.3em !important;
 }
 
 .labelName text {

@@ -453,7 +453,7 @@ button > * {
     font-size: 24px;
 }
 
-#rank_btn, #servicedesc_btn {
+#rank_btn, #servicedesc_btn, #qol_btn {
     /* margin: 0 0 0 50px; 
     background-color: #A6A6A6; */
     background-color: #fff;
@@ -465,7 +465,7 @@ button > * {
     margin: 0 10px;
 }
 
-#rank_btn:hover, #servicedesc_btn:hover {
+#rank_btn:hover, #servicedesc_btn:hover, #qol_btn:hover {
     /* background-color: #235A8E; */
     background-color: #ddd;
 }

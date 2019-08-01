@@ -618,9 +618,37 @@ function toast(msg) {
     return false;
 }
 
-function priorityText() {
-    var x = document.getElementById("priorityexplanation");
-    
+/* function moreInfoButton(that) {
+    var priorityexp = $('#priorityexplanation');
+    var serviceexp = $('#service-explanation');
+    var customizeQOL = $('#qolexplanation');
+
+    var el = $(that).next('div')
+
+    if (el == $(priorityexp)) {
+       if(priorityexp.css('display','none')) {
+        priorityexp.css('display', 'block')
+        } else {
+            priorityexp.css('display', 'none')
+        }
+    } else if (el == $(serviceexp)) {
+        if (serviceexp.css('display','none')) {
+        serviceexp.css('display', 'block')
+        } else {
+            serviceexp.css('display', 'none')
+        }
+    } else if (el == $(customizeQOL)) {
+        if (customizeQOL.css('display','none')) {
+        customizeQOL.css('display', 'block')
+        } else {
+            customizeQOL.css('display', 'none')
+        }
+    }
+} */
+
+function moreInfoPriority() {
+    var x = document.getElementById('priorityexplanation')
+
     if (x.style.display === 'none') {
         x.style.display = 'block';
     } else {
@@ -628,9 +656,19 @@ function priorityText() {
     }
 }
 
-function serviceText() {
-    var x = document.getElementById("service-explanation");
-    
+function moreInfoServices() {
+    var x = document.getElementById('service-explanation')
+
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+
+function moreInfoQOL() {
+    var x = document.getElementById('qolexplanation')
+
     if (x.style.display === 'none') {
         x.style.display = 'block';
     } else {
