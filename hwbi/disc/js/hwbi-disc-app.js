@@ -183,7 +183,7 @@ $(document).ready(function () {
             }
     });
 
-    $("#local_search").autocomplete({
+    $('#local_search, #top_local_search').autocomplete({
         minLength: 3,
         source: (request, response) => {
             var results = $.ui.autocomplete.filter(cities, request.term);
@@ -1008,17 +1008,17 @@ function initializeRankingDonut() {
  */
 function onlineSearch(online) {
     if (online) {
-        if (typeof google !== 'object') {
-            $.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyDEC5r_Tq31qfF8BKIdhUAH1KorOfjLV4g&libraries=places&callback=initializeGoogleMaps" )
-                .done(function( script, textStatus ) {
-                    console.log( textStatus );
-                    console.log( "Load complete.")
-                })
-                .fail(function( jqxhr, settings, exception ) {
-                    console.log(jqxhr.status);
-                    console.log(`exception: ${exception}`);
-            });
-        }
+        // if (typeof google !== 'object') {
+        //     $.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyDEC5r_Tq31qfF8BKIdhUAH1KorOfjLV4g&libraries=places&callback=initializeGoogleMaps" )
+        //         .done(function( script, textStatus ) {
+        //             console.log( textStatus );
+        //             console.log( "Load complete.")
+        //         })
+        //         .fail(function( jqxhr, settings, exception ) {
+        //             console.log(jqxhr.status);
+        //             console.log(`exception: ${exception}`);
+        //     });
+        // }
         $('#statecounty').hide();
         $('.autocomplete-container').show();
       
