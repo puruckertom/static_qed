@@ -195,6 +195,9 @@ $(document).ready(function () {
             let rows = await getCounty(location);
             let json = '';
 
+            show('mainpage', 'homepage');
+            $('.preload-wrapper, .preload').show();
+
             if (rows.length) {
                 json = {
                     county: rows[0].COUNTY_NAME,
@@ -211,8 +214,6 @@ $(document).ready(function () {
 
             locationValue = JSON.stringify(json);
 
-            show('mainpage', 'homepage');
-            $('.preload-wrapper, .preload').show();
             getScoreData();
             $('#local_search, #top_local_search').val('');
         }
