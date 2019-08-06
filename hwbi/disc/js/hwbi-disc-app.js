@@ -184,6 +184,7 @@ $(document).ready(function () {
     });
 
     $('#local_search, #top_local_search').autocomplete({
+        autoFocus: true,
         minLength: 3,
         source: (request, response) => {
             var results = $.ui.autocomplete.filter(cities, request.term);
