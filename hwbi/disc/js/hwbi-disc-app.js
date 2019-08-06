@@ -191,24 +191,29 @@ $(document).ready(function () {
         },
         select: async (event, ui) => {
             let location = ui.item.value.split(', ');
-            console.log(location);
             let rows = await getCounty(location);
-            console.log(rows[0])
-            
-            let json = {
-                county: rows[0].COUNTY_NAME,
-                state: location[1],
-                state_abbr: rows[0].STATE_CODE,
-            }
+            let json = '';
 
-            console.log(json)
+            if (rows.length) {
+                json = {
+                    county: rows[0].COUNTY_NAME,
+                    state: location[1],
+                    state_abbr: rows[0].STATE_CODE,
+                }
+            } else {
+                json = {
+                    county: location[0],
+                    state: location[1],
+                    state_abbr: (await getStateCode(location)).STATE_CODE,
+                }
+            }
 
             locationValue = JSON.stringify(json);
 
             show('mainpage', 'homepage');
             $('.preload-wrapper, .preload').show();
             getScoreData();
-            $('#local_search').val('');
+            $('#local_search, #top_local_search').val('');
         }
     });
     // Hide and disable TWIN metric sliders
