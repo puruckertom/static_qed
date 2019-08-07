@@ -947,9 +947,9 @@ function updateSliderLabel(ele) {
  * @function
  */
 function updateApexCharts(valueType) {
-    econChart.updateSeries([round(dataStructure.METRIC_GROUP['Social'][valueType] * 100, 1)]);
-    ecoChart.updateSeries([round(dataStructure.METRIC_GROUP['Economic'][valueType] * 100, 1)]);
-    socialChart.updateSeries([round(dataStructure.METRIC_GROUP['Ecosystem'][valueType] * 100, 1)]);
+    socialChart.updateSeries([round(dataStructure.METRIC_GROUP['Social'][valueType] * 100, 1)]);
+    econChart.updateSeries([round(dataStructure.METRIC_GROUP['Economic'][valueType] * 100, 1)]);
+    ecoChart.updateSeries([round(dataStructure.METRIC_GROUP['Ecosystem'][valueType] * 100, 1)]);
 }
 
 /**
