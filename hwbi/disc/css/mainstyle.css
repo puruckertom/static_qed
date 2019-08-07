@@ -491,7 +491,7 @@ h2.popup-title {
  .search {
      float: left;
      display: inline-block;
-     width: 395px;
+     width: 400px;
      height: 100%;
      margin: 0 0 0 4em;
  }
@@ -509,7 +509,7 @@ h2.popup-title {
   }
   .search input {
     border: none;
-    padding-left: 3.6em;
+    padding-left: 1.6em;
     border-radius: 0;
     background-color: #3e454c;
     border-left: 1px solid #51575d;
@@ -1603,7 +1603,7 @@ input[type="checkbox"].resources-checkbox {
     float: right !important;
     margin: 0 !important;
     position: absolute;
-    right: -400px;
+    right: -420px;
   }
 
   #mainpage-statecounty {

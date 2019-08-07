@@ -183,7 +183,8 @@ $(document).ready(function () {
             }
     });
 
-    $("#local_search").autocomplete({
+    $('#local_search, #top_local_search').autocomplete({
+        autoFocus: true,
         minLength: 3,
         source: (request, response) => {
             var results = $.ui.autocomplete.filter(cities, request.term);
@@ -191,24 +192,30 @@ $(document).ready(function () {
         },
         select: async (event, ui) => {
             let location = ui.item.value.split(', ');
-            console.log(location);
             let rows = await getCounty(location);
-            console.log(rows[0])
-            
-            let json = {
-                county: rows[0].COUNTY_NAME,
-                state: location[1],
-                state_abbr: rows[0].STATE_CODE,
-            }
-
-            console.log(json)
-
-            locationValue = JSON.stringify(json);
+            let json = '';
 
             show('mainpage', 'homepage');
             $('.preload-wrapper, .preload').show();
+
+            if (rows.length) {
+                json = {
+                    county: rows[0].COUNTY_NAME,
+                    state: location[1],
+                    state_abbr: rows[0].STATE_CODE,
+                }
+            } else {
+                json = {
+                    county: location[0],
+                    state: location[1],
+                    state_abbr: (await getStateCode(location)).STATE_CODE,
+                }
+            }
+
+            locationValue = JSON.stringify(json);
+
             getScoreData();
-            $('#local_search').val('');
+            $('#local_search, #top_local_search').val('');
         }
     });
     // Hide and disable TWIN metric sliders
@@ -940,9 +947,9 @@ function updateSliderLabel(ele) {
  * @function
  */
 function updateApexCharts(valueType) {
-    econChart.updateSeries([round(dataStructure.METRIC_GROUP['Social'][valueType] * 100, 1)]);
-    ecoChart.updateSeries([round(dataStructure.METRIC_GROUP['Economic'][valueType] * 100, 1)]);
-    socialChart.updateSeries([round(dataStructure.METRIC_GROUP['Ecosystem'][valueType] * 100, 1)]);
+    socialChart.updateSeries([round(dataStructure.METRIC_GROUP['Social'][valueType] * 100, 1)]);
+    econChart.updateSeries([round(dataStructure.METRIC_GROUP['Economic'][valueType] * 100, 1)]);
+    ecoChart.updateSeries([round(dataStructure.METRIC_GROUP['Ecosystem'][valueType] * 100, 1)]);
 }
 
 /**
@@ -1008,17 +1015,17 @@ function initializeRankingDonut() {
  */
 function onlineSearch(online) {
     if (online) {
-        if (typeof google !== 'object') {
-            $.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyDEC5r_Tq31qfF8BKIdhUAH1KorOfjLV4g&libraries=places&callback=initializeGoogleMaps" )
-                .done(function( script, textStatus ) {
-                    console.log( textStatus );
-                    console.log( "Load complete.")
-                })
-                .fail(function( jqxhr, settings, exception ) {
-                    console.log(jqxhr.status);
-                    console.log(`exception: ${exception}`);
-            });
-        }
+        // if (typeof google !== 'object') {
+        //     $.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyDEC5r_Tq31qfF8BKIdhUAH1KorOfjLV4g&libraries=places&callback=initializeGoogleMaps" )
+        //         .done(function( script, textStatus ) {
+        //             console.log( textStatus );
+        //             console.log( "Load complete.")
+        //         })
+        //         .fail(function( jqxhr, settings, exception ) {
+        //             console.log(jqxhr.status);
+        //             console.log(`exception: ${exception}`);
+        //     });
+        // }
         $('#statecounty').hide();
         $('.autocomplete-container').show();
       

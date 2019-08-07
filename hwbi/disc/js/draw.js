@@ -51,14 +51,15 @@ var path = svg.selectAll(".solidArc")
   .enter().append("path")
   //assign colors to solidArc slice based on domain name
   .attr("fill", (function (d) {
-      if (d.data.description == "Connection to Nature") { return "#569c83"; }
-      if (d.data.description == "Cultural Fulfillment") { return "#325481"; }
-      if (d.data.description == "Education") { return "#5E4EA1"; }
-      if (d.data.description == "Health") { return "#9E0041"; }
-      if (d.data.description == "Leisure Time") { return "#E1514B"; }
-      if (d.data.description == "Living Standards") { return "#FB9F59"; }
-      if (d.data.description == "Safety and Security") { return "#FAE38C"; }
-      if (d.data.description == "Social Cohesion") { return "#EAF195"; }
+      if (d.data.description == "Connection to Nature") { return "#82AC45"; }
+      if (d.data.description == "Cultural Fulfillment") { return "#998FE4"; }
+      if (d.data.description == "Education") { return "#D59B2D"; }
+      if (d.data.description == "Health") { return "#5598C3"; }
+      if (d.data.description == "Leisure Time") { return "#DC4B60"; }
+      if (d.data.description == "Living Standards") { return "#269683"; }
+      if (d.data.description == "Safety and Security") { return "#606060"; }
+      if (d.data.description == "Social Cohesion") { return "#E5632E"; }
+      if (d.data.description == "Resilience") { return "#FDFD65"; }
   }))
 
   .attr("class", "solidArc")
@@ -131,14 +132,15 @@ function updateAsterPlot(data) {
        .duration(250)
       //assign colors to solidArc slice based on domain name
       .attr("fill", (function (d) {
-          if (d.data.description == "Connection to Nature") { return "#569c83"; }
-          if (d.data.description == "Cultural Fulfillment") { return "#325481"; }
-          if (d.data.description == "Education") { return "#5E4EA1"; }
-          if (d.data.description == "Health") { return "#9E0041"; }
-          if (d.data.description == "Leisure Time") { return "#E1514B"; }
-          if (d.data.description == "Living Standards") { return "#FB9F59"; }
-          if (d.data.description == "Safety and Security") { return "#FAE38C"; }
-          if (d.data.description == "Social Cohesion") { return "#EAF195"; }
+        if (d.data.description == "Connection to Nature") { return "#82AC45"; }
+        if (d.data.description == "Cultural Fulfillment") { return "#998FE4"; }
+        if (d.data.description == "Education") { return "#D59B2D"; }
+        if (d.data.description == "Health") { return "#5598C3"; }
+        if (d.data.description == "Leisure Time") { return "#DC4B60"; }
+        if (d.data.description == "Living Standards") { return "#269683"; }
+        if (d.data.description == "Safety and Security") { return "#606060"; }
+        if (d.data.description == "Social Cohesion") { return "#E5632E"; }
+        if (d.data.description == "Resilience") { return "#FDFD65"; }
       }))
       .attr("class", "solidArc")
       .attr("stroke", "gray")
@@ -197,14 +199,15 @@ function updateAsterRivs(data) {
        .duration(250)
       //assign colors to solidArc slice based on domain name
       .attr("fill", (function (d) {
-          if (d.data.description == "Connection to Nature") { return "#569c83"; }
-          if (d.data.description == "Cultural Fulfillment") { return "#325481"; }
-          if (d.data.description == "Education") { return "#5E4EA1"; }
-          if (d.data.description == "Health") { return "#9E0041"; }
-          if (d.data.description == "Leisure Time") { return "#E1514B"; }
-          if (d.data.description == "Living Standards") { return "#FB9F59"; }
-          if (d.data.description == "Safety and Security") { return "#FAE38C"; }
-          if (d.data.description == "Social Cohesion") { return "#EAF195"; }
+        if (d.data.description == "Connection to Nature") { return "#82AC45"; }
+        if (d.data.description == "Cultural Fulfillment") { return "#998FE4"; }
+        if (d.data.description == "Education") { return "#D59B2D"; }
+        if (d.data.description == "Health") { return "#5598C3"; }
+        if (d.data.description == "Leisure Time") { return "#DC4B60"; }
+        if (d.data.description == "Living Standards") { return "#269683"; }
+        if (d.data.description == "Safety and Security") { return "#606060"; }
+        if (d.data.description == "Social Cohesion") { return "#E5632E"; }
+        if (d.data.description == "Resilience") { return "#FDFD65"; }
       }))
       .attr("class", "solidArc")
       .attr("stroke", "gray")
