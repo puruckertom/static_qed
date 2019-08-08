@@ -77,6 +77,7 @@ a {
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
+  border-radius: 3px;
 }
 
 .info-popup-button:hover{
@@ -132,8 +133,6 @@ h2.popup-title {
     background-size: cover;
   }
 
-
-  
   /* Control the right side */
   .right-side {
     right: 0;
@@ -1494,6 +1493,7 @@ input[type="checkbox"].resources-checkbox {
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
+  border-radius: 3px;
 }
 
 .tutButton:hover {
