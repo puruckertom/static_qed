@@ -59,7 +59,7 @@ div.cn, div.cf, div.ed, div.he, div.lt, div.ls, div.ss, div.sc, div.re {
 	padding: 1px;
 }
 
-.comparePanel h3, .result-panel h3 {
+.compare-panel h3, .result-panel h3 {
 	border-bottom: 2px solid #000000;
 	padding-bottom: 6px;
 	line-height: 1.2em;

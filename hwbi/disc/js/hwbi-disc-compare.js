@@ -48,7 +48,7 @@ let resultPanel = d3.select('#result-panel');
 let legend = comp_svg.append('g')
     .attr('class', 'legend');
 legend.append("rect")
-    .attr('x', comp_width - 110)
+    .attr('x', comp_width - comp_width)
     .attr('y', comp_height - 120)
     .attr('width', 110)
     .attr('height', 170)
