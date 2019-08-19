@@ -714,6 +714,11 @@ h2.popup-title {
   color: #333;
 }
 
+.modal p {
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
+
 .modal h2{
   font-family: Tahoma, Arial, sans-serif;
   color: #333;
@@ -724,6 +729,10 @@ h2.popup-title {
   max-height: 70%;
   overflow: auto;
   font-family: sans-serif;
+}
+
+#customize-domains-services .modal .modalcontent {
+  padding-top: 2%;
 }
 
 .modal-overlay {
@@ -1298,6 +1307,7 @@ input[type="range"]:focus::-ms-thumb {
 
 .scenario-cols {
   margin: 0;
+  padding-top: 3%;
 }
 
 .modal-disc-score {

@@ -355,7 +355,7 @@ button > * {
     text-align: center;
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 75px;
+    margin-bottom: 85px;
 }
 
 #wellbeing-score {
@@ -399,6 +399,21 @@ button > * {
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     border-radius: 50%;
+}
+
+.score-change-warning {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+p.score-change-warning {
+    padding-top: 3%;
+}
+
+span.score-change-warning {
+    font-size: 1rem;
+    margin-bottom: 20px;
 }
 
 /*Results*/
