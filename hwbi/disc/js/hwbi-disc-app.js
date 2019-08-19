@@ -39,16 +39,6 @@ $(document).ready(function () {
           if (choice === 0) {
             let baselineValue = 'original_val'; 
 
-            function isCustomized() {
-                const metrics = {...dataStructure.HWBI_METRIC, ...dataStructure.SERVICE_METRIC};
-                for (let metric in metrics) {
-                    if (metrics[metric].original_val !== metrics[metric].custom_val) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
             // isCustomized() ? baselineValue = 'custom_val' : baselineValue = 'original_val';
 
             resetValues(dataStructure.METRIC_GROUP.HWBI, 'scenario_val', baselineValue);
@@ -61,6 +51,7 @@ $(document).ready(function () {
 
             calculateServiceHWBI();
             runAsterPlot();
+            toggleCustomizedDataMessage();
         }
     });
 
@@ -92,6 +83,7 @@ $(document).ready(function () {
             const location = JSON.parse(locationValue);
             setScoreData(location.state_abbr, location.county, 'custom_val'); // set the domain scores
             loadSkillbar(); // update the colored bars on the snapshot page
+            toggleCustomizedDataMessage();
           }
     });
 
@@ -127,6 +119,7 @@ $(document).ready(function () {
             const location = JSON.parse(locationValue);
             setScoreData(location.state_abbr, location.county, 'custom_val'); // set the domain scores
             loadSkillbar(); // update the colored bars on the snapshot page
+            toggleCustomizedDataMessage();
         }
     });
 
@@ -145,6 +138,7 @@ $(document).ready(function () {
         if (choice === 0) {
             resetRivs();
             updateRivUi();
+            toggleCustomizedDataMessage();
         }
     });
 
@@ -162,6 +156,7 @@ $(document).ready(function () {
         });
         if (choice === 0) {
             resetDomains();
+            toggleCustomizedDataMessage();
         }
     });
 
@@ -180,6 +175,7 @@ $(document).ready(function () {
             if (choice === 0) {
                 resetServices();
                 resetServiceScores("custom_val");
+                toggleCustomizedDataMessage();
             }
     });
 
@@ -1071,4 +1067,27 @@ function resetServices() {
     // Reset Charts
     updateApexCharts("custom_val");
     $('.customize-service-metrics').parent().parent().find('.accordion-metrics').removeClass('bull');
+}
+
+function isCustomized() {
+    const metrics = {...dataStructure.HWBI_METRIC, ...dataStructure.SERVICE_METRIC};
+    for (const metric in metrics) {
+        if (metrics[metric].original_val !== metrics[metric].custom_val || metrics[metric].original_val !== metrics[metric].scenario_val) {
+            return true;
+        }
+    }
+    for (const domain in dataStructure.HWBI_DOMAIN) {
+        if (dataStructure.HWBI_DOMAIN[domain].weight !== 1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function toggleCustomizedDataMessage() {
+    if (isCustomized()) {
+        $('.score-change-warning').show();
+    } else {
+        $('.score-change-warning').hide();
+    }
 }
