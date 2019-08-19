@@ -487,6 +487,14 @@ h2.popup-title {
     display: block;
 }
 
+.sidenav-hr {
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 25%;
+  width: 80%;
+  background: #555;
+}
+
  .search {
      float: left;
      display: inline-block;
@@ -1452,6 +1460,10 @@ input[type="checkbox"].resources-checkbox {
 .reset-hwbi-custom-btn, .reset-service-custom-btn {
   position: absolute;
   bottom: 20px;
+}
+
+#reset-all {
+  transform: translate(42%, -50%);
 }
 
 .returntop {
