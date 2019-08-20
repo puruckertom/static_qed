@@ -401,17 +401,17 @@ button > * {
     border-radius: 50%;
 }
 
-.score-change-warning {
+.score-change-warning, .scenario-builder-score-change-warning {
     color: red;
     font-weight: bold;
     text-align: center;
 }
 
-p.score-change-warning {
+p.score-change-warning, p.scenario-builder-score-change-warning {
     padding-top: 6%;
 }
 
-span.score-change-warning {
+span.score-change-warning, span.scenario-builder-score-change-warning {
     font-size: 1rem;
     margin-bottom: 20px;
 }

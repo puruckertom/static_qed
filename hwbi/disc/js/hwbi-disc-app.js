@@ -1072,7 +1072,7 @@ function resetServices() {
 function isCustomized() {
     const metrics = {...dataStructure.HWBI_METRIC, ...dataStructure.SERVICE_METRIC};
     for (const metric in metrics) {
-        if (metrics[metric].original_val !== metrics[metric].custom_val || metrics[metric].original_val !== metrics[metric].scenario_val) {
+        if (metrics[metric].original_val !== metrics[metric].custom_val) {
             return true;
         }
     }
@@ -1084,10 +1084,39 @@ function isCustomized() {
     return false;
 }
 
+function scenarioBuilderCustomized() {
+    const metrics = dataStructure.SERVICE_METRIC;
+    for (const metric in metrics) {
+        if (metrics[metric].original_val !== metrics[metric].scenario_val) {
+            return true;
+        }
+    }
+
+    for (const domain in dataStructure.HWBI_DOMAIN) {
+        if (dataStructure.HWBI_DOMAIN[domain].weight !== 1) {
+            return true;
+        }
+    }
+
+    const hwbiMetrics = dataStructure.HWBI_METRIC;
+    for (const metric in hwbiMetrics) {
+        if (hwbiMetrics[metric].original_val !== hwbiMetrics[metric].custom_val) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function toggleCustomizedDataMessage() {
     if (isCustomized()) {
         $('.score-change-warning').show();
     } else {
         $('.score-change-warning').hide();
+    }
+    if (scenarioBuilderCustomized()) {
+        $('.scenario-builder-score-change-warning').show();
+    } else {
+        $('.scenario-builder-score-change-warning').hide();
     }
 }
