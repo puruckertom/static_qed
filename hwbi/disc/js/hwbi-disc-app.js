@@ -869,7 +869,13 @@ function resetSliders(startNode, valueType, sliderType) {
         const metric = startNode[metricName];
         const ele = document.querySelector(`[data-var="${metric.id}"].${sliderType}`);
         if (ele.value !== metric[valueType]) {
-            ele.value = metric[valueType];
+            if (metric[valueType] === null) {
+                ele.value = 0;
+                ele.dataset.isNull = true;
+            } else {
+                ele.value = metric[valueType];
+                ele.dataset.isNull = false;
+            }
             
             updateSliderLabel(ele);
         }
@@ -892,8 +898,10 @@ function resetSlidersRecursive(startNode, valueType, sliderType) {
         const ele = document.querySelector(`[data-var="${startNode.id}"].${sliderType}`);
         if (startNode[valueType] === null) {
             ele.value = 0;
+            ele.dataset.isNull = true;
         } else {
             ele.value = startNode[valueType];
+            ele.dataset.isNull = false;
         }
         updateSliderLabel(ele);
     }
@@ -919,6 +927,10 @@ function updateSliderLabel(ele) {
         ele.style = 'visibility: hidden;';
     }
 
+    if (ele.dataset.isNull === "true") {
+        val = 0;
+    }
+
     if ((units.toLowerCase().trim() === "percent" 
     || units.toLowerCase().trim() === "percent changed")) {
         roundValue = 1;
@@ -934,6 +946,10 @@ function updateSliderLabel(ele) {
         ele.previousElementSibling.innerHTML = "<span> " + round(val, roundValue) + " (" + units + ")</span>";
     } else {
         ele.previousElementSibling.innerHTML = "<span> " + round(val, roundValue) + "</span>";
+    }
+    if (ele.dataset.isNull === "true") {
+        ele.previousElementSibling.innerHTML = "<span> N/A</span>";
+        // console.log(ele.previousElementSibling.innerHTML)
     }
   }
 
