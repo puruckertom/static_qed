@@ -1114,6 +1114,7 @@ input[type="range"]:focus::-ms-thumb {
   outline: none;
   transition: 0.4s;
   margin: .5em 0 !important;
+  font-size: unset;
 }
 
 .active-metric, .accordion-metrics:hover {
@@ -1463,7 +1464,9 @@ input[type="checkbox"].resources-checkbox {
 }
 
 #reset-all {
-  transform: translate(42%, -50%);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
 }
 
 .returntop {
@@ -1587,6 +1590,10 @@ input[type="checkbox"].resources-checkbox {
   margin-left: 5%;
 }
 
+button {
+  font-size: 14px;
+
+}
 
 /********************** MEDIA QUERIES ************************/
 @media screen and (max-width: 970px) {

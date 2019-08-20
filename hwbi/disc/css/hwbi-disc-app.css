@@ -325,7 +325,6 @@ button > * {
 #report_pdf {
     float: right;
     color: white;
-    font-size: 16px;
     position: relative;
     z-index: 1;
 }
