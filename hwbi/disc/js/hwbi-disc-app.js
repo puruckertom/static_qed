@@ -918,12 +918,8 @@ function updateSliderLabel(ele) {
     let roundValue = 2;
 
     if (sign === "P") {
-        ele.disabled = false;
-        ele.style = 'visibility: initial;';
         val = (+ele.value * (+ele.dataset.max - +ele.dataset.min)) + +ele.dataset.min;
     } else if (sign === "N") {
-        ele.disabled = false;
-        ele.style = 'visibility: initial;';
         val = -1 * ((+ele.value - 1) * (+ele.dataset.max - +ele.dataset.min)) + +ele.dataset.min;
     } else {
         ele.disabled = true;
