@@ -406,6 +406,7 @@ function setFill() {
 
 function classByHwbi(FIPS) {
     let currCounty = hwbiByFIPS.get(currFIPS);
+    //console.log(currCounty);
 
     let county = hwbiByFIPS.get(FIPS);
 
