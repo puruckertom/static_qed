@@ -891,7 +891,6 @@ h2.popup-title {
 
 .aster-area {
   width: 50%;
-  margin-top: 8%;
 }
 
 /* end aster */
@@ -1171,14 +1170,15 @@ input[type="range"]:focus::-ms-thumb {
 	left: 0;
   position: relative;
   padding-left: 0;
+  width: 100%;
+  text-align: center;
 }
 .slinky-menu ul,
 .slinky-menu li {
 	list-style: none;
-	margin: 0;
 }
-.slinky-menu ul {
-	width: 100%;
+.slinky-menu li {
+  margin: 4% 0;
 }
 .slinky-menu a {
 	display: block;
@@ -1240,13 +1240,13 @@ input[type="range"]:focus::-ms-thumb {
 }
 
 .size-1of2 {
-  width: 40%;
+  width: 48%;
   display: inline-block;
   text-align: left;
 }
 
 .size-2of2 {
-  width: 40%;
+  width: 48%;
   display: inline-block;
   text-align: left;
 }
@@ -1317,6 +1317,9 @@ input[type="range"]:focus::-ms-thumb {
 .scenario-cols {
   margin: 0;
   padding-top: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-disc-score {
@@ -1698,6 +1701,20 @@ button {
     flex-direction: column;
   }
 
+}
+
+@media only screen and (max-width: 850px){
+  .scenario-cols {
+    flex-flow: column-reverse;
+  }
+
+  .scenario-cols div {
+    width: unset;
+  }
+
+  .aster-area {
+    margin-bottom: 5%;
+  }
 }
 
 @media only screen and (max-width: 768px){
