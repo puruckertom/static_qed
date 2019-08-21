@@ -47,7 +47,7 @@ $(document).ready(function () {
             resetValues(dataStructure.METRIC_GROUP.Economic, 'scenario_val', baselineValue);
             resetValues(dataStructure.METRIC_GROUP.Ecosystem, 'scenario_val', baselineValue);
             
-            resetSliders(dataStructure.SERVICE_METRIC, 'scenario_val', 'scenario-builder-metric');
+            // resetSliders(dataStructure.SERVICE_METRIC, 'scenario_val', 'scenario-builder-metric');
 
             calculateServiceHWBI();
             runAsterPlot();
