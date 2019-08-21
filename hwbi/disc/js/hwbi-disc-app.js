@@ -424,7 +424,6 @@ function setAccordion() {
 }
 
 function loadSkillbar() {
-    console.log("LoadSkillBar called");
     $('.domain-score-bar').each(function () {
         $(this).find('.score-bar').animate({
             width: jQuery(this).attr('data-percent')
@@ -949,7 +948,6 @@ function updateSliderLabel(ele) {
     }
     if (ele.dataset.isNull === "true") {
         ele.previousElementSibling.innerHTML = "<span> N/A</span>";
-        // console.log(ele.previousElementSibling.innerHTML)
     }
   }
 
