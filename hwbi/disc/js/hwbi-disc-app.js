@@ -47,9 +47,9 @@ $(document).ready(function () {
             resetValues(dataStructure.METRIC_GROUP.Economic, 'scenario_val', baselineValue);
             resetValues(dataStructure.METRIC_GROUP.Ecosystem, 'scenario_val', baselineValue);
             
-            // resetSliders(dataStructure.SERVICE_METRIC, 'scenario_val', 'scenario-builder-metric');
+            resetDomainSliders(dataStructure.SERVICE_DOMAIN, 'scenario_val', 'scenario-builder-domain');
 
-            calculateServiceHWBI();
+            calculateServiceHWBI('original_val');
             runAsterPlot();
             toggleCustomizedDataMessage();
         }
@@ -882,6 +882,29 @@ function resetSliders(startNode, valueType, sliderType) {
 }
 
 /**
+ * Resets scenario builder domain slider values to the original values
+ * @param {object} startNode - The node to reset
+ * @param {string} valueType - A string containing the data type to reset. custom_val || scenario_val
+ * @param {string} sliderType - A string contianing the type of slider to reset. scenario-builder-domain
+ * @function
+ */
+function resetDomainSliders(startNode, valueType, sliderType) {
+    for (const domainName in startNode) {
+        const domain = startNode[domainName];
+        const ele = document.querySelector(`[data-domain="${domain.id}"].${sliderType}`);
+        if (ele.value !== domain[valueType]) {
+            const displayVal = round(domain[valueType] * 100, 0);
+            const max = (+displayVal + 15) / 100;
+            const min = (+displayVal - 15) / 100;
+            ele.max = (max > 1.0 ? 1.0 : max);
+            ele.min = (min < 0.0 ? 0.0 : min);
+            ele.value = domain[valueType];
+            ele.previousElementSibling.innerHTML = "<span> " + displayVal + "</span>";
+        }
+    }
+}
+
+/**
  * Resets specified slider values to the original values. Travels down tree and resets all children
  * @param {object} startNode - The starting node to reset all children of
  * @param {string} valueType - A string containing the data type to reset. custom_val || scenario_val
@@ -1119,6 +1142,13 @@ function scenarioBuilderCustomized() {
         }
     }
 
+    const domains = dataStructure.SERVICE_DOMAIN;
+    for (const domain in domains) {
+        if (domains[domain].original_val !== domains[domain].scenario_val) {
+            return true;
+        }
+    }
+
     return false;
 }
 
@@ -1133,4 +1163,9 @@ function toggleCustomizedDataMessage() {
     } else {
         $('.scenario-builder-score-change-warning').hide();
     }
+}
+
+function toggleDomainConstituentMetricList(domain) {
+    const ele = document.querySelector(`#${domain}-metrics`);
+    (ele.style.display === 'none' ? ele.style.display = '' : ele.style.display = 'none');
 }
