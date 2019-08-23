@@ -29,7 +29,7 @@ $(document).ready(function () {
      * @listens click
      */
     document.getElementById("reset-scenario-builder-btn").addEventListener("click", function () {
-        var choice = dialog.showMessageBox(
+        const choice = dialog.showMessageBoxSync(
             {
               type: 'question',
               buttons: ['Yes', 'No'],
@@ -37,7 +37,7 @@ $(document).ready(function () {
               message: 'Resetting the Scenario Builder will restore the sliders below to the default data. This will reset any changes you have made below and unload any customized metrics.\n\nDo you still want to proceed?'
             });
           if (choice === 0) {
-            let baselineValue = 'original_val'; 
+            const baselineValue = 'original_val'; 
 
             // isCustomized() ? baselineValue = 'custom_val' : baselineValue = 'original_val';
 
@@ -61,7 +61,7 @@ $(document).ready(function () {
      */
     $(".reset-hwbi-custom-btn").on("click", function () {
         const id = this.dataset.id;
-        const choice = dialog.showMessageBox(
+        const choice = dialog.showMessageBoxSync(
             {
               type: 'question',
               buttons: ['Yes', 'No'],
@@ -93,7 +93,7 @@ $(document).ready(function () {
      */
     $(".reset-service-custom-btn").on("click", function () {
         const type = this.dataset.type;
-        const choice = dialog.showMessageBox(
+        const choice = dialog.showMessageBoxSync(
             {
               type: 'question',
               buttons: ['Yes', 'No'],
@@ -128,7 +128,7 @@ $(document).ready(function () {
      * @listens click
      */
     document.getElementById("riv-reset-btn").addEventListener("click", () => {
-        const choice = dialog.showMessageBox(
+        const choice = dialog.showMessageBoxSync(
         {
             type: 'question',
             buttons: ['Yes', 'No'],
@@ -147,7 +147,7 @@ $(document).ready(function () {
      * @listens click
      */
     document.getElementById("reset-hwbi-domains").addEventListener("click", () => {
-        const choice = dialog.showMessageBox(
+        const choice = dialog.showMessageBoxSync(
         {
             type: 'question',
             buttons: ['Yes', 'No'],
@@ -165,7 +165,7 @@ $(document).ready(function () {
      * @listens click
      */
     document.getElementById("reset-service-btn").addEventListener("click", () => {
-        const choice = dialog.showMessageBox(
+        const choice = dialog.showMessageBoxSync(
             {
                 type: 'question',
                 buttons: ['Yes', 'No'],
