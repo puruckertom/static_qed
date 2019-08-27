@@ -547,7 +547,7 @@ function startScenarioIntro() {
             },
             {
                 element: document.querySelector('.services'),
-                intro: "You can choose the service you are interested in customizing, then click through any of the indicators to edit the metrics for that specific indicator."
+                intro: "You can select between Economic, Ecosystem, and Social and see the domains associated with each. Clicking on a domain will show a list of constituent metrics that contribute to the domain score."
             },
             {
                 element: document.querySelector('#aster'),
