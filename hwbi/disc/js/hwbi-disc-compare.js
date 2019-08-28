@@ -119,7 +119,12 @@ function setText(id, div) {
     div.select('.ls').html('<text>Living Standards:  </text><span class="ls right">' + formatHwbi(county['Living Standards']) + '</span>');
     div.select('.ss').html('<text>Safety &amp; Security:  </text><span class="ss right">' + formatHwbi(county['Safety and Security']) + '</span>');
     div.select('.sc').html('<text>Social Cohesion:  </text><span class="sc right">' + formatHwbi(county['Social Cohesion']) + '</span>');
-    div.select('.re').html('<text>Resilience:  </text><span class="re right">' + formatHwbi(county['Resilience']) + '</span>');
+    div.select('.re').html('<text>Resilience:  </text><span class="re right">' + (county['Resilience'] === null ? 'N/A' : formatHwbi(county['Resilience'])) + '</span>');
+    if (county['Resilience'] === null) {
+        div.select('.re').attr('title', 'Score could not be calculated due to lack of available data.').style('cursor', 'help');
+    } else {
+        div.select('.re').attr('title', '').style('cursor', 'pointer');
+    }
 }
 
 function compareScores() {
@@ -313,7 +318,11 @@ async function dbGetCountyScores(fips) {
     let scores = await db_get_data(comp_location['COUNTY_NAME'], comp_location['STATE_CODE']);
     let hwbi = 0;
     for (let i = 0; i < scores.length; i++) {
-        data[scores[i].DOMAIN] = scores[i]['avg(SCORE)'] * 100;
+        if (scores[i]['avg(SCORE)'] === null) {
+            data[scores[i].DOMAIN] = scores[i]['avg(SCORE)'];
+        } else {
+            data[scores[i].DOMAIN] = scores[i]['avg(SCORE)'] * 100;
+        }
         hwbi += scores[i]['avg(SCORE)'];
     }
     data.hwbi = hwbi / scores.length * 100;

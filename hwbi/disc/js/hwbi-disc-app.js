@@ -898,8 +898,16 @@ function resetDomainSliders(startNode, valueType, sliderType) {
             const min = (+displayVal - 15) / 100;
             ele.max = (max > 1.0 ? 1.0 : max);
             ele.min = (min < 0.0 ? 0.0 : min);
+            const rawVal = domain[valueType];
             ele.value = domain[valueType];
             ele.previousElementSibling.innerHTML = "<span> " + displayVal + "</span>";
+            if (rawVal === null) {
+                ele.value = 0;
+                ele.max = 1.0;
+                ele.min = 0.0;
+                ele.previousElementSibling.innerHTML = "<span>N/A</span>";
+            }
+           
         }
     }
 }
