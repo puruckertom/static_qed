@@ -114,10 +114,17 @@ function drawAsterPlot(data) {
   // calculate the weighted mean HWBI score
   var score =
     data.reduce(function(a, b) {
-      return a + b.score * b.weight;
+      console.log(b);
+      if (b.score !== null) {
+        return a + b.score * b.weight;
+      }
+      return a;
     }, 0) /
     data.reduce(function(a, b) {
-      return a + b.weight;
+      if (b.score !== null) {
+        return a + b.weight;
+      }
+      return a;
     }, 0);
 
   //display DISC score
@@ -218,10 +225,17 @@ function updateAsterPlot(data) {
   // calculate the weighted mean HWBI score
   var score =
     data.reduce(function(a, b) {
-      return a + b.score * b.weight;
+      console.log(b);
+      if (b.score !== null) {
+        return a + b.score * b.weight;
+      }
+      return a;
     }, 0) /
     data.reduce(function(a, b) {
-      return a + b.weight;
+      if (b.score !== null) {
+        return a + b.weight;
+      }
+      return a;
     }, 0);
 
   //display DISC score
@@ -309,10 +323,17 @@ function updateAsterRivs(data) {
   // calculate the weighted mean HWBI score
   var score1 =
     data.reduce(function(a, b) {
-      return a + b.score * b.weight;
+      console.log(b);
+      if (b.score !== null) {
+        return a + b.score * b.weight;
+      }
+      return a;
     }, 0) /
     data.reduce(function(a, b) {
-      return a + b.weight;
+      if (b.score !== null) {
+        return a + b.weight;
+      }
+      return a;
     }, 0);
 
   //display HWBI score
