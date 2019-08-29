@@ -1163,6 +1163,10 @@ input[type="range"]:focus::-ms-thumb {
   cursor: help;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .scenario-builder-domain-label:hover {
   /* background-color: #ccc !important; */
 }
