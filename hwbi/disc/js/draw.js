@@ -114,7 +114,6 @@ function drawAsterPlot(data) {
   // calculate the weighted mean HWBI score
   var score =
     data.reduce(function(a, b) {
-      console.log(b);
       if (b.score !== null) {
         return a + b.score * b.weight;
       }
@@ -225,7 +224,6 @@ function updateAsterPlot(data) {
   // calculate the weighted mean HWBI score
   var score =
     data.reduce(function(a, b) {
-      console.log(b);
       if (b.score !== null) {
         return a + b.score * b.weight;
       }
@@ -323,7 +321,6 @@ function updateAsterRivs(data) {
   // calculate the weighted mean HWBI score
   var score1 =
     data.reduce(function(a, b) {
-      console.log(b);
       if (b.score !== null) {
         return a + b.score * b.weight;
       }
