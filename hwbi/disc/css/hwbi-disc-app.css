@@ -992,9 +992,6 @@ button.accordion.active:after {
 }
 
 /* COMPARE PAGE */
-#compare-tab {
-    padding: 10px !important;
-}
 
 .compare-communities-container {
     border-top: 2px solid #aeb0b5;
@@ -1419,7 +1416,11 @@ button.accordion.active:after {
 
 }
 
-#snapshot-btn, #print-btn {
+#snapshot-btn, #print-btn, #screenshot-btn {
     margin: 0 auto;
     display: block;
+}
+
+#screenshot-btn {
+    margin-top: 15px;
 }
