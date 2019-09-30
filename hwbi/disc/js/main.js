@@ -138,10 +138,12 @@ jQuery(document).ready(function() {
 
     $('.card a, .service-card a').click(function() {
         $(this).parent().find('.modal-overlay').addClass('modal-active');
+        $('body').css('overflow-y', 'hidden');
     });
        
     $('.card-list .close, .services-card-list .close').click(function() {
         $(this).parent().parent().removeClass('modal-active');
+        $('body').css('overflow-y', 'unset');
     })
         
 
