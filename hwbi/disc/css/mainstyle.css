@@ -380,7 +380,7 @@ input.search-bar {
 
 .main-header {
   position: fixed;
-  z-index: 3;
+  z-index: 4;
   top: 0;
   left: 0;
   height: 70px;
@@ -436,7 +436,7 @@ input.search-bar {
   min-height: 100vh;
   padding-top: 65px;
   background-color: #2c3136;
-  z-index: 2;
+  z-index: 3;
   left: 0;
 }
 
@@ -688,13 +688,18 @@ input.search-bar {
   padding: 40px;
   background: white;
   border-radius: 3px;
-  width: 80vw;
+  /* width: 80vw; */
   max-width: 1000px;
-  position: relative;
-  top: 70px;
-  height: 80vh;
-  box-shadow: 0 1px 16px rgba(0, 0, 0, 0.12), 0 6px 10px rgba(0, 0, 0, 0.24);
+  position: absolute; /*rel*/
+  /* top: 70px; */
+  height: 100%; /*80vh*/
+  /* box-shadow: 0 1px 16px rgba(0, 0, 0, 0.12), 0 6px 10px rgba(0, 0, 0, 0.24); */
   text-align: left;
+}
+
+.modal-active {
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .modal .close {
@@ -730,16 +735,16 @@ input.search-bar {
 
 .modal-overlay {
   position: fixed;
-  top: 0;
+  top: 70px; /* 0 */
   bottom: 0;
-  left: 0;
+  left: 195px; /* 0 */
   right: 0;
-  background: rgba(0, 0, 0, 0.64);
+  /* background: rgba(0, 0, 0, 0.64); */
   /* transition: opacity 250ms; */
   visibility: hidden;
   opacity: 0;
-  z-index: 9;
-  width: 100vw;
+  z-index: 2;
+  /* width: 100vw; */
 }
 
 .modal-overlay:target {
@@ -1723,6 +1728,10 @@ button {
   #customize_domain_indicators {
     display: flex;
     flex-direction: column;
+  }
+
+  .modal-overlay {
+    left: 0;
   }
 }
 

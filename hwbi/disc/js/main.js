@@ -128,13 +128,22 @@ jQuery(document).ready(function() {
      * @param {event} e - The click event.
      * @listens click
      */
-    document.querySelectorAll('.modal-overlay, .overlay').forEach(el => {
+    /* document.querySelectorAll('.modal-overlay, .overlay').forEach(el => {
         el.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal-overlay') || e.target.classList.contains('overlay')) {
                 document.querySelector(location.hash + ' > div > a.close').click();
             }
         });
+    }); */
+
+    $('.card a, .service-card a').click(function() {
+        $(this).parent().find('.modal-overlay').addClass('modal-active');
     });
+       
+    $('.card-list .close, .services-card-list .close').click(function() {
+        $(this).parent().parent().removeClass('modal-active');
+    })
+        
 
     $('#s-menu-economic').addClass('show');
 
