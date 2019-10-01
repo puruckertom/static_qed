@@ -140,7 +140,7 @@ jQuery(document).ready(function() {
         $(this).parent().find('.modal-overlay').addClass('modal-active');
     });
        
-    $('.card-list .close, .services-card-list .close').click(function() {
+    $('.customize-close').click(function() {
         $(this).parent().parent().removeClass('modal-active');
     })
         
