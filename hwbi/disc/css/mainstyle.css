@@ -491,10 +491,10 @@ input.search-bar {
 }
 
 .search-icon {
-  position: relative;
+  position: absolute;
   width: 30px;
-  top: -48px;
-  right: -17px;
+  top: 21px;
+  left: 215px;
 }
 
 .search form,
@@ -712,6 +712,42 @@ input.search-bar {
   color: #333;
 }
 
+.modal .customize-close {
+  position: absolute;
+  display: flex;
+  top: 5px;
+  left: 5px;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #555; 
+  font-size: 21px;
+}
+
+.close-container {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+}
+
+.customize-close:hover {
+  background: #0071bc;
+  color: white;
+}
+
+/* .close-container:hover span {
+  filter: invert(1);
+  -webkit-filter: invert(100%);
+} */
+
 .modal p {
   padding-top: 2%;
   padding-bottom: 1%;
@@ -720,7 +756,7 @@ input.search-bar {
 .modal h2 {
   font-family: Tahoma, Arial, sans-serif;
   color: #333;
-  margin-top: 0;
+  margin-top: 15px;
 }
 
 .modal .modalcontent {
@@ -1640,6 +1676,13 @@ button {
     top: 20px;
     right: 15px;
     cursor: pointer;
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 345px !important;
+    top: 21px;
+    left: unset !important;
   }
 
   #hamburger {
