@@ -47,7 +47,11 @@ function drawAsterPlot(data) {
     .arc()
     .innerRadius(innerRadius)
     .outerRadius(function(d) {
-      return (radius - innerRadius) * (d.data.score / 100.0) + innerRadius;
+      return (
+        (radius - innerRadius) *
+          ((d.data.score / 100) * 4 > 1 ? 1 : (d.data.score / 100) * 4.0) +
+        innerRadius
+      );
     });
 
   //use d3 to calculate size of outline arcs
@@ -161,7 +165,11 @@ function updateAsterPlot(data) {
     .arc()
     .innerRadius(innerRadius)
     .outerRadius(function(d) {
-      return (radius - innerRadius) * (d.data.score / 100) + innerRadius;
+      return (
+        (radius - innerRadius) *
+          ((d.data.score / 100) * 4 > 1 ? 1 : (d.data.score / 100) * 4) +
+        innerRadius
+      );
     });
 
   //use d3 to calculate size of outline arcs
@@ -258,7 +266,11 @@ function updateAsterRivs(data) {
     .arc()
     .innerRadius(innerRadius)
     .outerRadius(function(d) {
-      return (radius - innerRadius) * (d.data.score / 100) + innerRadius;
+      return (
+        (radius - innerRadius) *
+          ((d.data.score / 100) * 4 > 1 ? 1 : (d.data.score / 100) * 4) +
+        innerRadius
+      );
     });
 
   //use d3 to calculate size of outline arcs
