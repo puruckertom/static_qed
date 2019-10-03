@@ -215,7 +215,7 @@ $(document).ready(function () {
         }
     });
     // Hide and disable TWIN metric sliders
-    $('.customize-service-metrics.crs, .crs2, .customize-service-metrics.pct_shm, .pct_shm2, .customize-service-metrics.divcons, .divcons2, .customize-service-metrics.homeins, .homeins2, .customize-service-metrics.numnfip, .numnfip2').css('visibility', 'hidden').prop('disabled', true);
+    // $('.customize-service-metrics.crs, .crs2, .customize-service-metrics.pct_shm, .pct_shm2, .customize-service-metrics.divcons, .divcons2, .customize-service-metrics.homeins, .homeins2, .customize-service-metrics.numnfip, .numnfip2').css('visibility', 'hidden').prop('disabled', true);
 });
 
 function initializeGoogleMaps() {
