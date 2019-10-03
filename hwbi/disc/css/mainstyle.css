@@ -1663,6 +1663,27 @@ button {
   font-size: 14px;
 }
 
+i {
+  border: solid #888;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-right: 8px;
+  margin-bottom: 3px;
+}
+
+.arrow-down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transition: .1s;
+}
+
+.arrow-up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transition: .1s;
+}
+
 /********************** MEDIA QUERIES ************************/
 @media screen and (max-width: 970px) {
   .no-mobile {

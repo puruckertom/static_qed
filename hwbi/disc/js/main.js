@@ -654,3 +654,12 @@ function resourceLabelCheck() {
         $('div.additional-resources-section h3').addClass('no-print');
     }
 }
+
+function toggleArrow(that) {
+    let i = $(that).find('i');
+    if (i.hasClass('arrow-down')) {
+        i.removeClass('arrow-down').addClass('arrow-up')
+    } else if (i.hasClass('arrow-up')) {
+        i.removeClass('arrow-up').addClass('arrow-down')
+    }
+}
