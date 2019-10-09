@@ -1684,6 +1684,14 @@ i {
   transition: .1s;
 }
 
+#domain-scores a {
+  color: #0071bc;
+}
+
+#domain-scores a:hover {
+  color: #205493;
+}
+
 /********************** MEDIA QUERIES ************************/
 @media screen and (max-width: 970px) {
   .no-mobile {
