@@ -1276,11 +1276,13 @@ button.accordion.active:after {
 
     #wellbeing-scores h3 {
         /* margin-left: 11%; */
+        margin: 0;
     }
 
     #printable {
         display: block;
         font-family: sans-serif;
+        margin-bottom: 10%;
     }
 
     table.summary {
@@ -1410,7 +1412,27 @@ button.accordion.active:after {
         padding-bottom: 0 !important;
     }
 
+    .resources-body {
+        page-break-before: always;
+    }
+
     .domain-expand {
+        display: none;
+    }
+
+    .disc-body {
+        width: unset;
+    }
+
+    .domain-score-block {
+        /* margin-bottom: 10px; */
+    }
+
+    #wellbeing-scores {
+        padding-left: 0;
+    }
+
+    #domain-scores hr {
         display: none;
     }
 
