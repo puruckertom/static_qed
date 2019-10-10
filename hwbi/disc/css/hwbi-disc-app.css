@@ -1213,26 +1213,26 @@ button.accordion.active:after {
         display: none !important;
     }
 
-    #main-tab-nav, #search_block, #rank_btn, #servicedesc_btn, #customize_intro, #customize_domain_details, #priorityexplanation, #report_pdf {
+    #main-tab-nav, #search_block, #rank_btn, #servicedesc_btn, #customize_intro, #customize_domain_details, #priorityexplanation, #report_pdf, #print-btn, #screenshot-btn {
         display: none !important; 
     }
 
     #wellbeing-score {
-        font-size: 60px;
+        /* font-size: 60px;
         line-height: 3.125rem;
         font-weight: 700;
         margin: 0;
         padding: 15px 0 0;
-        text-align: center;
+        text-align: center; */
     }
 
-    .domain-score-bar {
+    /* .domain-score-bar {
         visibility: hidden;
         height: 0;
         margin: 0;
         padding: 0;
         width: 0;
-    }
+    } */
 
     #community-snapshot-tab {
         margin-left: 13%;
@@ -1275,7 +1275,7 @@ button.accordion.active:after {
     }
 
     #wellbeing-scores h3 {
-        margin-left: 11%;
+        /* margin-left: 11%; */
     }
 
     #printable {
@@ -1375,12 +1375,12 @@ button.accordion.active:after {
     }
 
     #apexcharts-track-0, #apexcharts-series-0 {
-        display: none;
+        /* display: none; */
     }
 
     .chartcontainer {
-        margin-top: -6%;
-        left: -195px;
+        /* margin-top: -6%;
+        left: -195px; */
     }
 
     #domain-scores h3 {
