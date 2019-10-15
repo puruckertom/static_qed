@@ -1606,7 +1606,7 @@ input[type="checkbox"].resources-checkbox {
   margin-top: 0;
 }
 
-.tutButton:hover {
+.tutButton:hover, .startButton:hover {
   background-color: #015085;
   color: white;
 }
