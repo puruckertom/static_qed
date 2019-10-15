@@ -297,6 +297,17 @@ input.search-bar {
   font-family: sans-serif;
 }
 
+#popup1 > .popup {
+  max-height: 85%;
+  height: fit-content;
+  overflow: scroll;
+}
+
+#popup1 > .popup .popupcontent {
+  max-height: 90%;
+  overflow: scroll;
+}
+
 .scores {
   width: 100%;
   height: 100%;
@@ -1577,7 +1588,7 @@ input[type="checkbox"].resources-checkbox {
   font-weight: bold;
 }
 
-.tutButton {
+.tutButton, .startButton {
   background-color: #0071bc;
   color: white;
   padding: 13px 25px;
@@ -1588,6 +1599,11 @@ input[type="checkbox"].resources-checkbox {
   font-weight: bold;
   text-decoration: none;
   border-radius: 3px;
+  margin-top: 20%;
+}
+
+.startButton {
+  margin-top: 0;
 }
 
 .tutButton:hover {

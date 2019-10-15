@@ -4,6 +4,10 @@ jQuery(document).ready(function() {
 		header = $('.main-header'),
 		sidebar = $('.sidenav'),
         searchForm = $('.search');
+
+    
+    $('.info-popup-button')[0].click()
+    
         
     $('.has-children > a').on('click', function(event) {
         var selectedItem = $(this);
@@ -63,6 +67,9 @@ jQuery(document).ready(function() {
             }
             else if ($(clicked).attr("id") === $('#resources-tab-link').attr("id")) {
                 $('#resources-tab').addClass('show');
+            }
+            else if ($(clicked).attr("id") === $('#references-tab-link').attr("id")) {
+                $('#references-tab').addClass('show');
             }
         }
     });
