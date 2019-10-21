@@ -895,9 +895,8 @@ function resetDomainSliders(startNode, valueType, sliderType) {
         if (ele.value !== domain[valueType]) {
             const displayVal = round(domain[valueType] * 100, 0);
             const max = (+displayVal + 15) / 100;
-            const min = (+displayVal - 15) / 100;
             ele.max = (max > 1.0 ? 1.0 : max);
-            ele.min = (min < 0.0 ? 0.0 : min);
+            ele.min = domain[valueType];
             const rawVal = domain[valueType];
             ele.value = domain[valueType];
             ele.previousElementSibling.innerHTML = "<span> " + displayVal + "</span>";
