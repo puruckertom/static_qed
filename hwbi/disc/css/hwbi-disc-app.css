@@ -462,7 +462,7 @@ span.score-change-warning, span.scenario-builder-score-change-warning {
     font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
     color: #235A8E;
     float: left;
-    font-size: 24px;
+    font-size: 21px;
 }
 
 #rank_btn, #servicedesc_btn, #qol_btn {
@@ -483,7 +483,6 @@ span.score-change-warning, span.scenario-builder-score-change-warning {
 }
 
 #domain-scores {
-    margin-top: 25px;
     width: 100%;
     float: right;
 }
@@ -1162,13 +1161,11 @@ button.accordion.active:after {
 #priorityexplanation {
     background-color: #fff;
     padding: 10px;
-    font-family: sans-serif;
 }
 
 #service-explanation {
     background-color: #fff;
     padding: 10px;
-    font-family: sans-serif;
 }
 
 .searchicon {
@@ -1196,6 +1193,7 @@ button.accordion.active:after {
 
 #printable {
     display: none;
+    font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
 }
 
 #search_field {
@@ -1211,6 +1209,10 @@ button.accordion.active:after {
 
     .no-print, .no-print * {
         display: none !important;
+    }
+
+    body {
+        font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
     }
 
     #main-tab-nav, #search_block, #rank_btn, #servicedesc_btn, #customize_intro, #customize_domain_details, #priorityexplanation, #report_pdf, #print-btn, #screenshot-btn {
@@ -1281,7 +1283,6 @@ button.accordion.active:after {
 
     #printable {
         display: block;
-        font-family: sans-serif;
         margin-bottom: 10%;
     }
 

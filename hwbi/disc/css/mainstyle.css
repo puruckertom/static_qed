@@ -12,7 +12,7 @@ html {
 
 body {
   /* font-size: 1.6em; */
-  font-family: "Open Sans", sans-serif;
+  /* font-family: "Open Sans", sans-serif; */
 }
 
 /* body::-webkit-scrollbar {
@@ -44,13 +44,11 @@ a {
 }
 
 .title {
-  font-family: sans-serif;
   color: rgba(0, 0, 0, 0.671);
   font-size: 15px;
 }
 
 .text {
-  font-family: sans-serif;
   color: rgba(0, 0, 0, 0.671);
   font-size: 12px;
   padding-bottom: 20px;
@@ -58,9 +56,8 @@ a {
 
 .searchtitle {
   color: rgba(0, 0, 0, 0.671);
-  font-size: 22px;
+  font-size: 23px;
   /* margin-top: 50%; */
-  font-family: sans-serif;
 }
 
 .info-popup-button {
@@ -71,7 +68,6 @@ a {
   padding: 13px 25px;
   text-align: center;
   display: inline-block;
-  font-family: sans-serif;
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
@@ -154,7 +150,6 @@ h2.popup-title {
 
 .searchbelow,
 label[for="stateform"] {
-  font-family: sans-serif;
   color: rgba(0, 0, 0, 0.671);
   margin-top: 3%;
   font-size: 17px;
@@ -236,7 +231,6 @@ input.search-bar {
 }
 
 .disc {
-  font-family: sans-serif;
   color: rgba(0, 0, 0, 0.671);
   font-size: 30px;
   position: absolute;
@@ -286,7 +280,7 @@ input.search-bar {
 }
 
 .popup h2 {
-  font-family: Tahoma, Arial, sans-serif;
+  /* font-family: Tahoma, Arial, sans-serif; */
   color: #333;
   margin-top: 0;
 }
@@ -294,7 +288,6 @@ input.search-bar {
 .popup .popupcontent {
   max-height: 30%;
   overflow: auto;
-  font-family: sans-serif;
 }
 
 #popup1 > .popup {
@@ -632,7 +625,6 @@ input.search-bar {
 
 .card-text-overlay {
   color: white;
-  font-family: sans-serif;
   font-weight: bold;
   position: absolute;
   top: 50%;
@@ -765,7 +757,7 @@ input.search-bar {
 }
 
 .modal h2 {
-  font-family: Tahoma, Arial, sans-serif;
+  /* font-family: Tahoma, Arial, sans-serif; */
   color: #333;
   margin-top: 15px;
 }
@@ -773,7 +765,6 @@ input.search-bar {
 .modal .modalcontent {
   max-height: 70%;
   overflow: auto;
-  font-family: sans-serif;
 }
 
 #customize-domains-services .modal .modalcontent {
@@ -848,7 +839,6 @@ div[id*="_priority_ranking"] form input {
   padding: 11px 12px;
   float: right;
   display: inline-block;
-  font-family: sans-serif;
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
@@ -1324,7 +1314,6 @@ input[type="range"]:focus::-ms-thumb {
 }
 
 #service_indicator_title {
-  font-family: sans-serif;
   text-align: center;
 }
 
@@ -1368,7 +1357,7 @@ input[type="range"]:focus::-ms-thumb {
 }
 
 #customize-resilience h4 {
-  font-family: Tahoma, Arial, sans-serif;
+  /* font-family: Tahoma, Arial, sans-serif; */
   color: #333;
   font-size: 2rem;
 }
@@ -1390,7 +1379,7 @@ input[type="range"]:focus::-ms-thumb {
 
 .modal-disc-score {
   margin-right: 10%;
-  font-family: Tahoma, Arial, sans-serif;
+  /* font-family: Tahoma, Arial, sans-serif; */
 }
 
 div[id*="_priority_ranking"] {
@@ -1594,7 +1583,6 @@ input[type="checkbox"].resources-checkbox {
   padding: 13px 25px;
   text-align: center;
   display: inline-block;
-  font-family: sans-serif;
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
