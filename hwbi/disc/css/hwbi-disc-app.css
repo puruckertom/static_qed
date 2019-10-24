@@ -358,7 +358,8 @@ button > * {
 }
 
 #wellbeing-score {
-    color: #36bc28;
+    /* color: #36bc28; */
+    color: #008896;
     font-size: 42px;
     line-height: 3.125rem;
     font-weight: 700;
