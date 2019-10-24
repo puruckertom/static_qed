@@ -428,7 +428,8 @@ function startCompareIntro() {
                 intro: "This is the compare page. Here you can compare the DISC score of the county you entered with surrounding counties."
             },
             ],
-        doneLabel: 'Continue'
+        doneLabel: 'Continue',
+        skipLabel: 'Exit'
         });
 
     introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().oncomplete(function() {
@@ -456,6 +457,7 @@ function startCustomizeIntro() {
         
         ],
     doneLabel: 'Continue',
+    skipLabel: 'Exit',
     scrollToElement: false
     });
     
@@ -490,6 +492,7 @@ function startCustomizeModal() {
             }, */
             ],
         doneLabel: 'Continue',
+        skipLabel: 'Exit',
         scrollToElement: false
         });
 
@@ -521,7 +524,8 @@ function startRankingIntro() {
                 intro: "Use the up or down arrows to modify the ranking values."
             },
             ],
-        doneLabel: 'Continue'
+        doneLabel: 'Continue',
+        skipLabel: 'Exit'
         });
 
     introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().oncomplete(function() {
@@ -540,6 +544,7 @@ function startCustomizeServicesIntro() {
         }
         ],
     doneLabel: 'Continue',
+    skipLabel: 'Exit',
     scrollToElement: false
     });
     
@@ -566,15 +571,16 @@ function startScenarioIntro() {
                 intro: "You can select between Economic, Ecosystem, and Social and see the domains associated with each. Clicking on a domain will show a list of constituent metrics that contribute to the domain score."
             },
             {
-                element: document.querySelector('#aster'),
-                intro: "This is an aster plot showing your DISC score and a visualization of each HWBI domain, which changes dynamically as you edit the service metrics."
+                element: document.querySelector('.aster-area'),
+                intro: "This is a heat map showing a visualization of each HWBI domain, which changes dynamically as you edit the service metrics."
             },
             {
                 element: document.querySelector('#scenario-btns'),
                 intro: "Use these buttons to either reset your scenario back to the baseline values, or load the values previously customized on the 'Customize Data' page."
             }
             ],
-        doneLabel: 'Continue'
+        doneLabel: 'Continue',
+        skipLabel: 'Exit'
         });
 
     introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().onafterchange(function(targetElement) {
@@ -609,7 +615,8 @@ function startResourcesIntro() {
                 intro: "Click this button to save a PDF of your Community Snapshot page, as well as all the links you selected to save."
             }
             ],
-        doneLabel: 'Done'
+        doneLabel: 'Done',
+        skipLabel: 'Exit'
         });
     
     introNext.setOption('showStepNumbers', false).setOption('disableInteraction', true).start().onchange(function(targetElement) {
