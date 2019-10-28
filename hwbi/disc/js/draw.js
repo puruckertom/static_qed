@@ -84,7 +84,7 @@ function drawAsterPlot(data) {
         return "#269683";
       }
       if (d.data.description == "Safety and Security") {
-        return "#606060";
+        return "#434c86";
       }
       if (d.data.description == "Social Cohesion") {
         return "#E5632E";
@@ -198,7 +198,7 @@ function updateAsterPlot(data) {
         return "#269683";
       }
       if (d.data.description == "Safety and Security") {
-        return "#606060";
+        return "#434c86";
       }
       if (d.data.description == "Social Cohesion") {
         return "#E5632E";
@@ -295,7 +295,7 @@ function updateAsterRivs(data) {
         return "#269683";
       }
       if (d.data.description == "Safety and Security") {
-        return "#606060";
+        return "#434c86";
       }
       if (d.data.description == "Social Cohesion") {
         return "#E5632E";

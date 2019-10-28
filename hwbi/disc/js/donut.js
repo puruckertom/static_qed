@@ -10,7 +10,7 @@ function donutChart() {
             '#5598C3',
             '#DC4B60',
             '#269683',
-            '#606060',
+            '#434c86',
             '#E5632E',
             '#FDFD65'
         ]), // colour scheme

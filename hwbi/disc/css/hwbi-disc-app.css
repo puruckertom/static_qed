@@ -634,7 +634,7 @@ button.accordion.active:after {
 }
 
 .safety-bar {
-    background-color: #606060;
+    background-color: #434c86;
 }
 
 .cohesion-bar {
@@ -787,11 +787,11 @@ button.accordion.active:after {
 }
 
 #safety-slider-bar {
-    background-color: #606060;
+    background-color: #434c86;
 }
 
 #safety-slider-bar span {
-    background-color: #606060;
+    background-color: #434c86;
     width: 15px;
 }
 
