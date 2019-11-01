@@ -1688,11 +1688,11 @@ i {
   transition: .1s;
 }
 
-#domain-scores a {
+#domain-scores a, #references-tab a {
   color: #0071bc;
 }
 
-#domain-scores a:hover {
+#domain-scores a:hover, #references-tab a:hover {
   color: #205493;
 }
 
@@ -1703,6 +1703,15 @@ i {
 
 #popup1 .popupcontent input[type="checkbox"] {
   margin-top: 15px;
+}
+
+#ref-links p {
+  margin-left: 30px;
+  text-indent: -30px;
+}
+
+#references-tab h4 {
+  margin-top: 5%;
 }
 
 /********************** MEDIA QUERIES ************************/
