@@ -427,6 +427,9 @@ function startCompareIntro() {
             {
                 intro: "This is the compare page. Here you can compare the DISC score of the county you entered with surrounding counties."
             },
+            {
+                intro: "Hover over a county to compare its DISC score with the county you searched. Green is your county, blue is a higher DISC score, and orange is a lower DISC score."
+            }
             ],
         doneLabel: 'Continue',
         skipLabel: 'Exit'
@@ -480,8 +483,12 @@ function startCustomizeModal() {
         introNext.setOptions({
         steps: [
             {
-                intro: "Here is a modal window. This is where you customize each indicator for the specified domain."
+                intro: "This is where you customize each indicator for the specified domain."
             },
+            {
+                element: document.querySelector('#connection-to-nature-modal .accordion-metrics'),
+                intro: "This is an accordion menu. Clicking on it will reveal the associated metrics and sliders."
+            }
             /* {
                 element: document.querySelector('#connection-to-nature_indicators').querySelector(' .indicator_data-title'),
                 intro: "This is an indicator. Click here to reveal the metrics associated with this specific indicator and move the slider left or right to manipulate the value."
@@ -493,7 +500,8 @@ function startCustomizeModal() {
             ],
         doneLabel: 'Continue',
         skipLabel: 'Exit',
-        scrollToElement: false
+        scrollToElement: false,
+        showSkipButton: true
         });
 
         /* introNext.onchange(function(targetElement) {
@@ -541,11 +549,16 @@ function startCustomizeServicesIntro() {
     steps: [
         {
             intro: "This is the Customize - Services page. Here you can customize your Services scores if you wish, but it is not required."
+        },
+        {
+            element: document.querySelector('.s-card1'),
+            intro: "These cards function similarly to the Quality of Life customize page. You can click on a card to start customizing the specific Service."
         }
         ],
     doneLabel: 'Continue',
     skipLabel: 'Exit',
-    scrollToElement: false
+    scrollToElement: false,
+    showButtons: true
     });
     
     intro.setOption('showStepNumbers', false).setOption('disableInteraction', true)    
@@ -675,5 +688,18 @@ function toggleArrow(that) {
         i.removeClass('arrow-down').addClass('arrow-up')
     } else if (i.hasClass('arrow-up')) {
         i.removeClass('arrow-up').addClass('arrow-down')
+    }
+}
+
+function customizeMoreText(that) {
+    let moreText = $(that).siblings('span'),
+        btnText = $(that)
+
+    if ($(moreText).css('display') == 'inline') {
+        $(btnText).text("More...")
+        $(moreText).css('display', 'none')
+    } else {
+        $(btnText).text("Less...")
+        $(moreText).css('display', 'inline')
     }
 }

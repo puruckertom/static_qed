@@ -1714,6 +1714,15 @@ i {
   margin-top: 5%;
 }
 
+.more-toggle {
+  cursor: pointer;
+  color: #0071bc;
+}
+
+.resources-body span {
+  font-style: italic;
+}
+
 /********************** MEDIA QUERIES ************************/
 @media screen and (max-width: 970px) {
   .no-mobile {
