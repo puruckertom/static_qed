@@ -691,7 +691,7 @@ input.search-bar {
   padding: 40px;
   background: white;
   border-radius: 3px;
-  /* width: 80vw; */
+  width: 100%;
   max-width: 1000px;
   position: absolute; /*rel*/
   /* top: 70px; */
