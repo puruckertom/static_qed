@@ -153,6 +153,10 @@ async function comp_setCompareMapData(state, county) {
         return;
     }
     currFIPS = parseInt(countyData.FIPS);
+    currFIPS = '' + currFIPS;
+    if (currFIPS.length === 4) {
+        currFIPS = '0' + currFIPS;
+    }
 
     let data = getCachedData(currFIPS);
     if (!data) {
