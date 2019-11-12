@@ -703,3 +703,19 @@ function customizeMoreText(that) {
         $(moreText).css('display', 'inline')
     }
 }
+
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 0) {
+        $('#scrollIndicator').fadeOut()
+    } else {
+        $('#scrollIndicator').fadeIn()
+    }
+})
+
+$(window).resize(function() {
+    if ($(document).height() > $(window).height()) {
+        $('#scrollIndicator').show()
+    } else {
+        $('#scrollIndicator').hide()
+}
+})
