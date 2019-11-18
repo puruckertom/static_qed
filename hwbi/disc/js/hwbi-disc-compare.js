@@ -148,8 +148,8 @@ function setText(id, div) {
   div
     .select(".cf")
     .html(
-      '<text>Fulfillment through Culture:  </text><span class="cf right">' +
-        formatHwbi(county["Fulfillment through Culture"]) +
+      '<text>Cultural Fulfillment:  </text><span class="cf right">' +
+        formatHwbi(county["Cultural Fulfillment"]) +
         "</span>"
     );
   div
@@ -176,8 +176,8 @@ function setText(id, div) {
   div
     .select(".cn")
     .html(
-      '<text>Nature Connection:  </text><span class="cn right">' +
-        formatHwbi(county["Nature Connection"]) +
+      '<text>Connection to Nature:  </text><span class="cn right">' +
+        formatHwbi(county["Connection to Nature"]) +
         "</span>"
     );
   div
