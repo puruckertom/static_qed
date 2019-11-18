@@ -1416,6 +1416,7 @@ button.accordion.active:after {
 
     .resources-body {
         page-break-before: always;
+        padding-top: 10%;
     }
 
     .domain-expand {
@@ -1427,7 +1428,7 @@ button.accordion.active:after {
     }
 
     .domain-score-block {
-        /* margin-bottom: 10px; */
+        margin-bottom: 0;
     }
 
     #wellbeing-scores {

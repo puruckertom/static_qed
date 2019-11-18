@@ -471,7 +471,7 @@ function startCustomizeIntro() {
         }
             
         }).oncomplete(function() {
-        window.location.href = '#connection-to-nature-modal';
+        window.location.href = '#education-modal';
         setTimeout(startCustomizeModal, 500);
     });
     
@@ -486,7 +486,7 @@ function startCustomizeModal() {
                 intro: "This is where you customize each indicator for the specified domain."
             },
             {
-                element: document.querySelector('#connection-to-nature-modal .accordion-metrics'),
+                element: document.querySelector('#education-modal .accordion-metrics'),
                 intro: "This is an accordion menu. Clicking on it will reveal the associated metrics and sliders."
             }
             /* {
