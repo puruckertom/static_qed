@@ -1795,6 +1795,10 @@ i {
   color: #235A8E;
 }
 
+.y .tick:nth-child(2), .y .tick:nth-child(4) {
+  color: #aaa;
+}
+
 /********************** MEDIA QUERIES ************************/
 @media screen and (max-width: 970px) {
   .no-mobile {
