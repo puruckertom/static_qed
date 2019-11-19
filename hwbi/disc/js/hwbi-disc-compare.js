@@ -146,24 +146,10 @@ function setText(id, div) {
         "</span>"
     );
   div
-    .select(".cf")
-    .html(
-      '<text>Cultural Fulfillment:  </text><span class="cf right">' +
-        formatHwbi(county["Cultural Fulfillment"]) +
-        "</span>"
-    );
-  div
     .select(".he")
     .html(
       '<text>Health:  </text><span class="he right">' +
         formatHwbi(county["Health"]) +
-        "</span>"
-    );
-  div
-    .select(".lt")
-    .html(
-      '<text>Leisure Time:  </text><span class="lt right">' +
-        formatHwbi(county["Leisure Time"]) +
         "</span>"
     );
   div
@@ -174,10 +160,10 @@ function setText(id, div) {
         "</span>"
     );
   div
-    .select(".cn")
+    .select(".ss")
     .html(
-      '<text>Connection to Nature:  </text><span class="cn right">' +
-        formatHwbi(county["Connection to Nature"]) +
+      '<text>Safety &amp; Security:  </text><span class="ss right">' +
+        formatHwbi(county["Safety and Security"]) +
         "</span>"
     );
   div
@@ -190,10 +176,10 @@ function setText(id, div) {
         "</span>"
     );
   div
-    .select(".ss")
+    .select(".cf")
     .html(
-      '<text>Safety &amp; Security:  </text><span class="ss right">' +
-        formatHwbi(county["Safety and Security"]) +
+      '<text>Cultural Fulfillment:  </text><span class="cf right">' +
+        formatHwbi(county["Cultural Fulfillment"]) +
         "</span>"
     );
   div
@@ -203,6 +189,21 @@ function setText(id, div) {
         formatHwbi(county["Social Cohesion"]) +
         "</span>"
     );
+  div
+    .select(".lt")
+    .html(
+      '<text>Leisure Time:  </text><span class="lt right">' +
+        formatHwbi(county["Leisure Time"]) +
+        "</span>"
+    );
+  div
+    .select(".cn")
+    .html(
+      '<text>Connection to Nature:  </text><span class="cn right">' +
+        formatHwbi(county["Connection to Nature"]) +
+        "</span>"
+    );
+
   if (county["Resilience"] === null) {
     div
       .select(".re")
