@@ -1790,6 +1790,11 @@ i {
   }
 }
 
+.heat-chart-title {
+  text-align: center;
+  color: #235A8E;
+}
+
 /********************** MEDIA QUERIES ************************/
 @media screen and (max-width: 970px) {
   .no-mobile {
